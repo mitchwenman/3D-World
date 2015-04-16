@@ -19,6 +19,7 @@
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
+GLuint vbo[1], vao[1];
 //----------------- functions ----------------------------------
 
 void DrawTriangle(int eyes)
@@ -42,6 +43,13 @@ void init()
 	int winwid = glutGet(GLUT_WINDOW_WIDTH);
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
+	float triangle[] = 
+	{
+		0.0, 1.0, 0.0,
+		-1.0, -1.0, 0.0,
+		1.0, 1.0, 0
+	};
+	glGenVertexArrays(1, vao);
 }
 
 void display(void)
@@ -53,22 +61,10 @@ void display(void)
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	//-----
 
-	glColor3f( 0.0f, 0.0f, 1.0f );	
-	/*
-	if (stereo)
-	{
-		DrawLeftSide();
-		
-		DrawRightSide();
-	}
-	DrawTriangle(+eyes);		// always draw the right side
-	*/
-	glBegin(GL_POLYGON);
-			glVertex3f(0, 1, 0);
-			glVertex3f(1, -1, 0);
-			glVertex3f(-1, -1, 0);
-	glEnd();
+	//-----
+
 	glutSwapBuffers();
 	glutPostRedisplay();
 }
