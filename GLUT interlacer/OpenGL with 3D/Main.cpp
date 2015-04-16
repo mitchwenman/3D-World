@@ -3,7 +3,9 @@
 
 //----------------- includes --------------------------------
 #ifdef _WIN32
+	#include "libs\glew.h"
 	#include "libs/glut.h"
+
 	#include <windows.h>
 	#pragma comment(lib, "winmm.lib")			//- not required but have it in anyway
 	#pragma comment(lib, "libs/glut32.lib")
@@ -14,6 +16,7 @@
 #endif
 
 #include "Interlacer.h"
+
 #include <math.h>
 
 //----------------- globals ------------------------------------
@@ -43,13 +46,20 @@ void init()
 	int winwid = glutGet(GLUT_WINDOW_WIDTH);
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
+	glewInit();
 	float triangle[] = 
 	{
 		0.0, 1.0, 0.0,
 		-1.0, -1.0, 0.0,
-		1.0, 1.0, 0
+		1.0, -1.0, 0
 	};
 	glGenVertexArrays(1, vao);
+	glGenBuffers(1, vbo);
+	glBindVertexArray(vao[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
 }
 
 void display(void)
@@ -62,7 +72,9 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//-----
-
+	glBindVertexArray(vao[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	//-----
 
 	glutSwapBuffers();
