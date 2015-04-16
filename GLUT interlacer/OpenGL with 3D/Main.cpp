@@ -22,8 +22,23 @@
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
-GLuint vbo[1], vao[1];
+double angle = 0;
 //----------------- functions ----------------------------------
+
+void drawCircle(double radius, double cx, double cy)
+{
+	int numPoints = 50;
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex2d(cx, cy);
+		for (int i = 0; i <= numPoints; i++)
+		{
+			double angle = ((2 * 3.14)/numPoints) * i;
+			double x = radius * cos(angle) + cx;
+			double y = radius * sin(angle) + cy;
+			glVertex2d(x, y);
+		}
+	glEnd();
+}
 
 void DrawTriangle(int eyes)
 {
@@ -47,19 +62,7 @@ void init()
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
-	float triangle[] = 
-	{
-		0.0, 1.0, 0.0,
-		-1.0, -1.0, 0.0,
-		1.0, -1.0, 0
-	};
-	glGenVertexArrays(1, vao);
-	glGenBuffers(1, vbo);
-	glBindVertexArray(vao[0]);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
+	
 }
 
 void display(void)
@@ -72,9 +75,15 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//-----
-	glBindVertexArray(vao[0]);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glColor3f(0, 0, 1);
+	drawCircle(0.25, 0.0, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glRotatef(fmod(angle, 360), 0, 0, 1);
+	angle += 0.01;
+	glColor3f(1, 1, 1);
+	drawCircle(0.1, 0.5, -0.5);
+	
 	//-----
 
 	glutSwapBuffers();
@@ -102,7 +111,7 @@ int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_STENCIL | GLUT_DEPTH);
-	glutInitWindowSize(1000, 600); 
+	glutInitWindowSize(600, 600); 
 	glutCreateWindow("OpenGL Interlacer");
 	init();
 	glutDisplayFunc(display);
