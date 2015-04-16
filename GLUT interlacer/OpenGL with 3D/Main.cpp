@@ -30,7 +30,7 @@ void drawCircle(double radius, double cx, double cy)
 	int numPoints = 50;
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex2d(cx, cy);
-		for (int i = 0; i <= numPoints; i++)
+		for (int i = 0; i < numPoints; i++)
 		{
 			double angle = ((2 * 3.14)/numPoints) * i;
 			double x = radius * cos(angle) + cx;
@@ -75,10 +75,15 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//-----
+	glPushMatrix();
 	glColor3f(0, 0, 1);
-	drawCircle(0.25, 0.0, 0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	
+	//glTranslatef(0.5, 0, 0);
+	glRotatef(fmod(angle, 360), 0, 0, 1);	
+	//glTranslatef(-0.5, 0, 0);
+	drawCircle(0.25, 0, 0);
+	glPopMatrix();
+
 	glRotatef(fmod(angle, 360), 0, 0, 1);
 	angle += 0.01;
 	glColor3f(1, 1, 1);
