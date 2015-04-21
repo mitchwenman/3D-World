@@ -19,6 +19,7 @@
 
 #include "WFObjectLoader.h"
 #include <math.h>
+#include "libs\glm\glm.hpp"
 
 
 //----------------- globals ------------------------------------
