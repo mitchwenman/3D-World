@@ -54,7 +54,6 @@ void DrawTriangle(int eyes)
 	glEnd();
 }
 
-
 void init()
 {
 	glEnable(GL_DEPTH_TEST);
@@ -74,8 +73,10 @@ void display(void)
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	gluPerspective (60.0, 1, 0.1, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
 	//-----
 	
 	int numVerts = poly->vertices.size();
@@ -102,6 +103,7 @@ void display(void)
 	};
 	glTranslatef(-.5, -.5, 0);
 	glRotatef(45, 0, 1, 0);
+	
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
