@@ -17,7 +17,9 @@
 
 #include "Interlacer.h"
 
+#include "WFObjectLoader.h"
 #include <math.h>
+
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -119,6 +121,7 @@ int main(int argc, char **argv)
 	glutInitWindowSize(600, 600); 
 	glutCreateWindow("OpenGL Interlacer");
 	init();
+	WFObjectLoader::loadObjectFile("Cube.obj");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);

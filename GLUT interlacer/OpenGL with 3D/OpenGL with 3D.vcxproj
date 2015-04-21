@@ -80,9 +80,13 @@
   <ItemGroup>
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WFObjectLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsUtil.h" />
     <ClInclude Include="Interlacer.h" />
+    <ClInclude Include="WaveFrontPolygon.h" />
+    <ClInclude Include="WFObjectLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
