@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 	glutInitWindowSize(600, 600); 
 	glutCreateWindow("OpenGL Interlacer");
 	init();
-	WFObjectLoader::loadObjectFile("Cube.obj");
+	WaveFrontPolygon *p = WFObjectLoader::loadObjectFile("Cube.obj");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);

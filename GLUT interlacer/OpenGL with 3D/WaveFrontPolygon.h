@@ -5,6 +5,7 @@
 
 class WaveFrontPolygonFace
 {
+public:
 	std::vector<int> vertexIndices;
 
 	std::vector<int> textureIndices;
