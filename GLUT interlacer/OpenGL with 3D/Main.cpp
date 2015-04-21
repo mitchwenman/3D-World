@@ -24,7 +24,7 @@
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
-double angle = 0;
+WaveFrontPolygon *poly;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -71,26 +71,45 @@ void display(void)
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glShadeModel(GL_FLAT);
+	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//-----
-	glPushMatrix();
-	glColor3f(0, 0, 1);
 	
-	//glTranslatef(0.5, 0, 0);
-	glRotatef(fmod(angle, 360), 0, 0, 1);	
-	//glTranslatef(-0.5, 0, 0);
-	drawCircle(0.25, 0, 0);
-	glPopMatrix();
+	int numVerts = poly->vertices.size();
+	std::vector<double> verts;
+	verts.reserve(numVerts * 3);
+	for (int i = 0; i < numVerts; i++)
+	{
+		verts.push_back(poly->vertices[i].x);
+		verts.push_back(poly->vertices[i].y);
+		verts.push_back(poly->vertices[i].z);
+	}
+	std::vector<GLubyte> indices;
+	for (unsigned int i = 0; i < poly->faces.size(); i++)
+	{
+		indices.insert(indices.end(), poly->faces[i].vertexIndices.begin(),
+			poly->faces[i].vertexIndices.end());
+	}
+	float colours[] = 
+	{
+		0, 1, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0,
+		0, 1, 1, 1, 1, 1,
+		1, 0, 1, 1, 0, 0
+	};
+	glTranslatef(-.5, -.5, 0);
+	glRotatef(45, 0, 1, 0);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
+	glColorPointer(3, GL_FLOAT, 0, colours);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_BYTE, indices.data());
+	GLenum err = glGetError();
+	glDisableClientState(GL_VERTEX_ARRAY);
 
-	glRotatef(fmod(angle, 360), 0, 0, 1);
-	angle += 0.01;
-	glColor3f(1, 1, 1);
-	drawCircle(0.1, 0.5, -0.5);
-	
 	//-----
 
 	glutSwapBuffers();
@@ -121,7 +140,7 @@ int main(int argc, char **argv)
 	glutInitWindowSize(600, 600); 
 	glutCreateWindow("OpenGL Interlacer");
 	init();
-	WaveFrontPolygon *p = WFObjectLoader::loadObjectFile("Cube.obj");
+	poly = WFObjectLoader::loadObjectFile("Cube-mod.obj");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);
