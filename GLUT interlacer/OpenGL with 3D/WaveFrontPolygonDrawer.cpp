@@ -1,5 +1,5 @@
 #include "WaveFrontPolygonDrawer.h"
-
+#include "GraphicsSettings.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
 
@@ -31,7 +31,7 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 		0, 1, 1, 1, 1, 1,
 		1, 0, 1, 1, 0, 0
 	};
-
+	GraphicsSettings::getSingleton()->setGLMatrices();
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());

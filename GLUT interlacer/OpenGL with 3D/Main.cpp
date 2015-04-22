@@ -22,6 +22,7 @@
 #include "WaveFrontPolygon.h"
 #include "ModelTransform.h"
 #include "WaveFrontPolygonDrawer.h"
+#include "GraphicsSettings.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -79,8 +80,10 @@ void display(void)
 	glLoadIdentity();
 	
 	//-----
+	GraphicsSettings* gset = GraphicsSettings::getSingleton();
+	ModelTransform::translate(-.5, -0.5, 0);	
 	WaveFrontPolygonDrawer::draw(*poly);
-	
+	gset->resetModelView();
 
 	
 	
