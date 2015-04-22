@@ -81,7 +81,7 @@ void display(void)
 	
 	//-----
 	GraphicsSettings* gset = GraphicsSettings::getSingleton();
-	ModelTransform::translate(-.5, -0.5, 0);	
+	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
 	gset->resetModelView();
 

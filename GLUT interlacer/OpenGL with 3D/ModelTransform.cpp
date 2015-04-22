@@ -13,3 +13,16 @@ void ModelTransform::translate(double x, double y, double z)
 	gset->modelViewMatrix = translation;
 
 }
+
+void ModelTransform::rotate(float angle, double x, double y, double z)
+{
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	gset->modelViewMatrix = glm::rotate(gset->modelViewMatrix, float(angle * (3.14/180)), glm::vec3(x, y, z));
+	
+}
+
+void ModelTransform::scale(double x, double y, double z)
+{
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	gset->modelViewMatrix = glm::scale(gset->modelViewMatrix, glm::vec3(x, y, z));
+}
