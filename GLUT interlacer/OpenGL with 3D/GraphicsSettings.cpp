@@ -8,6 +8,7 @@ static GraphicsSettings* _instance;
 
 #include <iostream>
 #include "libs\glm\ext.hpp"
+#include "Camera.h"
 
 GraphicsSettings::GraphicsSettings() {};
 

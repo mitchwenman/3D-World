@@ -23,11 +23,13 @@
 #include "ModelTransform.h"
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
+#include "Camera.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
 WaveFrontPolygon *poly;
+float angle = 0.5;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -73,18 +75,21 @@ void display(void)
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glShadeModel(GL_SMOOTH);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glShadeModel(GL_FLAT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
 	//-----
-	GraphicsSettings* gset = GraphicsSettings::getSingleton();
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	Camera* camera = Camera::getSingleton();
+	camera->lookAt(0, 0, -1, .5, .5, 0, 0, 1, 0);
 	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
 	gset->resetModelView();
-
 	
 	
 
