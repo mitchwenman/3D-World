@@ -24,6 +24,7 @@
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
 #include "Camera.h"
+#include "UserInput.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -77,7 +78,7 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glShadeModel(GL_FLAT);
+	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
@@ -85,8 +86,7 @@ void display(void)
 	
 	//-----
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	Camera* camera = Camera::getSingleton();
-	camera->lookAt(0, 0, -1, .5, .5, 0, 0, 1, 0);
+	Camera::getSingleton()->setCamera();
 	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
 	gset->resetModelView();
@@ -106,12 +106,20 @@ void kb(unsigned char c, int x, int y)
 	case 's': stereo ^= 1, eyes = 10;break;
 	case ']': eyes++;	break;
 	case '[': eyes--;	break;
-	case 27 : exit(0);
+	case 27 : exit(0);	break;
+	default:
+		UserInput::handleKeyInput(c, x, y);
 	}
+}
+
+void special(int key, int x, int y)
+{
+	kb((unsigned char)key, x, y);
 }
 
 void reshape(int w,int h)
 {
+	GraphicsSettings::getSingleton()->setFrameDimensions(w, h);
 	glViewport(0,0,w,h);
 	createInterlaceStencil(w,h);
 }   
@@ -120,13 +128,17 @@ int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_STENCIL | GLUT_DEPTH);
+	int width = 600;
+	int height = 600;
 	glutInitWindowSize(600, 600); 
+	GraphicsSettings::getSingleton()->setFrameDimensions(width, height);
 	glutCreateWindow("OpenGL Interlacer");
 	init();
 	poly = WFObjectLoader::loadObjectFile("Cube-mod.obj");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);
+	glutSpecialFunc(special);
 	glutMainLoop();
 	return 0;
 }

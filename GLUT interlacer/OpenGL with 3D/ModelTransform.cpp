@@ -1,4 +1,5 @@
 #include "ModelTransform.h"
+#include "libs\glew.h"
 #include "libs\glut.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtc\matrix_transform.hpp"

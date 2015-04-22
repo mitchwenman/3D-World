@@ -14,6 +14,11 @@ public:
 	
 	void lookAt(double eyex, double eyey, double eyez, double centrex, double centrey, double centrez, double upx, double upy, double upz );
 
+	void moveEye(double eyex, double eyey, double eyez);
+
+	//Changes the model view matrix to whatever values the camera currently has
+	void setCamera();
+
 	glm::mat4 getLookAtMatrix();
 
 private:
