@@ -19,8 +19,9 @@
 
 #include "WFObjectLoader.h"
 #include <math.h>
-#include "libs\glm\glm.hpp"
-
+#include "WaveFrontPolygon.h"
+#include "ModelTransform.h"
+#include "WaveFrontPolygonDrawer.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -74,44 +75,15 @@ void display(void)
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective (60.0, 1, 0.1, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
+	
 	//-----
+	WaveFrontPolygonDrawer::draw(*poly);
 	
-	int numVerts = poly->vertices.size();
-	std::vector<double> verts;
-	verts.reserve(numVerts * 3);
-	for (int i = 0; i < numVerts; i++)
-	{
-		verts.push_back(poly->vertices[i].x);
-		verts.push_back(poly->vertices[i].y);
-		verts.push_back(poly->vertices[i].z);
-	}
-	std::vector<GLubyte> indices;
-	for (unsigned int i = 0; i < poly->faces.size(); i++)
-	{
-		indices.insert(indices.end(), poly->faces[i].vertexIndices.begin(),
-			poly->faces[i].vertexIndices.end());
-	}
-	float colours[] = 
-	{
-		0, 1, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0,
-		0, 1, 1, 1, 1, 1,
-		1, 0, 1, 1, 0, 0
-	};
-	glTranslatef(-.5, -.5, 0);
-	glRotatef(45, 0, 1, 0);
+
 	
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
-	glColorPointer(3, GL_FLOAT, 0, colours);
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_BYTE, indices.data());
-	GLenum err = glGetError();
-	glDisableClientState(GL_VERTEX_ARRAY);
+	
 
 	//-----
 
