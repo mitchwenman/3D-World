@@ -113,8 +113,8 @@ void display(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
-	
-	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	//-----
 	
 	if (stereo)
