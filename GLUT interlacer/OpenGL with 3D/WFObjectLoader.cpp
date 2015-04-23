@@ -159,8 +159,8 @@ WaveFrontPolygonFace loadFaceWithVerticesTexturesNormals(std::string line)
 			indices[i] = stoi(ind) - 1; //Make indices 0 based
 		}
 		face.vertexIndices.push_back(indices[0]); //Put indices into face
-		face.normalIndices.push_back(indices[1]);
-		face.textureIndices.push_back(indices[2]);
+		face.textureIndices.push_back(indices[1]);
+		face.normalIndices.push_back(indices[2]);
 	}
 	
 	return face;

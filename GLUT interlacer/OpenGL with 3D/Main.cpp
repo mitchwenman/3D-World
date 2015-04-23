@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 	GraphicsSettings::getSingleton()->setFrameDimensions(width, height);
 	glutCreateWindow("OpenGL Interlacer");
 	init();
-	poly = WFObjectLoader::loadObjectFile("Cube-mod.obj");
+	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);
