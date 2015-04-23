@@ -82,11 +82,14 @@ void renderScene()
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	
 	Camera::getSingleton()->setCamera();
 	Frustum::getSingleton()->setFrustum();	
-	gset->setGLMatrices();
+	ModelTransform::translate(0, 0, -2.5);
+	
 
 	//---Scene
+	gset->setGLMatrices(); //Give the matrices to openGL
 	WaveFrontPolygonDrawer::draw(*poly);
 
 	//----- 
