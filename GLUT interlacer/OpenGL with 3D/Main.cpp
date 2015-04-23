@@ -82,18 +82,26 @@ void renderScene()
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	
+	gset->resetModelView();
+	gset->resetProjectionView();
 	Camera::getSingleton()->setCamera();
-	Frustum::getSingleton()->setFrustum();	
-	ModelTransform::translate(0, 0, -2.5);
+	Frustum::getSingleton()->setFrustum();
 	
-
+	ModelTransform::translate(0, 0, -5);
+	ModelTransform::rotate(angle += 0.1, 0, 1, 0);
+	gset->setGLMatrices(); //Give the matrices to openGL
+	WaveFrontPolygonDrawer::draw(*poly);
+	
+	gset->resetModelView();
+	Camera::getSingleton()->setCamera();
+	ModelTransform::translate(-1, 0, 0);
+	ModelTransform::rotate(angle, 1, 1, 1);
 	//---Scene
 	gset->setGLMatrices(); //Give the matrices to openGL
 	WaveFrontPolygonDrawer::draw(*poly);
 
 	//----- 
-	gset->resetModelView();
+	
 	gset->resetProjectionView();
 	
 }
@@ -124,11 +132,10 @@ void display(void)
 		//Render the scene
 		DrawRightSide();
 		renderScene();
-
 		//Reset the camera
 		cam->lookAt(leftEye.x, leftEye.y, leftEye.z, centre.x, centre.y, centre.z, up.x, up.y, up.z);
 	} else
-	{
+	{		
 		renderScene(); //just render the scene
 	}
 	

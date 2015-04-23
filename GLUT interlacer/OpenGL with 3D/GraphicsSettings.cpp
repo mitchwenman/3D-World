@@ -26,5 +26,5 @@ void GraphicsSettings::setGLMatrices()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(glm::value_ptr(modelViewMatrix));
 	glMatrixMode(GL_PROJECTION);
-	glMultMatrixf(glm::value_ptr(projectionViewMatrix));
+	glLoadMatrixf(glm::value_ptr(projectionViewMatrix));
 }
