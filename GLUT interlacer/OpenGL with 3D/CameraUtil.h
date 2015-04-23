@@ -3,7 +3,7 @@
 #include "GraphicsUtil.h"
 #include "Camera.h"
 
-class CameraUtil
+namespace CameraUtil
 {
-	Vertex3 calculateRightEye(Camera* camera);
-}
+	Vertex3 calculateRightEye(Camera camera, double eyeDist);
+};

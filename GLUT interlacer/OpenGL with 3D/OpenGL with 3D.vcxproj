@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="Interlacer.cpp" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="GraphicsUtil.h" />

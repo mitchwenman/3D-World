@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define INTERLACING_ON
 //----------------- includes --------------------------------
 #ifdef _WIN32
 	#include "libs\glew.h"
@@ -26,6 +27,7 @@
 #include "Camera.h"
 #include "UserInput.h"
 #include "Frustum.h"
+#include "CameraUtil.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -103,17 +105,26 @@ void display(void)
 	
 	
 	//-----
-	renderScene();
+	
 	if (stereo)
 	{
+		DrawLeftSide();
+		renderScene();
 		//Get the difference
-
+		Camera* cam = Camera::getSingleton();
+		Vertex3 leftEye = cam->eye;
+		Vertex3 rightEye = CameraUtil::calculateRightEye(*cam, eyes/100.0);
 		//Modify camera
-
+		cam->eye = rightEye;
 		//Render the scene
+		DrawRightSide();
 		renderScene();
 
 		//Reset the camera
+		cam->eye = leftEye;
+	} else
+	{
+		renderScene(); //just render the scene
 	}
 
 	//-----
