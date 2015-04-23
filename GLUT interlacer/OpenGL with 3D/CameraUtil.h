@@ -5,5 +5,9 @@
 
 namespace CameraUtil
 {
-	Vertex3 calculateRightEye(Camera camera, double eyeDist);
-};
+	Vertex3 calculateRightEye(Camera cam, double eyeDist);
+
+	void RotateCamera(Camera *cam, double diffAngle);
+
+	void MoveCamera(Camera *cam, double scalar);
+}
