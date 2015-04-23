@@ -10,13 +10,13 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 	case GLUT_KEY_LEFT:
 		{
 			Camera* cam = Camera::getSingleton();
-			cam->moveEye(.1, 0, 0);
+			cam->moveEye(-.1, 0, 0);
 			break;
 		}
 	case GLUT_KEY_RIGHT:
 		{
 			Camera* cam = Camera::getSingleton();
-			cam->moveEye(-.1, 0, 0);
+			cam->moveEye(.1, 0, 0);
 			break;
 		}
 	default:

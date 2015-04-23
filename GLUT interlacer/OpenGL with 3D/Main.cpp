@@ -25,6 +25,7 @@
 #include "GraphicsSettings.h"
 #include "Camera.h"
 #include "UserInput.h"
+#include "Frustum.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -72,6 +73,26 @@ void init()
 	
 }
 
+void renderScene()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();	
+	glMatrixMode(GL_MODELVIEW);	
+	glLoadIdentity();
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	Camera::getSingleton()->setCamera();
+	Frustum::getSingleton()->setFrustum();	
+	gset->setGLMatrices();
+
+	//---Scene
+	WaveFrontPolygonDrawer::draw(*poly);
+
+	//----- 
+	gset->resetModelView();
+	gset->resetProjectionView();
+	
+}
+
 void display(void)
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -79,19 +100,21 @@ void display(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	
 	
 	//-----
-	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	Camera::getSingleton()->setCamera();
-	gset->setGLMatrices();
-	WaveFrontPolygonDrawer::draw(*poly);
-	gset->resetModelView();
-	
-	
+	renderScene();
+	if (stereo)
+	{
+		//Get the difference
+
+		//Modify camera
+
+		//Render the scene
+		renderScene();
+
+		//Reset the camera
+	}
 
 	//-----
 

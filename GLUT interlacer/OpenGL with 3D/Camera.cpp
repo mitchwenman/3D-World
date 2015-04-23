@@ -24,11 +24,6 @@ void Camera::lookAt(double eyex, double eyey, double eyez, double centrex, doubl
 	this->eye = eye;
 	this->center = center;
 	this->up = up;
-	glm::vec3 eyeVec = glm::vec3(eye.x, eye.y, eye.z);
-	glm::vec3 centerVec = glm::vec3(center.x, center.y, center.z);
-	glm::vec3 upVec = glm::vec3(up.x, up.y, up.z);
-	glm::mat4 lookAt = glm::lookAt(eyeVec, centerVec, upVec);
-	GraphicsSettings::getSingleton()->modelViewMatrix *= lookAt;
 }
 
 void Camera::moveEye(double eyex, double eyey, double eyez)
@@ -56,5 +51,5 @@ glm::mat4 Camera::getLookAtMatrix()
 
 Camera::Camera()
 {
-	this->lookAt(0, 0, -1, 0, 0, 0, 0, 1, 0);
+	this->lookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
 }
