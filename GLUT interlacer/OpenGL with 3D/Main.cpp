@@ -115,21 +115,23 @@ void display(void)
 		renderScene();
 		//Get the difference
 		Camera* cam = Camera::getSingleton();
-		Vertex3 leftEye = cam->eye;
+		Vertex3 leftEye = cam->getEye();
 		Vertex3 rightEye = CameraUtil::calculateRightEye(*cam, eyes/100.0);
 		//Modify camera
-		cam->eye = rightEye;
+		Vertex3 centre = cam->getCentre();
+		Vertex3 up = cam->getUp();
+		cam->lookAt(rightEye.x, rightEye.y, rightEye.z, centre.x, centre.y, centre.z, up.x, up.y, up.z);
 		//Render the scene
 		DrawRightSide();
 		renderScene();
 
 		//Reset the camera
-		cam->eye = leftEye;
+		cam->lookAt(leftEye.x, leftEye.y, leftEye.z, centre.x, centre.y, centre.z, up.x, up.y, up.z);
 	} else
 	{
 		renderScene(); //just render the scene
 	}
-
+	
 	//-----
 
 	glutSwapBuffers();

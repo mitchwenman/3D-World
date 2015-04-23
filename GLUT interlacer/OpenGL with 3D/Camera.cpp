@@ -3,6 +3,7 @@
 #include "libs\glm\gtc\matrix_transform.hpp"
 #include "GraphicsUtil.h"
 #include "GraphicsSettings.h"
+#include <math.h>
 
 static Camera* _instance;
 
@@ -24,6 +25,7 @@ void Camera::lookAt(double eyex, double eyey, double eyez, double centrex, doubl
 	this->eye = eye;
 	this->center = center;
 	this->up = up;
+	//angle = asin(centrex - eyex);
 }
 
 void Camera::moveEye(double eyex, double eyey, double eyez)
@@ -31,6 +33,7 @@ void Camera::moveEye(double eyex, double eyey, double eyez)
 	eyex += eye.x;
 	eyey += eye.y;
 	eyez += eye.z;
+	angle = asin(this->center.x - this->eye.x);
 	this->lookAt(eyex, eyey, eyez, center.x, center.y, center.z, up.x, up.y, up.z);
 }
 
@@ -52,4 +55,5 @@ glm::mat4 Camera::getLookAtMatrix()
 Camera::Camera()
 {
 	this->lookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+	angle = 0;
 }
