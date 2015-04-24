@@ -28,6 +28,7 @@
 #include "UserInput.h"
 #include "Frustum.h"
 #include "CameraUtil.h"
+#include "Lighting.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -79,31 +80,70 @@ void renderScene()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	
+	glFrustum(-1, 1, -1, 1, .5, 200);
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	gset->resetModelView();
-	gset->resetProjectionView();
-	Camera::getSingleton()->setCamera();
-	Frustum::getSingleton()->setFrustum();
 	
-	ModelTransform::translate(0, 0, -5);
-	ModelTransform::rotate(angle += 0.1, 0, 1, 0);
-	gset->setGLMatrices(); //Give the matrices to openGL
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	//gset->resetModelView();
+	//gset->resetProjectionView();
+	
+	//Setup material
+	//-- usually	objects	have	a	white	specular	reflection
+	GLfloat	material_specular[]	= {	1.0, 1.0, 1.0, 1.0f	};
+	//-- set the ambient	and	diffuse	colour	to	be	the	same
+	GLfloat	material_diffuse_and_ambient[] = {	0, .75, .5,	1.0f };
+	//-- set	the	shininess	from	range	[0,128]
+	GLfloat	material_shininess[] = { 100 };
+			
+
+	Camera *cam = Camera::getSingleton();
+	cam->setCamera();
+	Vertex3 eye = cam->getEye();
+	Vertex3 at = cam->getCentre();
+	gluLookAt(eye.x, eye.y, eye.z, at.x, at.y, at.z, 0, 1, 0);
+	Vertex4 position = { 0, 5, 20, 1 };
+	Vertex4 diffuse = { 1, 1, 1, 1 };
+	Vertex4 ambient = { .2, .2, .2, 1 };
+	Vertex3 direction = { 0, 0, -1 };
+	Lighting::setupSpotLight(position, diffuse, ambient, direction, 30);
+		//-- set specular reflection
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
+	//-- set shininess
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, material_shininess);
+	//-- set diffuse and ambient properties
+	glMaterialfv(GL_FRONT_AND_BACK,	GL_AMBIENT,	material_diffuse_and_ambient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse_and_ambient);
+	
 	WaveFrontPolygonDrawer::draw(*poly);
 	
+	
+	//Frustum::getSingleton()->setFrustum();
+
+	//ModelTransform::translate(0, 0, -5);
+	//ModelTransform::rotate(angle += 0.1, 0, 1, 0);
+	//gset->setGLMatrices(); //Give the matrices to openGL via glLoadMatrixf
+	//Setup lighting after matrix setup
+	
+	
+	
+	
+	/*
 	gset->resetModelView();
 	Camera::getSingleton()->setCamera();
 	ModelTransform::translate(-1, 0, 0);
-	ModelTransform::rotate(angle, 1, 1, 1);
+	//ModelTransform::rotate(angle, 0, 1, 0);
+	
 	//---Scene
 	gset->setGLMatrices(); //Give the matrices to openGL
+	Lighting::setupSpotLight(position, diffuse, ambient, direction, 50.0);
 	WaveFrontPolygonDrawer::draw(*poly);
-
+	*/
 	//----- 
-	
+	/*
+	gset->resetModelView();
 	gset->resetProjectionView();
-	
+	*/
 }
 
 void display(void)
@@ -115,6 +155,8 @@ void display(void)
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	
+	
 	//-----
 	
 	if (stereo)
