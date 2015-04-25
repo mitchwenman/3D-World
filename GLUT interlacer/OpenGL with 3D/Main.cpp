@@ -29,6 +29,7 @@
 #include "Frustum.h"
 #include "CameraUtil.h"
 #include "Lighting.h"
+#include "HeightMap.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -84,7 +85,10 @@ void renderScene()
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	
+	HeightMap *h = new HeightMap();
+	h->loadFromImage("terrain-tut.bmp");
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	/*
 	//gset->resetModelView();
 	//gset->resetProjectionView();
 	

@@ -50,6 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,6 +83,7 @@
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -96,13 +98,19 @@
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="GraphicsUtil.h" />
+    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="Interlacer.h" />
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="ModelTransform.h" />
+    <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="WaveFrontPolygon.h" />
     <ClInclude Include="WaveFrontPolygonDrawer.h" />
     <ClInclude Include="WFObjectLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="frag.txt" />
+    <None Include="vert.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
