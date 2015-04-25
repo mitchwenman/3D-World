@@ -12,8 +12,8 @@ bool HeightMap::loadFromImage(std::string path)
 	rows = image.width();
 	columns = image.height();
 
-	std::vector<std::vector<Vertex3>> vertexData(rows, std::vector<Vertex3>(columns));
-	std::vector<std::vector<Vertex2>> textureCoords(rows, std::vector<Vertex2>(columns));
+	vertexData = std::vector<std::vector<Vertex3>>(rows, std::vector<Vertex3>(columns));
+	textureCoords = std::vector<std::vector<Vertex2>>(rows, std::vector<Vertex2>(columns));
 
 	double textureU = double(columns) / 10; //Instance of texture every 10 by 10 rows/columns
 	double textureV = double(rows) / 10;
@@ -83,6 +83,31 @@ bool HeightMap::loadFromImage(std::string path)
 			normals[i][j] = GraphicsUtil::GLMVec3ToVertex3(finalNorm);
 		}
 	}
-
+	indices.reserve((rows - 1) * (columns - 1) * 6); //Each row gives 6 indices for 2 triangles
+	//Create indices vect for indexed array
+	for (int i = 0; i < rows - 1; i++)
+	{
+		for (int j = 0; j < columns - 1; j++)
+		{
+			int v = i * j;
+			indices.push_back(v + columns);
+			indices.push_back(v);
+			indices.push_back(v + columns + 1);
+			indices.push_back(v + columns + 1);
+			indices.push_back(v);
+			indices.push_back(v + 1);
+		}
+	}
+	//Add data to list for quick drawing
+	vList.reserve(3 * rows * columns);
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			vList.push_back(vertexData[i][j].x);
+			vList.push_back(vertexData[i][j].y);
+			vList.push_back(vertexData[i][j].z);
+		}
+	}
 	return true;
 }

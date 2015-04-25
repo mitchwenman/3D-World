@@ -27,6 +27,14 @@ private:
 
 	std::vector<std::vector<Vertex3>> normals;
 
-	std::vector<std::vector<Vertex2>> coordData;
+	std::vector<std::vector<Vertex2>> textureCoords;
+
+	std::vector<int> indices;
+
+	std::vector<double> vList;
+
+	std::vector<double> normalsList;
+
+	std::vector<double> textureList;
 
 };
