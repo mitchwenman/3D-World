@@ -83,6 +83,7 @@
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
+    <ClCompile Include="GraphicsUtil.cpp" />
     <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Lighting.cpp" />
