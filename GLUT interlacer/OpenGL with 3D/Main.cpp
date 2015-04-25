@@ -89,7 +89,7 @@ void renderScene()
 	//cam->setCamera();
 	Vertex3 eye = cam->getEye();
 	Vertex3 at = cam->getCentre();
-	gluLookAt(eye.x, .75, eye.z, at.x, .75, at.z, 0, 1, 0);
+	gluLookAt(eye.x, 1, eye.z, at.x, 1, at.z, 0, 1, 0);
 	glColor3f(255, 255, 255);
 	h->render();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();

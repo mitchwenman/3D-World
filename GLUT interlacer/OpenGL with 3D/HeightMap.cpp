@@ -89,7 +89,7 @@ bool HeightMap::loadFromImage(std::string path)
 	{
 		for (int j = 0; j < columns - 1; j++)
 		{
-			int v = i + j * columns;
+			int v = i * columns + j;
 			indices.push_back(v + columns);
 			indices.push_back(v);
 			indices.push_back(v + columns + 1);
@@ -109,15 +109,27 @@ bool HeightMap::loadFromImage(std::string path)
 			vList.push_back(vertexData[i][j].z);
 		}
 	}
+
+	//Add normals to list
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			normalsList.push_back(normals[i][j].x);
+			normalsList.push_back(normals[i][j].y);
+			normalsList.push_back(normals[i][j].z);
+		}
+	}
 	return true;
 }
 
 void HeightMap::render()
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
-
+	glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
-
+	glNormalPointer(GL_DOUBLE, 0, normalsList.data());
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
