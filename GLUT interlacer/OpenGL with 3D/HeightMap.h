@@ -29,7 +29,7 @@ private:
 
 	std::vector<std::vector<Vertex2>> textureCoords;
 
-	std::vector<int> indices;
+	std::vector<GLushort> indices;
 
 	std::vector<double> vList;
 

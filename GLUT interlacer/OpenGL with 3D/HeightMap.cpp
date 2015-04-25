@@ -18,15 +18,15 @@ bool HeightMap::loadFromImage(std::string path)
 	double textureU = double(columns) / 10; //Instance of texture every 10 by 10 rows/columns
 	double textureV = double(rows) / 10;
 
-	//Copy values into vectors - scale to -.5, .5 on X/Z axis, (0, 1) on Y
+	//Copy values into vectors - scale to 0, 1 on Y axis and 1/5 size of image
 	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 0; j < rows; j++)
+		for (int j = 0; j < columns; j++)
 		{
-			double scaleCol = double(j) / double(columns - 1);
-			double scaleRow = double(i) / double(rows - 1);
+			double scaleCol = double(j) / (.2 * double(columns - 1));
+			double scaleRow = double(i) / (.2 * double(rows - 1));
 			double vertexHeight = image(i, j, 0, 0, 0) / 255.0;
-			Vertex3 vertex = { -0.5 + scaleCol, vertexHeight, -0.5 + scaleRow };
+			Vertex3 vertex = { -.5 + scaleCol, vertexHeight, -.5 + scaleRow };
 			Vertex2 texture = { textureU * scaleCol, textureV * scaleRow };
 
 			vertexData[i][j] = vertex;
@@ -89,7 +89,7 @@ bool HeightMap::loadFromImage(std::string path)
 	{
 		for (int j = 0; j < columns - 1; j++)
 		{
-			int v = i * j;
+			int v = i + j * columns;
 			indices.push_back(v + columns);
 			indices.push_back(v);
 			indices.push_back(v + columns + 1);
@@ -110,4 +110,14 @@ bool HeightMap::loadFromImage(std::string path)
 		}
 	}
 	return true;
+}
+
+void HeightMap::render()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
+
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
+	glDisableClientState(GL_VERTEX_ARRAY);
 }

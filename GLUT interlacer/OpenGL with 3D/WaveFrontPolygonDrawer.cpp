@@ -25,10 +25,18 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 			polygon.faces[i].vertexIndices.end());
 	}
 
+	//XXX: random colours for now
+	float colours[] = 
+	{
+		0, 1, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0,
+		0, 1, 1, 1, 1, 1,
+		1, 0, 1, 1, 0, 0
+	};	
 	glEnableClientState(GL_VERTEX_ARRAY);
-
+	glEnableClientState(GL_COLOR_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
-
+	glColorPointer(3, GL_FLOAT, 0, colours);
 	glDrawElements(GL_TRIANGLES, faceIndices.size(), GL_UNSIGNED_BYTE, faceIndices.data());
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

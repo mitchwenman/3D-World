@@ -36,6 +36,7 @@ bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
 WaveFrontPolygon *poly;
 float angle = 0.5;
+HeightMap* h;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -81,14 +82,18 @@ void renderScene()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	
-	glFrustum(-1, 1, -1, 1, .5, 200);
+	glFrustum(-1, 1, -1, 1, .1, 200);
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	
-	HeightMap *h = new HeightMap();
-	h->loadFromImage("terrain-tut.bmp");
+	Camera *cam = Camera::getSingleton();
+	//cam->setCamera();
+	Vertex3 eye = cam->getEye();
+	Vertex3 at = cam->getCentre();
+	gluLookAt(eye.x, .75, eye.z, at.x, .75, at.z, 0, 1, 0);
+	glColor3f(255, 255, 255);
+	h->render();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	/*
+	
 	//gset->resetModelView();
 	//gset->resetProjectionView();
 	
@@ -101,16 +106,11 @@ void renderScene()
 	GLfloat	material_shininess[] = { 100 };
 			
 
-	Camera *cam = Camera::getSingleton();
-	cam->setCamera();
-	Vertex3 eye = cam->getEye();
-	Vertex3 at = cam->getCentre();
-	gluLookAt(eye.x, eye.y, eye.z, at.x, at.y, at.z, 0, 1, 0);
-	Vertex4 position = { 0, 5, 20, 1 };
+	Vertex4 position = { 0, 5, 20, 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1 };
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, 0, -1 };
-	Lighting::setupSpotLight(position, diffuse, ambient, direction, 30);
+	Lighting::setupSpotLight(position, diffuse, ambient, direction, 80);
 		//-- set specular reflection
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
 	//-- set shininess
@@ -119,7 +119,7 @@ void renderScene()
 	glMaterialfv(GL_FRONT_AND_BACK,	GL_AMBIENT,	material_diffuse_and_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse_and_ambient);
 	
-	WaveFrontPolygonDrawer::draw(*poly);
+	//WaveFrontPolygonDrawer::draw(*poly);
 	
 	
 	//Frustum::getSingleton()->setFrustum();
@@ -227,6 +227,8 @@ int main(int argc, char **argv)
 	glutCreateWindow("OpenGL Interlacer");
 	init();
 	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
+	h = new HeightMap();
+	h->loadFromImage("terrain-tut.bmp");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);
