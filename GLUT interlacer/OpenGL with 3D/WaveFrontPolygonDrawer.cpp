@@ -18,7 +18,7 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 		verts.push_back(polygon.vertices[i].z);
 	}
 	//Create array of indices into vertices
-	std::vector<GLubyte> faceIndices;
+	std::vector<unsigned int> faceIndices;
 	for (unsigned int i = 0; i < polygon.faces.size(); i++)
 	{
 		faceIndices.insert(faceIndices.end(), polygon.faces[i].vertexIndices.begin(),
@@ -52,7 +52,7 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(3, 0, vertexNormals.data());
-	glDrawElements(GL_TRIANGLES, faceIndices.size(), GL_UNSIGNED_BYTE, faceIndices.data());
+	glDrawElements(GL_TRIANGLES, faceIndices.size(), GL_UNSIGNED_INT, faceIndices.data());
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

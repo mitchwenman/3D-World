@@ -125,7 +125,7 @@ void renderScene()
 	ModelTransform::scale(.5, .5, .5);
 	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
-	
+
 	
 	
 }
