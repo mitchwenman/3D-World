@@ -105,7 +105,7 @@ bool HeightMap::loadFromImage(std::string path)
 		{
 			for (int k = 0; k < 2; k++)
 			{
-				int row = i + 1 - k;
+				int row = i + k;
 				unsigned int index = row * columns + j;
 				indices.push_back(index);
 			}

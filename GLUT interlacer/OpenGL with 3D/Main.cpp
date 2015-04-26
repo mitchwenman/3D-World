@@ -120,7 +120,7 @@ void renderScene()
 	glMaterialfv(GL_FRONT_AND_BACK,	GL_AMBIENT,	material_diffuse_and_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse_and_ambient);
 	
-	//WaveFrontPolygonDrawer::draw(*poly);
+	WaveFrontPolygonDrawer::draw(*poly);
 	
 	
 	//Frustum::getSingleton()->setFrustum();
@@ -155,7 +155,7 @@ void display(void)
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
 	init();
 	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
 	h = new HeightMap();
-	h->loadFromImage("terrain-heightmap-flat.bmp");
+	h->loadFromImage("terrain-heightmap-surround.bmp");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);
