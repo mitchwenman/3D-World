@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #define INTERLACING_ON
-#define GLEW_STATIC
+
 //----------------- includes --------------------------------
 #ifdef _WIN32
 	#include "libs\glew.h"
@@ -39,6 +39,7 @@ long eyes = 10;			//- distance between eyes
 WaveFrontPolygon *poly;
 float angle = 0.5;
 HeightMap* h;
+unsigned int program;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -78,6 +79,8 @@ void init()
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
 	unsigned int shader = ShaderLoader::compile("vert.txt", GL_VERTEX_SHADER);
+	unsigned int fragShader = ShaderLoader::compile("frag.txt", GL_FRAGMENT_SHADER);
+	program = ShaderLoader::link(shader, fragShader);
 
 }
 
@@ -87,6 +90,7 @@ void renderScene()
 	glLoadIdentity();		
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
+	glUseProgram(program);
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();

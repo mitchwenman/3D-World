@@ -51,3 +51,27 @@ unsigned int ShaderLoader::compile(std::string file, int shaderType)
 	}
 	return shader;
 }
+
+unsigned int ShaderLoader::link(unsigned int vertexShader, unsigned int fragmentShader)
+{
+	unsigned int program = glCreateProgram();
+
+	if (program == 0)
+	{
+		std::cout << "couldn't create program" << std::endl;
+		exit(1);
+	}
+
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
+
+	glLinkProgram(program);
+
+	int params;
+	glGetProgramiv(program, GL_LINK_STATUS, &params);
+	if (params != GL_TRUE)
+	{
+		std::cout << "Error linking shader" << vertexShader << " to " << fragmentShader << std::endl;
+	}
+	return program;
+}
