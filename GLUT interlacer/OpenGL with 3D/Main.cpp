@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #define INTERLACING_ON
+#define GLEW_STATIC
 //----------------- includes --------------------------------
 #ifdef _WIN32
 	#include "libs\glew.h"
@@ -30,6 +31,7 @@
 #include "CameraUtil.h"
 #include "Lighting.h"
 #include "HeightMap.h"
+#include "ShaderLoader.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -75,7 +77,8 @@ void init()
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
-	
+	unsigned int shader = ShaderLoader::compile("vert.txt", GL_VERTEX_SHADER);
+
 }
 
 void renderScene()
