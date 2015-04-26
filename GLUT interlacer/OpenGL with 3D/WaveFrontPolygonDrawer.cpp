@@ -1,5 +1,6 @@
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
+#include "GraphicsUtil.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
 
@@ -9,7 +10,6 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 	//Create vertex array
 	int numVerts = polygon.vertices.size();
 	std::vector<double> verts;
-	std::vector<double> normals;
 	verts.reserve(numVerts * 3);
 	for (int i = 0; i < numVerts; i++)
 	{
@@ -24,19 +24,35 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 		faceIndices.insert(faceIndices.end(), polygon.faces[i].vertexIndices.begin(),
 			polygon.faces[i].vertexIndices.end());
 	}
-
-	//XXX: random colours for now
-	float colours[] = 
+	//Multiple vertex normals - add together and then normalise
+	std::vector<glm::vec3> normals(polygon.vertices.size());
+	for (unsigned int i = 0; i < normals.size(); i++) normals[i] = glm::vec3(0, 0, 0); //Init with 0
+	for (unsigned int i = 0; i < polygon.faces.size(); i++)
 	{
-		0, 1, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0,
-		0, 1, 1, 1, 1, 1,
-		1, 0, 1, 1, 0, 0
-	};	
+		WaveFrontPolygonFace face = polygon.faces[i];
+		for (unsigned int j = 0; j < face.normalIndices.size(); j++)
+		{
+			//Convert to vec, add to current normal
+			glm::vec3 norm = GraphicsUtil::vertex3ToGLMVec3(polygon.normals[face.normalIndices[j]]);
+			int vertn = face.vertexIndices[j];
+			normals[vertn] += norm;
+		}
+	}
+	//Loop through, normalise and create glnormal array
+	std::vector<double> vertexNormals;
+	for (unsigned int i = 0; i < normals.size(); i++)
+	{
+		glm::vec3 vertNormal = glm::normalize(normals[i]);
+		vertexNormals.push_back(vertNormal.x);
+		vertexNormals.push_back(vertNormal.y);
+		vertexNormals.push_back(vertNormal.z);
+	}
+
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
-	glColorPointer(3, GL_FLOAT, 0, colours);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(3, 0, vertexNormals.data());
 	glDrawElements(GL_TRIANGLES, faceIndices.size(), GL_UNSIGNED_BYTE, faceIndices.data());
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

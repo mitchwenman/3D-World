@@ -113,7 +113,9 @@ void renderScene()
 	
 
 	
-	
+	ModelTransform::translate(2.5, .5, 3);
+	ModelTransform::scale(.5, .5, .5);
+	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
 	
 	
@@ -154,7 +156,7 @@ void display(void)
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	
+	glEnable(GL_NORMALIZE);
 	
 	//-----
 	
