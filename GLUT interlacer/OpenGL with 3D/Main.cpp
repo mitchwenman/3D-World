@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 
 #define INTERLACING_ON
 
@@ -81,7 +82,7 @@ void init()
 	unsigned int shader = ShaderLoader::compile("vert.txt", GL_VERTEX_SHADER);
 	unsigned int fragShader = ShaderLoader::compile("frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
-
+	std::cout << glGetString(GL_VERSION) << std::endl;
 }
 
 void renderScene()

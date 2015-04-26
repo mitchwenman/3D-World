@@ -71,7 +71,11 @@ unsigned int ShaderLoader::link(unsigned int vertexShader, unsigned int fragment
 	glGetProgramiv(program, GL_LINK_STATUS, &params);
 	if (params != GL_TRUE)
 	{
-		std::cout << "Error linking shader" << vertexShader << " to " << fragmentShader << std::endl;
+		std::cout << "Error linking shader " << vertexShader << " to " << fragmentShader << std::endl;
+		int nl;
+		char* temp = (char*)malloc(params);
+		glGetProgramInfoLog(program, params, &nl, temp);
+		printf("%s\n", temp);
 	}
 	return program;
 }
