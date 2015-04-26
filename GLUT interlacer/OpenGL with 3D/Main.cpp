@@ -113,38 +113,13 @@ void renderScene()
 	
 
 	
-	ModelTransform::translate(2.5, .5, 3);
+	ModelTransform::translate(3.25, .5, 1);
 	ModelTransform::scale(.5, .5, .5);
 	gset->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*poly);
 	
 	
-	//Frustum::getSingleton()->setFrustum();
-
-	//ModelTransform::translate(0, 0, -5);
-	//ModelTransform::rotate(angle += 0.1, 0, 1, 0);
-	//gset->setGLMatrices(); //Give the matrices to openGL via glLoadMatrixf
-	//Setup lighting after matrix setup
 	
-	
-	
-	
-	/*
-	gset->resetModelView();
-	Camera::getSingleton()->setCamera();
-	ModelTransform::translate(-1, 0, 0);
-	//ModelTransform::rotate(angle, 0, 1, 0);
-	
-	//---Scene
-	gset->setGLMatrices(); //Give the matrices to openGL
-	Lighting::setupSpotLight(position, diffuse, ambient, direction, 50.0);
-	WaveFrontPolygonDrawer::draw(*poly);
-	*/
-	//----- 
-	/*
-	gset->resetModelView();
-	gset->resetProjectionView();
-	*/
 }
 
 void display(void)
