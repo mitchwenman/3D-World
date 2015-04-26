@@ -21,6 +21,9 @@ public:
 private:
 	int rows, columns;
 
+	GLuint dataVao, dataVbo,
+		   indexVao, indexVBO;
+
 	Vertex3 renderScale;
 
 	std::vector<std::vector<Vertex3>> vertexData;
@@ -29,12 +32,12 @@ private:
 
 	std::vector<std::vector<Vertex2>> textureCoords;
 
-	std::vector<GLushort> indices;
+	std::vector<unsigned int> indices;
 
 	std::vector<double> vList;
 
-	std::vector<double> normalsList;
+	std::vector<double> nList;
 
-	std::vector<double> textureList;
+	
 
 };

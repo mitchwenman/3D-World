@@ -89,7 +89,7 @@ void renderScene()
 	//cam->setCamera();
 	Vertex3 eye = cam->getEye();
 	Vertex3 at = cam->getCentre();
-	gluLookAt(eye.x, 1, eye.z, at.x, 1, at.z, 0, 1, 0);
+	gluLookAt(eye.x, 1.0, eye.z, at.x, 1.0, at.z, 0, 1, 0);
 	glColor3f(255, 255, 255);
 	h->render();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
@@ -110,7 +110,8 @@ void renderScene()
 	Vertex4 diffuse = { 1, 1, 1, 1 };
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, 0, -1 };
-	Lighting::setupSpotLight(position, diffuse, ambient, direction, 80);
+	
+	Lighting::setupSpotLight(position, diffuse, ambient, direction, 30);
 		//-- set specular reflection
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
 	//-- set shininess
@@ -154,7 +155,7 @@ void display(void)
 {
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
@@ -228,7 +229,7 @@ int main(int argc, char **argv)
 	init();
 	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
 	h = new HeightMap();
-	h->loadFromImage("terrain-tut.bmp");
+	h->loadFromImage("terrain-heightmap-flat.bmp");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);

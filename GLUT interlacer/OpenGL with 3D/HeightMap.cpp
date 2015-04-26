@@ -83,23 +83,9 @@ bool HeightMap::loadFromImage(std::string path)
 			normals[i][j] = GraphicsUtil::GLMVec3ToVertex3(finalNorm);
 		}
 	}
-	indices.reserve((rows - 1) * (columns - 1) * 6); //Each row gives 6 indices for 2 triangles
-	//Create indices vect for indexed array
-	for (int i = 0; i < rows - 1; i++)
-	{
-		for (int j = 0; j < columns - 1; j++)
-		{
-			int v = i * columns + j;
-			indices.push_back(v + columns);
-			indices.push_back(v);
-			indices.push_back(v + columns + 1);
-			indices.push_back(v + columns + 1);
-			indices.push_back(v);
-			indices.push_back(v + 1);
-		}
-	}
-	//Add data to list for quick drawing
-	vList.reserve(3 * rows * columns);
+	//XXX: just vertices and normals for now
+	vList.reserve(rows * columns * 3);
+	nList.reserve(rows * columns * 3);
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -107,29 +93,40 @@ bool HeightMap::loadFromImage(std::string path)
 			vList.push_back(vertexData[i][j].x);
 			vList.push_back(vertexData[i][j].y);
 			vList.push_back(vertexData[i][j].z);
+			nList.push_back(normals[i][j].x);
+			nList.push_back(normals[i][j].y);
+			nList.push_back(normals[i][j].z);
 		}
 	}
-
-	//Add normals to list
-	for (int i = 0; i < rows; i++)
+	int restartIndex = rows * columns;
+	for (int i = 0; i < rows - 1; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			normalsList.push_back(normals[i][j].x);
-			normalsList.push_back(normals[i][j].y);
-			normalsList.push_back(normals[i][j].z);
+			for (int k = 0; k < 2; k++)
+			{
+				int row = i + 1 - k;
+				unsigned int index = row * columns + j;
+				indices.push_back(index);
+			}
 		}
+		indices.push_back(restartIndex);
 	}
+	
 	return true;
 }
 
 void HeightMap::render()
 {
+
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
-	glNormalPointer(GL_DOUBLE, 0, normalsList.data());
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_DOUBLE, 0, nList.data());
+	
+	glPrimitiveRestartIndex(rows * columns);
+	glEnable(GL_PRIMITIVE_RESTART);
+	glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, indices.data());
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
