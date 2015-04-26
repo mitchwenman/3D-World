@@ -1,0 +1,12 @@
+varying vec3 outNormal;
+varying vec3 halfVector;
+
+void main()
+{
+	float shininess = gl_FrontMaterial.shininess;
+	vec3 ambientColour = gl_FrontMaterial.ambient;
+	vec3 ambientIntensity = gl_LightSource[0].ambient;
+	
+	float specularIntensity = pow(max(dot(halfVector, outNormal), 0), shininess);	
+	
+}
