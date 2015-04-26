@@ -14,6 +14,7 @@ bool HeightMap::loadFromImage(std::string path)
 	rows = image.width();
 	columns = image.height();
 
+	//2 dimensional array - rows X columns, each element is one column
 	vertexData = std::vector<std::vector<Vertex3>>(rows, std::vector<Vertex3>(columns));
 	textureCoords = std::vector<std::vector<Vertex2>>(rows, std::vector<Vertex2>(columns));
 
@@ -21,6 +22,8 @@ bool HeightMap::loadFromImage(std::string path)
 	double textureV = double(rows) / 10;
 
 	//Copy values into vectors - scale to 0, 1 on Y axis and 1/5 size of image
+	double xoffset = -2.5;
+	double zoffset = -2.5;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -28,7 +31,7 @@ bool HeightMap::loadFromImage(std::string path)
 			double scaleCol = double(j) / (.2 * double(columns - 1));
 			double scaleRow = double(i) / (.2 * double(rows - 1));
 			double vertexHeight = image(i, j, 0, 0, 0) / 255.0;
-			Vertex3 vertex = { -.5 + scaleCol, vertexHeight, -.5 + scaleRow };
+			Vertex3 vertex = { xoffset + scaleCol, vertexHeight, zoffset + scaleRow };
 			Vertex2 texture = { textureU * scaleCol, textureV * scaleRow };
 
 			vertexData[i][j] = vertex;
@@ -100,6 +103,9 @@ bool HeightMap::loadFromImage(std::string path)
 			nList.push_back(normals[i][j].z);
 		}
 	}
+	//Use restart index so we can use triangle strips
+	//row * columns will be out of bounds, therefore 
+	//never used in the array
 	int restartIndex = rows * columns;
 	for (int i = 0; i < rows - 1; i++)
 	{
