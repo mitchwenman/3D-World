@@ -91,7 +91,7 @@ void renderScene()
 	glLoadIdentity();		
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	glUseProgram(program);
+	//glUseProgram(program);
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();

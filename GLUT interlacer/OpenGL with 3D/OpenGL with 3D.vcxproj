@@ -113,6 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.txt" />
+    <None Include="phong_frag.txt" />
+    <None Include="phong_vert.txt" />
     <None Include="vert.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

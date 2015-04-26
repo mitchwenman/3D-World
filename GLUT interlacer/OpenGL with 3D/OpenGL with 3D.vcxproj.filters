@@ -112,5 +112,11 @@
     <None Include="frag.txt">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="phong_vert.txt">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="phong_frag.txt">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

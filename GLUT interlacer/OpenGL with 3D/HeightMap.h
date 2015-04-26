@@ -8,7 +8,7 @@
 class HeightMap
 {
 public:
-	bool loadFromImage(std::string path);
+	void loadFromImage(std::string path);
 
 	void render();
 
@@ -20,8 +20,6 @@ public:
 
 private:
 	int rows, columns;
-
-	Vertex3 renderScale;
 
 	std::vector<std::vector<Vertex3>> vertexData;
 
@@ -35,6 +33,6 @@ private:
 
 	std::vector<double> nList;
 
-	
+	void calculateNormals();
 
 };
