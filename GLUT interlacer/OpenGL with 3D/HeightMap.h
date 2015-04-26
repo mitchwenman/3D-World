@@ -21,9 +21,6 @@ public:
 private:
 	int rows, columns;
 
-	GLuint dataVao, dataVbo,
-		   indexVao, indexVBO;
-
 	Vertex3 renderScale;
 
 	std::vector<std::vector<Vertex3>> vertexData;

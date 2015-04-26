@@ -54,6 +54,6 @@ glm::mat4 Camera::getLookAtMatrix()
 
 Camera::Camera()
 {
-	this->lookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+	this->lookAt(0, .5, 1, 0, .5, 0, 0, 1, 0);
 	angle = 0;
 }
