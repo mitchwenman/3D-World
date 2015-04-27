@@ -86,6 +86,7 @@
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="GraphicsUtil.cpp" />
     <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="HeightMapWorldObject.cpp" />
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />

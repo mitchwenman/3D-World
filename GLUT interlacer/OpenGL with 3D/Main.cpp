@@ -36,6 +36,8 @@
 #include "World.h"
 #include "MaterialData.h"
 #include "Transformation.h"
+#include "HeightMapWorldObject.h"
+#include "Polygon.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -100,12 +102,13 @@ void init()
 	GLfloat	material_shininess[1] = { 50 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData);
 	Vertex4 trans = { 0, 0, -2, 0};
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	std::vector<Transformation*> transformations;
 	transformations.push_back(translate);
 	world->insertPolygon(poly, matData,  transformations);
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData);
 }
 
 void renderScene()
