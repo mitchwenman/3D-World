@@ -79,8 +79,8 @@ void init()
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
-	unsigned int shader = ShaderLoader::compile("vert.txt", GL_VERTEX_SHADER);
-	unsigned int fragShader = ShaderLoader::compile("frag.txt", GL_FRAGMENT_SHADER);
+	unsigned int shader = ShaderLoader::compile("phong_vert.txt", GL_VERTEX_SHADER);
+	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	std::cout << glGetString(GL_VERSION) << std::endl;
 }
@@ -91,7 +91,7 @@ void renderScene()
 	glLoadIdentity();		
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	//glUseProgram(program);
+	glUseProgram(program);
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();

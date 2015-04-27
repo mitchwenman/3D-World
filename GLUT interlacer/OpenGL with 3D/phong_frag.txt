@@ -4,9 +4,19 @@ varying vec3 halfVector;
 void main()
 {
 	float shininess = gl_FrontMaterial.shininess;
+
 	vec3 ambientColour = gl_FrontMaterial.ambient;
 	vec3 ambientIntensity = gl_LightSource[0].ambient;
+	vec3 I_ambient = ambientColour * ambientIntensity;	
+
+	vec3 diffuseItensity = gl_LightSource[0].diffuse;
+	vec3 diffuseColour = gl_FrontMaterial.diffuse;
+	vec3 I_diffuse = diffuseItensity * diffuseColour;
+
+	float specularIntensity = pow(max(dot(halfVector, outNormal), 0), shininess);
 	
-	float specularIntensity = pow(max(dot(halfVector, outNormal), 0), shininess);	
+	vec3 I_specular = specularIntensity * ambientColour;
+	
+	gl_fragColor = I_ambient + I_defuse + I_specular;
 	
 }

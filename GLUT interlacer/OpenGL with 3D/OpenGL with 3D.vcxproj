@@ -110,6 +110,7 @@
     <ClInclude Include="WaveFrontPolygon.h" />
     <ClInclude Include="WaveFrontPolygonDrawer.h" />
     <ClInclude Include="WFObjectLoader.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.txt" />
