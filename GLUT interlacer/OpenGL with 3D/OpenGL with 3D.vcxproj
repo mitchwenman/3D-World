@@ -92,6 +92,7 @@
     <ClCompile Include="MaterialData.cpp" />
     <ClCompile Include="ModelTransform.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="WaveFrontPolygonDrawer.cpp" />
     <ClCompile Include="WFObjectLoader.cpp" />

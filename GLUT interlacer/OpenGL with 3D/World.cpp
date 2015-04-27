@@ -17,6 +17,14 @@ void World::draw()
 	for (unsigned int i = 0; i < polygons.size(); i++)
 	{
 		materials[i]->setMaterial();
+		for (unsigned int j = 0; j < transformations[i].size(); j++)
+		{
+			Transformation *t = transformations[i][j];
+			if (t != NULL)
+			{
+				t->apply();
+			}
+		}
 		WaveFrontPolygonDrawer::draw(*polygons[i]);
 	}
 }
