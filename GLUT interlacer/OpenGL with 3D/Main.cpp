@@ -34,13 +34,13 @@
 #include "HeightMap.h"
 #include "ShaderLoader.h"
 #include "World.h"
+#include "MaterialData.h"
+#include "Transformation.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
-WaveFrontPolygon *poly;
 float angle = 0.5;
-HeightMap* h;
 unsigned int program;
 //----------------- functions ----------------------------------
 
@@ -84,6 +84,28 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	std::cout << glGetString(GL_VERSION) << std::endl;
+
+	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
+	HeightMap *h = new HeightMap();
+	h->loadFromImage("terrain-heightmap-surround.bmp");
+	World* world = world->getInstance();
+	world->setHeightMap(h);
+	
+	//Setup material
+	//-- usually	objects	have	a	white	specular	reflection
+	GLfloat	material_specular[4]	= {	1.0, 1.0, 1.0, 1.0f	};
+	//-- set the ambient	and	diffuse	colour	to	be	the	same
+	GLfloat	material_diffuse_and_ambient[4] = {	0, .75, .5,	1.0f };
+	//-- set	the	shininess	from	range	[0,128]
+	GLfloat	material_shininess[1] = { 50 };
+	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
+									material_diffuse_and_ambient, material_shininess);
+	
+	Vertex4 trans = { 0, 0, -2, 0};
+	Transformation *translate = new Transformation(TRANSLATE, trans);
+	std::vector<Transformation*> transformations;
+	transformations.push_back(translate);
+	world->insertPolygon(poly, matData,  transformations);
 }
 
 void renderScene()
@@ -100,18 +122,9 @@ void renderScene()
 	Camera *cam = Camera::getSingleton();
 	
 	cam->setCamera();
-	gset->setGLMatrices();
+	gset->setGLMatrices();		
 
-	//Setup material
-	//-- usually	objects	have	a	white	specular	reflection
-	GLfloat	material_specular[]	= {	1.0, 1.0, 1.0, 1.0f	};
-	//-- set the ambient	and	diffuse	colour	to	be	the	same
-	GLfloat	material_diffuse_and_ambient[] = {	0, .75, .5,	1.0f };
-	//-- set	the	shininess	from	range	[0,128]
-	GLfloat	material_shininess[] = { 100 };
-	glMaterialfv(GL_FRONT_AND_BACK,	GL_AMBIENT,	material_diffuse_and_ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse_and_ambient);		
-
+	//Light setup
 	Vertex4 position = { 0, 20, 2.5, 1 };
 	Vertex4 diffuse = { 1, 1, 1, 1 };
 	Vertex4 ambient = { .2, .2, .2, 1 };
@@ -119,13 +132,8 @@ void renderScene()
 	
 	Lighting::setupSpotLight(position, diffuse, ambient, direction, 10);
 	World::getInstance()->draw();
-	
 
 	
-	ModelTransform::translate(3.25, .5, 1);
-	ModelTransform::scale(.5, .5, .5);
-	gset->setGLMatrices();
-	WaveFrontPolygonDrawer::draw(*poly);
 
 	
 	
@@ -207,10 +215,9 @@ int main(int argc, char **argv)
 	GraphicsSettings::getSingleton()->setFrameDimensions(width, height);
 	glutCreateWindow("OpenGL Interlacer");
 	init();
-	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
-	h = new HeightMap();
-	h->loadFromImage("terrain-heightmap-surround.bmp");
-	World::getInstance()->setHeightMap(h);
+	
+	
+	
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);

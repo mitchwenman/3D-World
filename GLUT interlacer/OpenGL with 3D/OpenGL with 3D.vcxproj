@@ -89,6 +89,7 @@
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MaterialData.cpp" />
     <ClCompile Include="ModelTransform.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="UserInput.cpp" />
@@ -105,8 +106,10 @@
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="Interlacer.h" />
     <ClInclude Include="Lighting.h" />
+    <ClInclude Include="MaterialData.h" />
     <ClInclude Include="ModelTransform.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="Transformation.h" />
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="WaveFrontPolygon.h" />
     <ClInclude Include="WaveFrontPolygonDrawer.h" />
