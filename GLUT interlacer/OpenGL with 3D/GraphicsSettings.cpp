@@ -28,3 +28,18 @@ void GraphicsSettings::setGLMatrices()
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(glm::value_ptr(projectionViewMatrix));
 }
+
+
+void GraphicsSettings::resetModelView()
+{
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	modelViewMatrix = glm::mat4();
+}
+
+void GraphicsSettings::resetProjectionView()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	projectionViewMatrix = glm::mat4();
+}

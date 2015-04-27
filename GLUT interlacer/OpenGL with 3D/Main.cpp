@@ -118,18 +118,15 @@ void renderScene()
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();
-	Frustum::getSingleton()->setFrustum();
 	Camera *cam = Camera::getSingleton();
-	
 	cam->setCamera();
-	gset->setGLMatrices();		
-
+	Frustum::getSingleton()->setFrustum();
+	gset->setGLMatrices();
 	//Light setup
 	Vertex4 position = { 0, 20, 2.5, 1 };
 	Vertex4 diffuse = { 1, 1, 1, 1 };
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
-	
 	Lighting::setupSpotLight(position, diffuse, ambient, direction, 10);
 	World::getInstance()->draw();
 

@@ -16,6 +16,6 @@ namespace GraphicsUtil
 	glm::vec3 vertex3ToGLMVec3(Vertex3 v);
 
 	Vertex3 GLMVec3ToVertex3(glm::vec3);
-};
+}
 
 

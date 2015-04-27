@@ -6,14 +6,14 @@
 
 class WorldObject
 {
-private:
+public:
 	MaterialData* material;
 
 	std::vector<Transformation*> transformations;
 
 	unsigned int shaderProgram;
 
-public:
+
 	virtual void draw() = 0;
 
 	WorldObject(MaterialData* material, 

@@ -1,6 +1,8 @@
 #include "World.h"
 
 #include "WaveFrontPolygonDrawer.h"
+#include "Camera.h"
+#include "GraphicsSettings.h"
 
 static World* _instance;
 
@@ -13,10 +15,14 @@ World* World::getInstance()
 
 void World::draw()
 {
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	Camera* cam = Camera::getSingleton();
+	gset->resetModelView();
+	cam->setCamera();
+	gset->setGLMatrices();
 	this->heightMap->render();
 	for (unsigned int i = 0; i < polygons.size(); i++)
-	{
-		materials[i]->setMaterial();
+	{		
 		for (unsigned int j = 0; j < transformations[i].size(); j++)
 		{
 			Transformation *t = transformations[i][j];
@@ -25,7 +31,11 @@ void World::draw()
 				t->apply();
 			}
 		}
+		gset->setGLMatrices();
+		materials[i]->setMaterial();
 		WaveFrontPolygonDrawer::draw(*polygons[i]);
+		gset->resetModelView();
+		cam->setCamera();
 	}
 }
 

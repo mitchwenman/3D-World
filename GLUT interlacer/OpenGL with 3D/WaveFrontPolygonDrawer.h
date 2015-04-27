@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "WaveFrontPolygon.h"
 
 namespace WaveFrontPolygonDrawer

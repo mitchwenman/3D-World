@@ -15,9 +15,9 @@ public:
 
 	glm::mat4 projectionViewMatrix;
 
-	void resetModelView() { modelViewMatrix = glm::mat4(); }
+	void resetModelView(); 
 
-	void resetProjectionView() { projectionViewMatrix = glm::mat4(); }
+	void resetProjectionView();
 
 	//Sets the open gl matrices to the current model view/projection matrices
 	void setGLMatrices();
