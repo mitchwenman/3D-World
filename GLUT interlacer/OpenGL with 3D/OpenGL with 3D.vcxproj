@@ -94,6 +94,7 @@
     <ClCompile Include="ModelTransform.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="WaveFrontPolygonDrawer.cpp" />

@@ -39,11 +39,15 @@
 #include "HeightMapWorldObject.h"
 #include "Polygon.h"
 
+#include "tiny_obj_loader.h"
+
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
 float angle = 0.5;
 unsigned int program;
+std::vector<tinyobj::shape_t> shapes;
+std::vector<tinyobj::material_t> mats;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -88,6 +92,13 @@ void init()
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
 	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
+	//Tiny object loader
+	
+	std::string file("Cube-mod.wob");
+	tinyobj::LoadObj(shapes, mats, file.c_str());
+
+
+
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
@@ -108,7 +119,7 @@ void init()
 	
 	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData);
 	pwo->transformations.push_back(translate);
-	world->insertObject(pwo);
+	//world->insertObject(pwo);
 }
 
 void renderScene()
@@ -117,7 +128,7 @@ void renderScene()
 	glLoadIdentity();		
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	glUseProgram(program);
+	glUseProgram(0);
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();
@@ -131,9 +142,20 @@ void renderScene()
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
 	Lighting::setupSpotLight(position, diffuse, ambient, direction, 10);
-	World::getInstance()->draw();
+	World* world = World::getInstance();
+	world->objects[0]->material->setMaterial();
+	glEnableClientState(GL_VERTEX_ARRAY);
+	float* verts = shapes[0].mesh.positions.data();
+	glVertexPointer(3, GL_FLOAT, 0, verts);
+	float* normals = shapes[0].mesh.normals.data();
+	//glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(3, 0, normals);
+	unsigned int* indices = shapes[0].mesh.indices.data();
+	glDrawElements(GL_TRIANGLES, shapes[0].mesh.indices.size(), GL_UNSIGNED_INT, indices);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	//World::getInstance()->draw();
 
-	
 
 	
 	
