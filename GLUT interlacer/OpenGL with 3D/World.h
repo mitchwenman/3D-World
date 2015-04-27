@@ -7,6 +7,7 @@
 #include "HeightMap.h"
 #include "MaterialData.h"
 #include "Transformation.h"
+#include "WorldObject.h"
 
 class World
 {
