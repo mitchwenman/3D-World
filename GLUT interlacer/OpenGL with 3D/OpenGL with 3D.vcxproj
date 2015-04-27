@@ -94,6 +94,7 @@
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="WaveFrontPolygonDrawer.cpp" />
     <ClCompile Include="WFObjectLoader.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />

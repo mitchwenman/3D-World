@@ -33,6 +33,7 @@
 #include "Lighting.h"
 #include "HeightMap.h"
 #include "ShaderLoader.h"
+#include "World.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -117,7 +118,7 @@ void renderScene()
 	Vertex3 direction = { 0, -1, 0 };
 	
 	Lighting::setupSpotLight(position, diffuse, ambient, direction, 10);
-	h->render();
+	World::getInstance()->draw();
 	
 
 	
@@ -209,6 +210,7 @@ int main(int argc, char **argv)
 	poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
 	h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
+	World::getInstance()->setHeightMap(h);
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(kb);

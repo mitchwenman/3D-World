@@ -73,7 +73,6 @@ void HeightMap::loadFromImage(std::string path)
 
 void HeightMap::render()
 {
-
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
 	glEnableClientState(GL_NORMAL_ARRAY);
