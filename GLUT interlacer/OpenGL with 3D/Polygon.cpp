@@ -1,6 +1,7 @@
 #include "Polygon.h"
 #include "WaveFrontPolygon.h"
 #include "WaveFrontPolygonDrawer.h"
+#include "GraphicsSettings.h"
 
 void PolygonWorldObject::draw()
 {
@@ -10,5 +11,6 @@ void PolygonWorldObject::draw()
 	}
 	if (this->material)
 		material->setMaterial();
+	GraphicsSettings::getSingleton()->setGLMatrices();
 	WaveFrontPolygonDrawer::draw(*this->polygon);
 }

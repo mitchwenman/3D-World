@@ -17,16 +17,12 @@ private:
 	World() {};
 
 public:
-	std::vector<WaveFrontPolygon *> polygons;
-	std::vector<MaterialData *> materials;
-	std::vector<std::vector<Transformation*>> transformations;
+	std::vector<WorldObject *> objects;
 
 	static World* getInstance();
 
 	void draw();
 
-	void setHeightMap(HeightMap *heightmap);
-
-	void insertPolygon(WaveFrontPolygon *poly, MaterialData *mat, std::vector<Transformation*> trans = std::vector<Transformation*>());
+	void insertObject(WorldObject *object);
 	
 };
