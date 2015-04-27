@@ -1,22 +1,29 @@
-varying vec3 outNormal;
-varying vec3 halfVector;
+varying vec3 lightDirection;
+varying vec3 normal;
+varying vec3 eye;
 
 void main()
 {
+	vec4 colour = vec4(0, 0, 0, 1);
 	float shininess = gl_FrontMaterial.shininess;
 
 	vec3 ambientColour = gl_FrontMaterial.ambient;
 	vec3 ambientIntensity = gl_LightSource[0].ambient;
-	vec3 I_ambient = ambientColour * ambientIntensity;	
+	vec3 I_ambient = vec3(.2, .2, .2);
+	colour += I_ambient;
 
 	vec3 diffuseItensity = gl_LightSource[0].diffuse;
 	vec3 diffuseColour = gl_FrontMaterial.diffuse;
 	vec3 I_diffuse = diffuseItensity * diffuseColour;
+	colour += I_diffuse;
 
+	vec3 eyeToVertex = normalise(eye);
+	vec3 halfVector = normalise(eye + lightDirection);
+	vec3 outNormal = normalise(normal);
 	float specularIntensity = pow(max(dot(halfVector, outNormal), 0), shininess);
 	
 	vec3 I_specular = specularIntensity * ambientColour;
-	
-	gl_fragColor = I_ambient + I_defuse + I_specular;
+	colour += I_specular;
+	gl_FragColor = colour;
 	
 }
