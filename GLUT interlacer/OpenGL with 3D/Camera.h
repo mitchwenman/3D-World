@@ -11,34 +11,50 @@ private:
 	Vertex3 up;
 
 	double angle; //Angle between center.x and eye.x
-
+	/*
+	 * Default private constructor for singleton pattern
+	 */
 	Camera();
 
 public:
 
+	///Gets the camera singleton object
+	///@return The singleton instance of Camera.
 	static Camera* getSingleton();
 	
+	///Sets the camera the position, direction and up vector of the camera.
+	///@param eyex, eyey, eyez The location of the camera
+	///@param centrex, centrey, centrez The point at which the camera will face.
+	///@param upx, upy, upz The up vector.
 	void lookAt(double eyex, double eyey, double eyez, double centrex, double centrey, double centrez, double upx, double upy, double upz );
 
-	//void moveEye(double eyex, double eyey, double eyez);
-
-	//Changes the model view matrix to whatever values the camera currently has
+	///Multiplies the model view matrix by the current camera values
 	void setCamera();
 
 	void moveEye(double eyex, double eyey, double eyez);
 
-	//Getters
+	///Gets the current camera matrix
+	///@return The camera matrix.
 	glm::mat4 getLookAtMatrix();
 
+	///Gets the eye vector
+	///@return the eye vector.
 	Vertex3 getEye() { return this->eye; }
 
+	///The center vector
+	///@return the center vector
 	Vertex3 getCentre() { return this->center; }
 
+	///The up vector
+	///@return the up vector
 	Vertex3 getUp() { return this->up; }
 
+	///The angle getter
+	///@return the angle between the center and eye
 	double getAngle() { return this->angle; }
 
-	//Setters
+	///Sets the angle
+	///@param angle The new angle.
 	void setAngle(double angle) { this->angle = angle; }
 
 };
