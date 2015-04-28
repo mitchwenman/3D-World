@@ -109,17 +109,17 @@ void init()
 	//-- set the ambient	and	diffuse	colour	to	be	the	same
 	GLfloat	material_diffuse_and_ambient[4] = {	0, .75, .5,	1.0f };
 	//-- set	the	shininess	from	range	[0,128]
-	GLfloat	material_shininess[1] = { 50 };
+	GLfloat	material_shininess[1] = { 20 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData);
-	Vertex4 trans = { 0, 0, -1.5, 0};
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData, program);
+	Vertex4 trans = { 0, .5, -0.5, 0};
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	world->insertObject(hm);
 	
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData);
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData, program);
 	pwo->transformations.push_back(translate);
-	//world->insertObject(pwo);
+	world->insertObject(pwo);
 }
 
 void renderScene()
@@ -128,7 +128,6 @@ void renderScene()
 	glLoadIdentity();		
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-	glUseProgram(0);
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
 	gset->resetModelView();
 	gset->resetProjectionView();
@@ -137,24 +136,15 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 0, 20, 2.5, 1 };
-	Vertex4 diffuse = { 1, 1, 1, 1 };
+	Vertex4 position = { 5, 20, 0, 1 };
+	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
-	Lighting::setupSpotLight(position, diffuse, ambient, direction, 10);
-	World* world = World::getInstance();
-	world->objects[0]->material->setMaterial();
-	glEnableClientState(GL_VERTEX_ARRAY);
-	float* verts = shapes[0].mesh.positions.data();
-	glVertexPointer(3, GL_FLOAT, 0, verts);
-	float* normals = shapes[0].mesh.normals.data();
-	//glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(3, 0, normals);
-	unsigned int* indices = shapes[0].mesh.indices.data();
-	glDrawElements(GL_TRIANGLES, shapes[0].mesh.indices.size(), GL_UNSIGNED_INT, indices);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	//World::getInstance()->draw();
+	Lighting::setupPointLight(position, diffuse, ambient);
+
+
+	World::getInstance()->draw();
+
 
 
 	

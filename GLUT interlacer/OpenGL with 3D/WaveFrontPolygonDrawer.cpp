@@ -51,7 +51,7 @@ void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verts.data());
 	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(3, 0, vertexNormals.data());
+	glNormalPointer(GL_DOUBLE, 0, vertexNormals.data());
 	glDrawElements(GL_TRIANGLES, faceIndices.size(), GL_UNSIGNED_INT, faceIndices.data());
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
