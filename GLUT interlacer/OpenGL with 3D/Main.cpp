@@ -98,10 +98,10 @@ void init()
 	//-- set the ambient	and	diffuse	colour	to	be	the	same
 	GLfloat	material_diffuse_and_ambient[4] = {	0, .75, .5,	1.0f };
 	//-- set	the	shininess	from	range	[0,128]
-	GLfloat	material_shininess[1] = { 50 };
+	GLfloat	material_shininess[1] = { 20 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData);
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData, program);
 	Vertex4 trans = { 0, 0, -1.5, 0};
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	world->insertObject(hm);

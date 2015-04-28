@@ -1,11 +1,11 @@
-varying vec3 lightDirection;
 varying vec3 normal;
-varying vec3 eye;
+varying vec3 halfVector;
+varying vec3 vertPos;
 
 void main()
 {
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 	normal = gl_Normal * gl_NormalMatrix;
-	eye = -((gl_Vertex * gl_ModelViewMatrix).xyz);
-	lightDrection = vec3(gl_LightSource[0].position.xyz - (gl_Vertex * gl_ModelViewMatrix);
+	halfVector = gl_LightSource[0].halfVector.xyz;
+	vertPos = (gl_Vertex * gl_ModelViewMatrix).xyz;
 }

@@ -43,7 +43,7 @@ unsigned int ShaderLoader::compile(std::string file, int shaderType)
 		std::cout << "Shader error" << std::endl;
 		if (params > 0)
 		{
-			char* message = (char*)malloc(params);
+			char* message = (char*)malloc(1000);
 			glGetShaderInfoLog(shader, params, &read, message);
 			std::cout << message << std::endl;
 			free(message);
