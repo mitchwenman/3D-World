@@ -1,11 +1,14 @@
-varying vec3 normal;
+
 varying vec3 halfVector;
-varying vec3 vertPos;
+varying vec4 vertPos;
+varying vec3 outNormal;
 
 void main()
 {
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-	normal = gl_Normal * gl_NormalMatrix;
+	vec4 vertPos = gl_Vertex * gl_ModelViewMatrix;
+
 	halfVector = gl_LightSource[0].halfVector.xyz;
-	vertPos = (gl_Vertex * gl_ModelViewMatrix).xyz;
+
+	outNormal = normalize(gl_Normal * gl_NormalMatrix);
 }

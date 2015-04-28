@@ -1,6 +1,7 @@
-varying vec3 normal;
+
 varying vec3 halfVector;
-varying vec3 vertPos;
+varying vec3 outNormal;
+varying vec4 vertPos;
 
 void main()
 {
@@ -9,31 +10,29 @@ void main()
 	vec4 ambientColour = gl_FrontMaterial.ambient;
 	vec4 ambientIntensity = gl_LightSource[0].ambient;
 	vec4 I_ambient = ambientIntensity * ambientColour;
-	//colour =  colour + I_ambient;
+	colour += I_ambient;
 
-	
-
-
-	vec3 outNormal = normalize(normal);
-	vec3 lightDir = normalize(gl_LightSource[0].position.xyz - vertPos);
-	float lambertian = max(dot(lightDir, outNormal), 0.0);
+	vec3 normal = normalize(outNormal);
+	vec3 l = vec3(gl_LightSource[0].position - vertPos);
+	float lambertian = max(dot(normal, l), 0.0);
 	if (lambertian > 0.0)
 	{
 		vec4 diffuseIntensity = gl_LightSource[0].diffuse;
 		vec4 diffuseColour = gl_FrontMaterial.diffuse;
-		vec4 I_diffuse = diffuseIntensity;
-		colour += diffuseColour;
+		vec4 I_diffuse = diffuseIntensity * diffuseColour;// * lambertian;
+		colour += I_diffuse;
 		
 		vec3 nHalfVector = normalize(halfVector);
-		float dotp = dot(nHalfVector, outNormal);
+		float dotp = dot(normal, nHalfVector);
 		float mantissa = max(dotp, 0);
-		float specularIntensity = pow(mantissa, 2);
+		float specularIntensity = pow(mantissa, shininess);
 
 		vec4 I_specular = specularIntensity * ambientColour;
-		//colour += I_specular;
+		colour += I_specular;
 	}
-	vec4 col = vec4(outNormal, 1.0);
-	gl_FragColor = col;
+	
+	gl_FragColor = colour;	
+	
 	
 	
 }
