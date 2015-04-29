@@ -34,7 +34,7 @@ void Texture::bind()
 	//clamp to 0, 1 on x and y
 	glTexParameteri(this->textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(this->textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexParameteri(this->textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(this->textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(this->textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(this->textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 }
