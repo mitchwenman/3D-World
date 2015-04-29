@@ -94,8 +94,8 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	test_texture_program = ShaderLoader::link(ShaderLoader::compile("basic_texture.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("basic_texture.fs", GL_FRAGMENT_SHADER));
+	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_ambient.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("texture_ambient.fs", GL_FRAGMENT_SHADER));
 	
 
 	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
@@ -184,7 +184,7 @@ void display(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);
 	

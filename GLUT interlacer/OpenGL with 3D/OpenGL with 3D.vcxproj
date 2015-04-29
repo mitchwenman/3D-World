@@ -131,6 +131,8 @@
     <None Include="frag.txt" />
     <None Include="phong_frag.txt" />
     <None Include="phong_vert.txt" />
+    <None Include="texture _ambient.vs" />
+    <None Include="texture_ambient.fs" />
     <None Include="vert.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
