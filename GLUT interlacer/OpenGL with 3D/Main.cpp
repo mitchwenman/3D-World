@@ -47,6 +47,7 @@ bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
 float angle = 0.5;
 unsigned int program;
+unsigned int test_texture_program;
 std::vector<tinyobj::shape_t> shapes;
 std::vector<tinyobj::material_t> mats;
 Texture* texture;
@@ -92,7 +93,10 @@ void init()
 	unsigned int shader = ShaderLoader::compile("phong_vert.txt", GL_VERTEX_SHADER);
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
-	std::cout << glGetString(GL_VERSION) << std::endl;
+	
+	test_texture_program = ShaderLoader::link(ShaderLoader::compile("basic_texture.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("basic_texture.fs", GL_FRAGMENT_SHADER));
+	
 
 	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
 	//Tiny object loader
@@ -124,7 +128,7 @@ void init()
 	world->insertObject(pwo);
 	//----------------
 	texture = new Texture(GL_TEXTURE_2D, "checkerboard.bmp");
-
+	
 
 }
 
@@ -142,16 +146,19 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 0, 50, 2, 1 };
+	Vertex4 position = { 0, -1, 2, 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
-	Lighting::setupSpotLight(position, diffuse, ambient, direction, 50);
+	Lighting::setupDirectionalLight(position, diffuse, ambient);
 
 
 	//World::getInstance()->draw();
-
+	
 	texture->bind();
+	glUseProgram(test_texture_program);
+	int samplerLocation = glGetUniformLocation(test_texture_program, "gSampler"); 
+	glUniform1i(samplerLocation, 0);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	float* verts = shapes[0].mesh.positions.data();
 	glVertexPointer(3, GL_FLOAT, 0, verts);
@@ -177,7 +184,7 @@ void display(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glShadeModel(GL_SMOOTH);
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);
 	

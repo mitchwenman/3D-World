@@ -126,6 +126,8 @@
     <ClInclude Include="WorldObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="basic_texture.fs" />
+    <None Include="basic_texture.vs" />
     <None Include="frag.txt" />
     <None Include="phong_frag.txt" />
     <None Include="phong_vert.txt" />

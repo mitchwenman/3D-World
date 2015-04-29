@@ -160,5 +160,11 @@
     <None Include="phong_frag.txt">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="basic_texture.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="basic_texture.fs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
