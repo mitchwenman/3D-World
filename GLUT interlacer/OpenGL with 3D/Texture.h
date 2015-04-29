@@ -13,10 +13,12 @@ private:
 
 	GLuint textureID;
 
+	GLenum textureTarget;
+
 	unsigned char* textureData;
 
-	//number of rows, number of columns
-	int textureU, textureV;
+	//number of rows, number of columns in image
+	int rows, columns;
 
 	bool loadFromPath(std::string file);
 

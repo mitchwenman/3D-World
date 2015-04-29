@@ -38,6 +38,7 @@
 #include "Transformation.h"
 #include "HeightMapWorldObject.h"
 #include "Polygon.h"
+#include "Texture.h"
 
 #include "tiny_obj_loader.h"
 
@@ -112,14 +113,17 @@ void init()
 	GLfloat	material_shininess[1] = { 20 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData, program);
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData, 0);
 	Vertex4 trans = { 0, .5, -0.5, 0};
 	Transformation *translate = new Transformation(TRANSLATE, trans);
-	world->insertObject(hm);
-	
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData, program);
+	world->insertObject(hm);	
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData, 0);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
+	//----------------
+	Texture *texture = new Texture(GL_TEXTURE_2D, "checkerboard.bmp");
+
+
 }
 
 void renderScene()
