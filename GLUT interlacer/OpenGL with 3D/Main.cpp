@@ -142,14 +142,15 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 5, 20, 0, 1 };
+	Vertex4 position = { 0, 50, 2, 1 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
-	Lighting::setupPointLight(position, diffuse, ambient);
+	Lighting::setupSpotLight(position, diffuse, ambient, direction, 50);
 
 
 	//World::getInstance()->draw();
+
 	texture->bind();
 	glEnableClientState(GL_VERTEX_ARRAY);
 	float* verts = shapes[0].mesh.positions.data();
