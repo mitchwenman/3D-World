@@ -115,6 +115,7 @@
     <ClInclude Include="ModelTransform.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="WaveFrontPolygon.h" />
