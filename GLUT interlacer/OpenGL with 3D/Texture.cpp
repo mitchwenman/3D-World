@@ -11,7 +11,7 @@ Texture::Texture(GLenum textureTarget, std::string file) : textureTarget(texture
 }
 
 
-bool Texture::loadFromPath(std::string path)
+void Texture::loadFromPath(std::string path)
 {
 	cimg_library::CImg<unsigned char> image(path.c_str());
 	rows = image.height();		
@@ -24,7 +24,7 @@ bool Texture::loadFromPath(std::string path)
 	
 	glTexImage2D(this->textureTarget, 0, GL_RGB, columns, rows, 0, GL_RGB, GL_UNSIGNED_BYTE, this->textureData); 
 	GLenum err = glGetError();
-	return true;
+
 }
 
 void Texture::bind()
