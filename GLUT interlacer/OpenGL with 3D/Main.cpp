@@ -94,8 +94,8 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_ambient.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("texture_ambient.fs", GL_FRAGMENT_SHADER));
+	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_diffuse.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("texture_diffuse.fs", GL_FRAGMENT_SHADER));
 	
 
 	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
@@ -146,7 +146,7 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 0, -1, 2, 0 };
+	Vertex4 position = { 0, 10, -10 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };
@@ -159,6 +159,8 @@ void renderScene()
 	glUseProgram(test_texture_program);
 	int samplerLocation = glGetUniformLocation(test_texture_program, "gSampler"); 
 	glUniform1i(samplerLocation, 0);
+	int lightDirLocation = glGetUniformLocation(test_texture_program, "lightDirection");
+	glUniform3f(lightDirLocation, -position.x, -position.y, -position.z);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	float* verts = shapes[0].mesh.positions.data();
 	glVertexPointer(3, GL_FLOAT, 0, verts);

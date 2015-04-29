@@ -172,5 +172,11 @@
     <None Include="texture_ambient.fs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="texture_diffuse.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="texture_diffuse.vs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
