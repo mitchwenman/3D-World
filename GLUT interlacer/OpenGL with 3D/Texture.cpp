@@ -4,9 +4,10 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-Texture::Texture(GLenum textureTarget, std::string file)
+Texture::Texture(GLenum textureTarget, std::string file) : textureTarget(textureTarget)
 {
 	loadFromPath(file);
+
 }
 
 
@@ -18,9 +19,11 @@ bool Texture::loadFromPath(std::string path)
 
 	this->textureData = image.data();
 	//Generate texture 
-	glGenTextures(1, &this->textureID);
+	glGenTextures(1, &this->textureID);	
 	glBindTexture(this->textureTarget, this->textureID);
-	glTexImage2D(this->textureTarget, 0, GL_RGBA, columns, rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, this->textureData); 
+	
+	glTexImage2D(this->textureTarget, 0, GL_RGB, columns, rows, 0, GL_RGB, GL_UNSIGNED_BYTE, this->textureData); 
+	GLenum err = glGetError();
 	return true;
 }
 

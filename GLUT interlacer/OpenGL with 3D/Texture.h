@@ -9,6 +9,8 @@ class Texture
 public:
 	Texture(GLenum textureTarget, std::string file);
 
+	void bind();
+
 private:
 
 	GLuint textureID;
@@ -22,6 +24,6 @@ private:
 
 	bool loadFromPath(std::string file);
 
-	void bind();
+	
 
 };

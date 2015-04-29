@@ -49,6 +49,7 @@ float angle = 0.5;
 unsigned int program;
 std::vector<tinyobj::shape_t> shapes;
 std::vector<tinyobj::material_t> mats;
+Texture* texture;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -83,6 +84,7 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel (GL_SMOOTH);
 	glCullFace(GL_BACK);
+	glEnable(GL_TEXTURE_2D);
 	int winwid = glutGet(GLUT_WINDOW_WIDTH);
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
@@ -121,7 +123,7 @@ void init()
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	//----------------
-	Texture *texture = new Texture(GL_TEXTURE_2D, "checkerboard.bmp");
+	texture = new Texture(GL_TEXTURE_2D, "checkerboard.bmp");
 
 
 }
@@ -147,9 +149,21 @@ void renderScene()
 	Lighting::setupPointLight(position, diffuse, ambient);
 
 
-	World::getInstance()->draw();
-
-
+	//World::getInstance()->draw();
+	texture->bind();
+	glEnableClientState(GL_VERTEX_ARRAY);
+	float* verts = shapes[0].mesh.positions.data();
+	glVertexPointer(3, GL_FLOAT, 0, verts);
+	float* normals = shapes[0].mesh.normals.data();
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_FLOAT, 0, normals);
+	unsigned int* indices = shapes[0].mesh.indices.data();
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, shapes[0].mesh.texcoords.data());
+	glDrawElements(GL_TRIANGLES, shapes[0].mesh.indices.size(), GL_UNSIGNED_INT, indices);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	
 	
@@ -165,6 +179,7 @@ void display(void)
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);
+	
 	
 	//-----
 	
