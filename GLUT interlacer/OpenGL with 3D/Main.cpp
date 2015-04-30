@@ -94,8 +94,8 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_diffuse.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("texture_diffuse.fs", GL_FRAGMENT_SHADER));
+	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_specular.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("texture_specular.fs", GL_FRAGMENT_SHADER));
 	
 
 	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
@@ -146,7 +146,7 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 50, 100, -100 , 0 };
+	Vertex4 position = { 50, 50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };

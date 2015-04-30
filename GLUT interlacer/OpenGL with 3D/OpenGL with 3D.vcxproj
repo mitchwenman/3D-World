@@ -135,6 +135,8 @@
     <None Include="texture_ambient.fs" />
     <None Include="texture_diffuse.fs" />
     <None Include="texture_diffuse.vs" />
+    <None Include="texture_specular.fs" />
+    <None Include="texture_specular.vs" />
     <None Include="vert.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
