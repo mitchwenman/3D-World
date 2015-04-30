@@ -127,7 +127,7 @@ void init()
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	//----------------
-	texture = new Texture(GL_TEXTURE_2D, "checkerboard.bmp");
+	texture = new Texture(GL_TEXTURE_2D, "wood_floor.bmp");
 	
 
 }
@@ -146,7 +146,7 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 0, 10, -10 , 0 };
+	Vertex4 position = { 50, 100, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	Vertex3 direction = { 0, -1, 0 };

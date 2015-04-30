@@ -16,13 +16,12 @@ void Texture::loadFromPath(std::string path)
 	cimg_library::CImg<unsigned char> image(path.c_str());
 	rows = image.height();		
 	columns = image.width();
-
 	this->textureData = image.data();
 	//Generate texture 
 	glGenTextures(1, &this->textureID);	
 	glBindTexture(this->textureTarget, this->textureID);
 	
-	glTexImage2D(this->textureTarget, 0, GL_RGB, columns, rows, 0, GL_RGB, GL_UNSIGNED_BYTE, this->textureData); 
+	glTexImage2D(this->textureTarget, 0, GL_RGB, columns, rows, 0, GL_BGR, GL_UNSIGNED_BYTE, this->textureData); 
 	GLenum err = glGetError();
 
 }
