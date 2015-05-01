@@ -184,5 +184,11 @@
     <None Include="texture_specular.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="texture_normal.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="texture_normal.vs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

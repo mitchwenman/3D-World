@@ -17,7 +17,7 @@ public:
 	Texture(GLenum textureTarget, std::string file);
 
 	///Binds this texture to the active texture GL_TEXTURE0
-	void bind();
+	void bind(GLenum textureUnit);
 
 private:
 

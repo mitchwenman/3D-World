@@ -51,6 +51,7 @@ unsigned int test_texture_program;
 std::vector<tinyobj::shape_t> shapes;
 std::vector<tinyobj::material_t> mats;
 Texture* texture;
+Texture* normalMap;
 //----------------- functions ----------------------------------
 
 void drawCircle(double radius, double cx, double cy)
@@ -94,11 +95,11 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_specular.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("texture_specular.fs", GL_FRAGMENT_SHADER));
+	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_normal.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("texture_normal.fs", GL_FRAGMENT_SHADER));
 	
 
-	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube-mod.wob");
+	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube.obj");
 	//Tiny object loader
 	
 	std::string file("Cube-mod.wob");
@@ -128,7 +129,7 @@ void init()
 	world->insertObject(pwo);
 	//----------------
 	texture = new Texture(GL_TEXTURE_2D, "wood_floor.bmp");
-	
+	normalMap = new Texture(GL_TEXTURE_2D, "wood_normal.bmp");
 
 }
 
@@ -154,8 +155,9 @@ void renderScene()
 
 
 	//World::getInstance()->draw();
-	
-	texture->bind();
+	ModelTransform::translate(0, 0, -2);
+	gset->setGLMatrices();
+	texture->bind(GL_TEXTURE0);
 	glUseProgram(test_texture_program);
 	int samplerLocation = glGetUniformLocation(test_texture_program, "gSampler"); 
 	glUniform1i(samplerLocation, 0);

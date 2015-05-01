@@ -22,13 +22,11 @@ void Texture::loadFromPath(std::string path)
 	glBindTexture(this->textureTarget, this->textureID);
 	
 	glTexImage2D(this->textureTarget, 0, GL_RGB, columns, rows, 0, GL_BGR, GL_UNSIGNED_BYTE, this->textureData); 
-	GLenum err = glGetError();
-
 }
 
-void Texture::bind()
+void Texture::bind(GLenum textureUnit)
 {	
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(textureUnit);
 	glBindTexture(this->textureTarget, this->textureID);
 	//clamp to 0, 1 on x and y
 	glTexParameteri(this->textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP);
