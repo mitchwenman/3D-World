@@ -6,6 +6,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
+static float angle = 0.1;
 
 void PolygonWorldObject::draw()
 {

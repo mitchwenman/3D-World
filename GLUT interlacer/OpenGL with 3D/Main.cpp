@@ -96,7 +96,7 @@ void init()
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
-	Vertex4 position = { 50, 50, -100 , 0 };
+	Vertex4 position = { -50, 50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	dirLight->setLight(position, ambient, diffuse);
