@@ -98,6 +98,7 @@
     <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="UserInput.cpp" />
+    <ClCompile Include="WaveFrontPolygon.cpp" />
     <ClCompile Include="WaveFrontPolygonDrawer.cpp" />
     <ClCompile Include="WFObjectLoader.cpp" />
     <ClCompile Include="World.cpp" />

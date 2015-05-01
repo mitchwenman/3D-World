@@ -41,7 +41,7 @@ void Camera::moveEye(double eyex, double eyey, double eyez)
 
 void Camera::setCamera()
 {
-	gluLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
+	GraphicsSettings::getSingleton()->modelViewMatrix *= this->getLookAtMatrix();
 }
 
 glm::mat4 Camera::getLookAtMatrix()

@@ -20,7 +20,7 @@ Frustum* Frustum::getSingleton()
 
 void Frustum::setFrustum()
 {
-	glFrustum(left, right, bottom, top, nearPlane, farPlane);
+	GraphicsSettings::getSingleton()->projectionViewMatrix *= this->frustumMatrix;
 }
 
 void Frustum::setFrustum(double left, double right, double top, double bottom, double near, double far) 

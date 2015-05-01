@@ -8,7 +8,7 @@
 #include <sstream>
 
 using namespace std;
-
+/*
 Vertex4 loadVertexLine(std::string line);
 Vertex3 loadNormalLine(std::string line);
 Vertex2 loadTextureLine(std::string line);
@@ -164,4 +164,4 @@ WaveFrontPolygonFace loadFaceWithVerticesTexturesNormals(std::string line)
 	}
 	
 	return face;
-}
+}*/

@@ -1,29 +1,22 @@
 #pragma once
 
 #include "GraphicsUtil.h"
+#include <string>
 #include <vector>
-
-class WaveFrontPolygonFace
-{
-public:
-	std::vector<int> vertexIndices;
-
-	std::vector<int> textureIndices;
-
-	std::vector<int> normalIndices;
-
-};
 
 class WaveFrontPolygon
 {
 public:
-	std::vector<Vertex4> vertices;
+	std::vector<float> vertices;
 
-	std::vector<Vertex2> textures;
+	std::vector<float> textures;
 
-	std::vector<Vertex3> normals;
+	std::vector<float> normals;
 
-	std::vector<WaveFrontPolygonFace> faces;
+	std::vector<unsigned int> indices;
+
+	WaveFrontPolygon(std::string objFile);
+
 };
 
 

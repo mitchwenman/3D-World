@@ -20,7 +20,6 @@
 
 #include "Interlacer.h"
 
-#include "WFObjectLoader.h"
 #include <math.h>
 #include "WaveFrontPolygon.h"
 #include "ModelTransform.h"
@@ -40,7 +39,6 @@
 #include "Polygon.h"
 #include "Texture.h"
 
-#include "tiny_obj_loader.h"
 
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
@@ -48,8 +46,7 @@ long eyes = 10;			//- distance between eyes
 float angle = 0.5;
 unsigned int program;
 unsigned int test_texture_program;
-std::vector<tinyobj::shape_t> shapes;
-std::vector<tinyobj::material_t> mats;
+
 Texture* texture;
 Texture* normalMap;
 //----------------- functions ----------------------------------
@@ -72,13 +69,7 @@ void init()
 		ShaderLoader::compile("texture_specular.fs", GL_FRAGMENT_SHADER));
 	
 
-	WaveFrontPolygon* poly = WFObjectLoader::loadObjectFile("Cube.obj");
-	//Tiny object loader
-	
-	std::string file("Cube-mod.wob");
-	tinyobj::LoadObj(shapes, mats, file.c_str());
-
-
+	WaveFrontPolygon* poly = new WaveFrontPolygon("Cube-mod.wob");
 
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
@@ -97,7 +88,7 @@ void init()
 	Vertex4 trans = { 0, .5, -0.5, 0};
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	world->insertObject(hm);	
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, matData, 0);
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, NULL, test_texture_program);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	//----------------
@@ -114,12 +105,12 @@ void renderScene()
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
-	//gset->resetModelView();
-	//gset->resetProjectionView();
+	gset->resetModelView();
+	gset->resetProjectionView();
 	Camera *cam = Camera::getSingleton();
 	cam->setCamera();
 	
-	//gset->setGLMatrices();
+	gset->setGLMatrices();
 	//Light setup
 	Vertex4 position = { 50, 50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
@@ -127,10 +118,8 @@ void renderScene()
 	Vertex3 direction = { 0, -1, 0 };
 	Lighting::setupDirectionalLight(position, diffuse, ambient);
 
-	glRotatef(angle += 0.01, 0, 1, 0);
 	
-	//ModelTransform::translate(0, 0, -2);
-	//gset->setGLMatrices();
+	gset->setGLMatrices();
 	texture->bind(GL_TEXTURE0);
 	normalMap->bind(GL_TEXTURE1);
 	glUseProgram(test_texture_program);
@@ -140,19 +129,7 @@ void renderScene()
 	glUniform1i(normalLocation, 1);
 	int lightDirLocation = glGetUniformLocation(test_texture_program, "lightDirection");
 	glUniform3f(lightDirLocation, -position.x, -position.y, -position.z);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	float* verts = shapes[0].mesh.positions.data();
-	glVertexPointer(3, GL_FLOAT, 0, verts);
-	float* normals = shapes[0].mesh.normals.data();
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(GL_FLOAT, 0, normals);
-	unsigned int* indices = shapes[0].mesh.indices.data();
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, shapes[0].mesh.texcoords.data());
-	glDrawElements(GL_TRIANGLES, shapes[0].mesh.indices.size(), GL_UNSIGNED_INT, indices);
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
 
 	World::getInstance()->draw();
 	
