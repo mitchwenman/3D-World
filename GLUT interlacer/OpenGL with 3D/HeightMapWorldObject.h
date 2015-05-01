@@ -7,9 +7,8 @@ private:
 	HeightMap* heightmap;
 
 public:
-	HeightMapWorldObject(HeightMap* hm, MaterialData* material, 
-				unsigned int shaderProgram = 0, 
-				std::vector<Transformation*> trans = std::vector<Transformation*>()) : WorldObject(material, shaderProgram, trans) { this->heightmap = hm; };
+	HeightMapWorldObject(HeightMap* hm, IShaderProgram* shaderProgram = NULL, 
+				std::vector<Transformation*> trans = std::vector<Transformation*>()) : WorldObject(shaderProgram, trans) { this->heightmap = hm; };
 
 
 	void draw();

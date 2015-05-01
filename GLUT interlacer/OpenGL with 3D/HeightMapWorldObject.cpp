@@ -5,8 +5,9 @@
 
 void HeightMapWorldObject::draw()
 {
-	glUseProgram(this->shaderProgram);
-	if (this->material)
-		material->setMaterial();
+	if (this->shaderProgram)
+		shaderProgram->useProgram();
+	else
+		glUseProgram(0);
 	this->heightmap->render();
 }

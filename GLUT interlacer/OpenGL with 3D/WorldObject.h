@@ -2,24 +2,22 @@
 
 #include "MaterialData.h"
 #include "Transformation.h"
+#include "IShaderProgram.h"
 #include <vector>
 
 class WorldObject
 {
 public:
-	MaterialData* material;
 
 	std::vector<Transformation*> transformations;
 
-	unsigned int shaderProgram;
+	IShaderProgram* shaderProgram;
 
 
 	virtual void draw() = 0;
 
-	WorldObject(MaterialData* material, 
-				unsigned int shaderProgram = 0, 
-				std::vector<Transformation*> trans = std::vector<Transformation*>()) : material(material), 
-																						shaderProgram(shaderProgram),
+	WorldObject(IShaderProgram* shaderProgram = NULL, 
+				std::vector<Transformation*> trans = std::vector<Transformation*>()) : shaderProgram(shaderProgram),
 																						transformations(trans) {};
 	
 

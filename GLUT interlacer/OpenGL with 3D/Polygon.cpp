@@ -11,9 +11,10 @@ void PolygonWorldObject::draw()
 	{
 		transformations[i]->apply();
 	}
-	if (this->material)
-		material->setMaterial();
 	GraphicsSettings::getSingleton()->setGLMatrices();
-	glUseProgram(this->shaderProgram);
+	if (this->shaderProgram)
+		shaderProgram->useProgram();
+	else
+		glUseProgram(0);
 	WaveFrontPolygonDrawer::draw(*this->polygon);
 }

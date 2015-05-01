@@ -39,6 +39,7 @@
 #include "Polygon.h"
 #include "Texture.h"
 #include "DirectionalLight.h"
+#include "SpecularColourMap.h"
 
 
 //----------------- globals ------------------------------------
@@ -66,10 +67,6 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	test_texture_program = ShaderLoader::link(ShaderLoader::compile("texture_specular.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("texture_specular.fs", GL_FRAGMENT_SHADER));
-	
-
 	WaveFrontPolygon* poly = new WaveFrontPolygon("Cube-mod.wob");
 
 	HeightMap *h = new HeightMap();
@@ -85,16 +82,17 @@ void init()
 	GLfloat	material_shininess[1] = { 20 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, matData, 0);
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h);
 	Vertex4 trans = { 0, .5, -0.5, 0};
-	Transformation *translate = new Transformation(TRANSLATE, trans);
+	
 	world->insertObject(hm);	
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, NULL, test_texture_program);
-	pwo->transformations.push_back(translate);
+
+	SpecularColourMap *cMap = new SpecularColourMap("wood_floor.bmp");
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, cMap);
+	Transformation *translate = new Transformation(TRANSLATE, trans);
+	//pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	//----------------
-	texture = new Texture(GL_TEXTURE_2D, "wood_floor.bmp");
-	normalMap = new Texture(GL_TEXTURE_2D, "wood_normal.bmp");
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
@@ -122,18 +120,6 @@ void renderScene()
 	DirectionalLight::getSingleton()->setLight();
 
 	
-	Vertex4 position = { 50, 50, -100 , 0 };
-	texture->bind(GL_TEXTURE0);
-	normalMap->bind(GL_TEXTURE1);
-	glUseProgram(test_texture_program);
-	int samplerLocation = glGetUniformLocation(test_texture_program, "gSampler"); 
-	glUniform1i(samplerLocation, 0);
-	int normalLocation = glGetUniformLocation(test_texture_program, "normSampler"); 
-	glUniform1i(normalLocation, 1);
-	int lightDirLocation = glGetUniformLocation(test_texture_program, "lightDirection");
-	glUniform3f(lightDirLocation, -position.x, -position.y, -position.z);
-	
-
 	World::getInstance()->draw();
 	
 }

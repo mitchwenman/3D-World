@@ -8,7 +8,7 @@
 class SpecularColourMap : public IShaderProgram
 {
 private:
-	Texture texture;
+	Texture* texture;
 
 public:
 	SpecularColourMap(std::string textureFile);
