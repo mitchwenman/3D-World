@@ -14,7 +14,7 @@ void main()
 	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
 	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
 
-	vec3 lightDir = (vec4(lightDirection, 1.0) * gl_ModelViewMatrix).xyz;
+	vec3 lightDir = (gl_ModelViewMatrix * vec4(lightDirection, 1.0)).xyz;
 
 	float diffuse_intensity = dot(normalize(normal), normalize(lightDir));
 	if (diffuse_intensity > 0.0)
@@ -23,9 +23,9 @@ void main()
 
 		//No specular if diffuse intensity is 0
 		
-		vec3 nLightDir = normalize(lightDirection);
+		vec3 nLightDir = normalize(lightDir);
 		vec3 nNorm = normalize(normal);
-		vec3 lightReflection = normalize(reflect(nLightDir, nNorm));
+		vec3 lightReflection = normalize(reflect(-lightDir, normal));
 		vec3 vertEye = normalize(-position); //Vector from pixel to eye at (0,0,0)
 		float shininess = 4.0;
 		float specularIntensity = max(0.0, pow(dot(vertEye, lightReflection), shininess)); //Negative angle shouldn't see specular

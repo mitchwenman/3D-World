@@ -4,6 +4,8 @@
 #include "GraphicsUtil.h"
 #include "GraphicsSettings.h"
 #include <math.h>
+#include "libs\glew.h"
+#include "libs\glut.h"
 
 static Camera* _instance;
 
@@ -39,8 +41,7 @@ void Camera::moveEye(double eyex, double eyey, double eyez)
 
 void Camera::setCamera()
 {
-	glm::mat4 lookAt = this->getLookAtMatrix();
-	GraphicsSettings::getSingleton()->modelViewMatrix *= lookAt;
+	gluLookAt(eye.x, eye.y, eye.z, center.x, center.y, center.z, up.x, up.y, up.z);
 }
 
 glm::mat4 Camera::getLookAtMatrix()

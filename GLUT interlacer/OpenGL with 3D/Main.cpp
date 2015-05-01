@@ -136,16 +136,17 @@ void init()
 void renderScene()
 {
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();		
+	glLoadIdentity();	
+	Frustum::getSingleton()->setFrustum();	
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
-	gset->resetModelView();
-	gset->resetProjectionView();
+	//gset->resetModelView();
+	//gset->resetProjectionView();
 	Camera *cam = Camera::getSingleton();
 	cam->setCamera();
-	Frustum::getSingleton()->setFrustum();
-	gset->setGLMatrices();
+	
+	//gset->setGLMatrices();
 	//Light setup
 	Vertex4 position = { 50, 50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
@@ -153,10 +154,10 @@ void renderScene()
 	Vertex3 direction = { 0, -1, 0 };
 	Lighting::setupDirectionalLight(position, diffuse, ambient);
 
-
+	glRotatef(angle += 0.01, 0, 1, 0);
 	//World::getInstance()->draw();
-	ModelTransform::translate(0, 0, -2);
-	gset->setGLMatrices();
+	//ModelTransform::translate(0, 0, -2);
+	//gset->setGLMatrices();
 	texture->bind(GL_TEXTURE0);
 	normalMap->bind(GL_TEXTURE1);
 	glUseProgram(test_texture_program);
