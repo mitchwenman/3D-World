@@ -54,33 +54,6 @@ Texture* texture;
 Texture* normalMap;
 //----------------- functions ----------------------------------
 
-void drawCircle(double radius, double cx, double cy)
-{
-	int numPoints = 50;
-	glBegin(GL_TRIANGLE_FAN);
-		glVertex2d(cx, cy);
-		for (int i = 0; i < numPoints; i++)
-		{
-			double angle = ((2 * 3.14)/numPoints) * i;
-			double x = radius * cos(angle) + cx;
-			double y = radius * sin(angle) + cy;
-			glVertex2d(x, y);
-		}
-	glEnd();
-}
-
-void DrawTriangle(int eyes)
-{
-	float e = eyes / 100.0;
-	glBegin( GL_TRIANGLES );
-	{
-		glVertex2f( e+0.0f, 1.5f );
-		glVertex2f( e+1.75f, -1.5f );
-		glVertex2f( e-1.75f, -1.5f );
-	}
-	glEnd();
-}
-
 void init()
 {
 	glEnable(GL_DEPTH_TEST);
@@ -155,7 +128,7 @@ void renderScene()
 	Lighting::setupDirectionalLight(position, diffuse, ambient);
 
 	glRotatef(angle += 0.01, 0, 1, 0);
-	//World::getInstance()->draw();
+	
 	//ModelTransform::translate(0, 0, -2);
 	//gset->setGLMatrices();
 	texture->bind(GL_TEXTURE0);
@@ -181,7 +154,7 @@ void renderScene()
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	
+	World::getInstance()->draw();
 	
 }
 

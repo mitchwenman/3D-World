@@ -21,7 +21,7 @@ void World::draw()
 	cam->setCamera();
 	for (unsigned int i = 0; i < objects.size(); i++)
 	{		
-		gset->setGLMatrices();
+		//gset->setGLMatrices();
 		objects[i]->draw();
 		gset->resetModelView();
 		cam->setCamera();
