@@ -101,7 +101,7 @@ void renderScene()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	
-	Frustum::getSingleton()->setFrustum();	
+	
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	
@@ -109,7 +109,7 @@ void renderScene()
 	gset->resetProjectionView();
 	Camera *cam = Camera::getSingleton();
 	cam->setCamera();
-	
+	Frustum::getSingleton()->setFrustum();	
 	gset->setGLMatrices();
 	//Light setup
 	Vertex4 position = { 50, 50, -100 , 0 };
@@ -119,7 +119,7 @@ void renderScene()
 	Lighting::setupDirectionalLight(position, diffuse, ambient);
 
 	
-	gset->setGLMatrices();
+	
 	texture->bind(GL_TEXTURE0);
 	normalMap->bind(GL_TEXTURE1);
 	glUseProgram(test_texture_program);

@@ -1,6 +1,6 @@
 #include "WaveFrontPolygon.h"
 
-#include "libs\tiny_obj_loader.h"
+#include "tiny_obj_loader.h"
 
 WaveFrontPolygon::WaveFrontPolygon(std::string objFile)
 {
