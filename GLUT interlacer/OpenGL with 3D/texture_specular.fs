@@ -4,6 +4,7 @@ varying vec3 position;
 
 uniform sampler2D gSampler;
 uniform vec3 lightDirection;
+uniform mat4 gCameraMatrix;
 
 void main()
 {
@@ -14,7 +15,7 @@ void main()
 	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
 	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
 
-	vec3 lightDir = (gl_ModelViewMatrix * vec4(lightDirection, 1.0)).xyz;
+	vec3 lightDir = (gCameraMatrix * vec4(lightDirection, 1.0)).xyz;
 
 	float diffuse_intensity = dot(normalize(normal), normalize(lightDir));
 	if (diffuse_intensity > 0.0)

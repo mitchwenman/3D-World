@@ -2,8 +2,10 @@
 #include "WaveFrontPolygon.h"
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
+#include "ModelTransform.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
+
 
 void PolygonWorldObject::draw()
 {
@@ -16,5 +18,6 @@ void PolygonWorldObject::draw()
 		shaderProgram->useProgram();
 	else
 		glUseProgram(0);
+	
 	WaveFrontPolygonDrawer::draw(*this->polygon);
 }
