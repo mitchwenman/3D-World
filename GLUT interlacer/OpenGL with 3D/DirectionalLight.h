@@ -12,7 +12,7 @@ private:
 			diffuse;
 
 public:
-	DirectionalLight* getSingleton();
+	static DirectionalLight* getSingleton();
 
 	void setLight();
 	

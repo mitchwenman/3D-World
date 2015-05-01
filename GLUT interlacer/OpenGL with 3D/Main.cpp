@@ -38,6 +38,7 @@
 #include "HeightMapWorldObject.h"
 #include "Polygon.h"
 #include "Texture.h"
+#include "DirectionalLight.h"
 
 
 //----------------- globals ------------------------------------
@@ -95,6 +96,12 @@ void init()
 	texture = new Texture(GL_TEXTURE_2D, "wood_floor.bmp");
 	normalMap = new Texture(GL_TEXTURE_2D, "wood_normal.bmp");
 
+	//Setup light
+	DirectionalLight *dirLight = DirectionalLight::getSingleton();
+	Vertex4 position = { 50, 50, -100 , 0 };
+	Vertex4 diffuse = { 1, 1, 1, 1};
+	Vertex4 ambient = { .2, .2, .2, 1 };
+	dirLight->setLight(position, ambient, diffuse);
 }
 
 void renderScene()
@@ -112,14 +119,10 @@ void renderScene()
 	Frustum::getSingleton()->setFrustum();	
 	gset->setGLMatrices();
 	//Light setup
-	Vertex4 position = { 50, 50, -100 , 0 };
-	Vertex4 diffuse = { 1, 1, 1, 1};
-	Vertex4 ambient = { .2, .2, .2, 1 };
-	Vertex3 direction = { 0, -1, 0 };
-	Lighting::setupDirectionalLight(position, diffuse, ambient);
+	DirectionalLight::getSingleton()->setLight();
 
 	
-	
+	Vertex4 position = { 50, 50, -100 , 0 };
 	texture->bind(GL_TEXTURE0);
 	normalMap->bind(GL_TEXTURE1);
 	glUseProgram(test_texture_program);

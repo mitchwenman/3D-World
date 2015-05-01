@@ -22,5 +22,4 @@ void DirectionalLight::setLight(Vertex4 direction, Vertex4 ambient, Vertex4 diff
 	this->direction = direction;
 	this->ambient = ambient;
 	this->diffuse = diffuse;
-	this->setLight();
 }
