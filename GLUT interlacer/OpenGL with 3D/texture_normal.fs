@@ -1,8 +1,8 @@
 varying vec2 textureCoord;
-varying vec3 normal;
 varying vec3 position;
 
-uniform sampler2D gSampler;
+uniform sampler2D gSampler; //The texture
+uniform sampler2D normSampler; //The normal map
 uniform vec3 lightDirection;
 
 void main()
@@ -15,6 +15,11 @@ void main()
 	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
 
 	vec3 lightDir = (vec4(lightDirection, 1.0) * gl_ModelViewMatrix).xyz;
+
+	//Get normal from normal map
+	vec3 nMapValue = texture2D(normSampler, textureCoord).rgb * 2.0 - 1.0;
+	vec3 nMapCamSpace = vec4(nMapValue, 1.0) * gl_ModelViewMatrix;
+	vec3 normal = normalize(nMapValue);
 
 	float diffuse_intensity = dot(normalize(normal), normalize(lightDir));
 	if (diffuse_intensity > 0.0)

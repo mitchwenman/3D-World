@@ -158,9 +158,12 @@ void renderScene()
 	ModelTransform::translate(0, 0, -2);
 	gset->setGLMatrices();
 	texture->bind(GL_TEXTURE0);
+	normalMap->bind(GL_TEXTURE1);
 	glUseProgram(test_texture_program);
 	int samplerLocation = glGetUniformLocation(test_texture_program, "gSampler"); 
 	glUniform1i(samplerLocation, 0);
+	int normalLocation = glGetUniformLocation(test_texture_program, "normSampler"); 
+	glUniform1i(normalLocation, 1);
 	int lightDirLocation = glGetUniformLocation(test_texture_program, "lightDirection");
 	glUniform3f(lightDirLocation, -position.x, -position.y, -position.z);
 	glEnableClientState(GL_VERTEX_ARRAY);
