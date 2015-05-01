@@ -1,6 +1,6 @@
 #pragma once
 
-class ShaderProgram
+class IShaderProgram
 {
 public:
 	virtual void useProgram() = 0;
