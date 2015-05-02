@@ -40,6 +40,7 @@
 #include "Texture.h"
 #include "DirectionalLight.h"
 #include "SpecularColourMap.h"
+#include "SpecularNormalMap.h"
 
 
 //----------------- globals ------------------------------------
@@ -87,10 +88,10 @@ void init()
 	
 	world->insertObject(hm);	
 
-	SpecularColourMap *cMap = new SpecularColourMap("wood_floor.bmp");
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, cMap);
+	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
+	PolygonWorldObject *pwo = new PolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
-	//pwo->transformations.push_back(translate);
+	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	//----------------
 

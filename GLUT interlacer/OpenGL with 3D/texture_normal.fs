@@ -1,9 +1,12 @@
 varying vec2 textureCoord;
+varying vec3 normal;
 varying vec3 position;
 
-uniform sampler2D gSampler; //The texture
-uniform sampler2D normSampler; //The normal map
+uniform sampler2D gSampler;
+uniform sampler2D gNormalSampler;
+
 uniform vec3 lightDirection;
+uniform mat4 gCameraMatrix;
 
 void main()
 {
@@ -14,12 +17,7 @@ void main()
 	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
 	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
 
-	vec3 lightDir = (vec4(lightDirection, 1.0) * gl_ModelViewMatrix).xyz;
-
-	//Get normal from normal map
-	vec3 nMapValue = texture2D(normSampler, textureCoord).rgb * 2.0 - 1.0;
-	vec3 nMapCamSpace = vec4(nMapValue, 1.0) * gl_ModelViewMatrix;
-	vec3 normal = normalize(nMapValue);
+	vec3 lightDir = (gCameraMatrix * vec4(lightDirection, 1.0)).xyz;
 
 	float diffuse_intensity = dot(normalize(normal), normalize(lightDir));
 	if (diffuse_intensity > 0.0)
@@ -28,9 +26,9 @@ void main()
 
 		//No specular if diffuse intensity is 0
 		
-		vec3 nLightDir = normalize(lightDirection);
+		vec3 nLightDir = normalize(lightDir);
 		vec3 nNorm = normalize(normal);
-		vec3 lightReflection = normalize(reflect(nLightDir, nNorm));
+		vec3 lightReflection = normalize(reflect(-lightDir, normal));
 		vec3 vertEye = normalize(-position); //Vector from pixel to eye at (0,0,0)
 		float shininess = 4.0;
 		float specularIntensity = max(0.0, pow(dot(vertEye, lightReflection), shininess)); //Negative angle shouldn't see specular

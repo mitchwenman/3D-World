@@ -1,28 +1,34 @@
-#include "SpecularColourMap.h"
+#include "SpecularNormalMap.h"
+#include "ShaderLoader.h"
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtc\type_ptr.hpp"
-#include "ShaderLoader.h"
+
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-
-SpecularColourMap::SpecularColourMap(std::string file)
+SpecularNormalMap::SpecularNormalMap(std::string texture, std::string normalMap)
 {
-	this->texture = new Texture(GL_TEXTURE_2D, file); //Load texture from file	
+	this->texture = new Texture(GL_TEXTURE_2D, texture);
+	this->normalMap = new Texture(GL_TEXTURE_2D, normalMap);
 
-	this->programId = ShaderLoader::link(ShaderLoader::compile("texture_specular.vs", GL_VERTEX_SHADER),
-		ShaderLoader::compile("texture_specular.fs", GL_FRAGMENT_SHADER));
+	this->programId = ShaderLoader::link(ShaderLoader::compile("texture_normal.vs", GL_VERTEX_SHADER),
+		ShaderLoader::compile("texture_normal.fs", GL_FRAGMENT_SHADER));
 }
 
-void SpecularColourMap::useProgram()
+void SpecularNormalMap::useProgram()
 {
 	//Texture sampler
 	texture->bind(GL_TEXTURE0);
 	glUseProgram(this->programId);
 	int samplerLocation = glGetUniformLocation(this->programId, "gSampler"); 
 	glUniform1i(samplerLocation, 0);
+
+	//Normal Map
+	normalMap->bind(GL_TEXTURE1);
+	int normalSamplerLocation = glGetUniformLocation(this->programId, "gNormalSampler");
+	glUniform1i(normalSamplerLocation, 1);
 
 	//Setting light direction uniform
 	DirectionalLight *light = DirectionalLight::getSingleton();
