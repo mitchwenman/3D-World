@@ -5,7 +5,7 @@
 class TangentWaveFrontPolygon : public WaveFrontPolygon
 {
 public:
-	std::vector<double> tangents;
+	std::vector<float> tangents;
 
 	TangentWaveFrontPolygon(std::string objFile);
 };

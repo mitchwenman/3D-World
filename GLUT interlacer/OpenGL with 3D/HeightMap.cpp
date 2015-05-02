@@ -84,7 +84,6 @@ void HeightMap::render()
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-/* Taken and modified slightly from above tutorial */
 void HeightMap::calculateNormals()
 {
 	//Calculate triangle surface normals

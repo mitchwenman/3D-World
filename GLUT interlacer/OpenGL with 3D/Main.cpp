@@ -38,6 +38,7 @@
 #include "Transformation.h"
 #include "HeightMapWorldObject.h"
 #include "Polygon.h"
+#include "TangentPolygonWorldObject.h"
 #include "Texture.h"
 #include "DirectionalLight.h"
 #include "SpecularColourMap.h"
@@ -90,8 +91,9 @@ void init()
 	
 	world->insertObject(hm);	
 
+	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
-	PolygonWorldObject *pwo = new PolygonWorldObject(poly, nMap);
+	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
