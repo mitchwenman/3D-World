@@ -93,6 +93,9 @@
     <ClCompile Include="SpecularNormalMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TangentWaveFrontPolygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interlacer.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpecularNormalMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TangentWaveFrontPolygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

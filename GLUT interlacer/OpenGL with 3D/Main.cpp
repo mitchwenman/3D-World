@@ -22,6 +22,7 @@
 
 #include <math.h>
 #include "WaveFrontPolygon.h"
+#include "TangentWaveFrontPolygon.h"
 #include "ModelTransform.h"
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
@@ -68,7 +69,8 @@ void init()
 	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
 	program = ShaderLoader::link(shader, fragShader);
 	
-	WaveFrontPolygon* poly = new WaveFrontPolygon("Cube-mod.wob");
+	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Cube-mod.wob");
+	
 
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");

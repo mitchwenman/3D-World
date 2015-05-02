@@ -97,6 +97,7 @@
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SpecularColourMap.cpp" />
     <ClCompile Include="SpecularNormalMap.cpp" />
+    <ClCompile Include="TangentWaveFrontPolygon.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="Transformation.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="IShaderProgram.h" />
     <ClInclude Include="SpecularColourMap.h" />
     <ClInclude Include="SpecularNormalMap.h" />
+    <ClInclude Include="TangentWaveFrontPolygon.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transformation.h" />
     <ClInclude Include="UserInput.h" />
