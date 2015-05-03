@@ -88,7 +88,8 @@ void init()
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
 	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, cmap);
+	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
 
 	Vertex4 trans = { 0, .5, -0.5, 0};
 	
@@ -104,7 +105,7 @@ void init()
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
-	Vertex4 position = { -50, 50, -100 , 0 };
+	Vertex4 position = { -50, -50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
 	Vertex4 ambient = { .2, .2, .2, 1 };
 	dirLight->setLight(position, ambient, diffuse);

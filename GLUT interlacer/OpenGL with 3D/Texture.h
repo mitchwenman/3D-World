@@ -4,6 +4,8 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
+#include <vector>
+
 /*
 	Loosely based on this tutorial: http://ogldev.atspace.co.uk/www/tutorial16/tutorial16.html
 */
@@ -25,7 +27,7 @@ private:
 
 	GLenum textureTarget;
 
-	unsigned char* textureData;
+	std::vector<unsigned char> textureData;
 
 	//number of rows, number of columns in image
 	int rows, columns;

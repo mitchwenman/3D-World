@@ -31,7 +31,7 @@ void HeightMap::loadFromImage(std::string path)
 			double zScale = double(i) / (.2 * double(rows - 1));
 			double vertexHeight = image(i, j, 0, 0, 0) / 255.0; //Just use Red values if RGB
 			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale };
-			Vertex2 texture = { columns / 10. * xScale, rows / 10. * zScale };
+			Vertex2 texture = { columns / 10. * (j / double(columns - 1)), rows / 10. * (i / double(rows - 1)) };
 
 			vertexData[i][j] = vertex;
 			textureCoords[i][j] = texture;
@@ -77,12 +77,12 @@ void HeightMap::render()
 	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(GL_DOUBLE, 0, nList.data());	
-	glEnableClientState(GL_TEXTURE_2D_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2, GL_DOUBLE, 0, tList.data());
 	glPrimitiveRestartIndex(rows * columns);
 	glEnable(GL_PRIMITIVE_RESTART);
 	glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, indices.data());
-	glDisableClientState(GL_TEXTURE_2D_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
