@@ -87,14 +87,16 @@ void init()
 	GLfloat	material_shininess[1] = { 20 };
 	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
 									material_diffuse_and_ambient, material_shininess);
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h);
+	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, cmap);
+
 	Vertex4 trans = { 0, .5, -0.5, 0};
 	
 	world->insertObject(hm);	
 
-	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
+	
 	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
-	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
+	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, cmap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);

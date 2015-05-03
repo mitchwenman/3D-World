@@ -33,6 +33,8 @@ private:
 
 	std::vector<double> nList;
 
+	std::vector<double> tList;
+
 	void calculateNormals();
 
 };

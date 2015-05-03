@@ -20,9 +20,6 @@ void HeightMap::loadFromImage(std::string path)
 	vertexData = std::vector<std::vector<Vertex3>>(rows, std::vector<Vertex3>(columns));
 	textureCoords = std::vector<std::vector<Vertex2>>(rows, std::vector<Vertex2>(columns));
 
-	double textureX = double(columns) / 10; //Instance of texture every 10 by 10 rows/columns
-	double textureZ = double(rows) / 10;
-
 	//Copy values into vectors - scale to 0, 1 on Y axis and 1/5 size of image
 	double xoffset = -2.5;
 	double zoffset = -2.5;
@@ -34,7 +31,7 @@ void HeightMap::loadFromImage(std::string path)
 			double zScale = double(i) / (.2 * double(rows - 1));
 			double vertexHeight = image(i, j, 0, 0, 0) / 255.0; //Just use Red values if RGB
 			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale };
-			Vertex2 texture = { textureX * xScale, textureZ * zScale };
+			Vertex2 texture = { columns / 10. * xScale, rows / 10. * zScale };
 
 			vertexData[i][j] = vertex;
 			textureCoords[i][j] = texture;
@@ -44,6 +41,7 @@ void HeightMap::loadFromImage(std::string path)
 	//XXX: just vertices and normals for now
 	vList.reserve(rows * columns * 3);
 	nList.reserve(rows * columns * 3);
+	tList.reserve(rows * columns * 2);
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -54,6 +52,8 @@ void HeightMap::loadFromImage(std::string path)
 			nList.push_back(normals[i][j].x);
 			nList.push_back(normals[i][j].y);
 			nList.push_back(normals[i][j].z);
+			tList.push_back(textureCoords[i][j].x);
+			tList.push_back(textureCoords[i][j].y);
 		}
 	}
 	//Use restart index so we can use triangle strips
@@ -77,9 +77,12 @@ void HeightMap::render()
 	glVertexPointer(3, GL_DOUBLE, 0, vList.data());
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(GL_DOUBLE, 0, nList.data());	
+	glEnableClientState(GL_TEXTURE_2D_ARRAY);
+	glTexCoordPointer(2, GL_DOUBLE, 0, tList.data());
 	glPrimitiveRestartIndex(rows * columns);
 	glEnable(GL_PRIMITIVE_RESTART);
 	glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, indices.data());
+	glDisableClientState(GL_TEXTURE_2D_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
