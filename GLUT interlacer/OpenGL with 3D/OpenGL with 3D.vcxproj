@@ -88,6 +88,7 @@
     <ClCompile Include="GraphicsUtil.cpp" />
     <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="HeightMapWorldObject.cpp" />
+    <ClCompile Include="HighlightShaderProgram.cpp" />
     <ClCompile Include="Interlacer.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="GraphicsUtil.h" />
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="HeightMapWorldObject.h" />
+    <ClInclude Include="HighlightShaderProgram.h" />
     <ClInclude Include="Interlacer.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Lighting.h" />

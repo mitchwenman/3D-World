@@ -33,6 +33,6 @@ void main()
 
 	}
 	
-	gl_FragColor = vec4(0, 1, 1) * (specular + diffuse + ambientColour);
+	gl_FragColor = vec4(1, 1, 0, 1) * (specular + diffuse + ambientColour);
 
 }

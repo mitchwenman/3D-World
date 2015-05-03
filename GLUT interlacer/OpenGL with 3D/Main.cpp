@@ -43,6 +43,7 @@
 #include "DirectionalLight.h"
 #include "SpecularColourMap.h"
 #include "SpecularNormalMap.h"
+#include "HighlightShaderProgram.h"
 
 
 //----------------- globals ------------------------------------
@@ -93,7 +94,8 @@ void init()
 
 	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
-	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
+	HighlightShaderProgram *hlShader = new HighlightShaderProgram();
+	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, hlShader);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
