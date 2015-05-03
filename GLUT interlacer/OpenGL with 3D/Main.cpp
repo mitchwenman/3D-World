@@ -97,7 +97,7 @@ void init()
 
 	
 	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
-	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, cmap);
+	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);

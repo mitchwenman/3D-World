@@ -23,9 +23,7 @@ void main()
 		diffuse += gl_LightSource[0].diffuse * diffuse_intensity;
 
 		//No specular if diffuse intensity is 0
-		
-		vec3 nLightDir = normalize(lightDir);
-		vec3 nNorm = normalize(normal);
+
 		vec3 lightReflection = normalize(reflect(-lightDir, normal));
 		vec3 vertEye = normalize(-position); //Vector from pixel to eye at (0,0,0)
 		float shininess = 16.0;
