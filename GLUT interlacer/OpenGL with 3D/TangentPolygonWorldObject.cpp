@@ -12,7 +12,7 @@ void TangentPolygonWorldObject::draw()
 	{
 		transformations[i]->apply();
 	}
-	ModelTransform::rotate(angle += 0.05, 1, 1, 1);
+	ModelTransform::rotate(angle += 0.05, 0, 1, 0);
 	GraphicsSettings::getSingleton()->setGLMatrices();
 	if (this->shaderProgram)
 		shaderProgram->useProgram();

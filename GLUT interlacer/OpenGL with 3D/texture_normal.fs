@@ -3,6 +3,7 @@ varying vec3 normal;
 varying vec3 position;
 varying vec3 tangent;
 
+
 uniform sampler2D gSampler;
 uniform sampler2D gNormalSampler;
 
@@ -17,11 +18,11 @@ vec3 getNormal()
 	vec3 nnormal = normalize(normal);
 	ntangent = normalize(ntangent - dot(ntangent, nnormal) * nnormal);
 	//Calculate bitangent
-	vec3 bitangent = cross(ntangent, nnormal);
+	vec3 bitangent = normalize(cross(ntangent, nnormal));
 
 	//Get normal map normal and get between -1, 1
-	vec3 nMapNormal = vec3(0, 0, 1);// texture2D(gNormalSampler, textureCoord).xyz;
-	nMapNormal = 2.0 * nMapNormal - 1.0;
+	vec3 nMapNormal = texture2D(gNormalSampler, textureCoord).xyz;
+	nMapNormal = 2.0 * nMapNormal - vec3(1.0, 1, 1);
 	nMapNormal = normalize(nMapNormal);
 
 	//Build TBN matrix
@@ -44,6 +45,7 @@ void main()
 	vec3 lightDir = (gCameraMatrix * vec4(lightDirection, 1.0)).xyz;
 
 	vec3 nMapNormal = getNormal();
+
 	float diffuse_intensity = dot(normalize(nMapNormal), normalize(lightDir));
 	if (diffuse_intensity > 0.0)
 	{
