@@ -6,6 +6,8 @@ uniform sampler2D gSampler;
 uniform vec3 lightDirection;
 uniform mat4 gCameraMatrix;
 
+
+//Phong shading model (uses reflect vector rather than half vector)
 void main()
 {
 	float ambientIntensity = 0.5; //Constant intensity
