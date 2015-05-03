@@ -27,18 +27,21 @@ void HeightMap::loadFromImage(std::string path)
 	{
 		for (int j = 0; j < columns; j++)
 		{
+			//Scale vertices
 			double xScale = double(j) / (.2 * double(columns - 1));
 			double zScale = double(i) / (.2 * double(rows - 1));
+			//Get pixel heigh value
 			double vertexHeight = image(i, j, 0, 0, 0) / 255.0; //Just use Red values if RGB
-			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale };
-			Vertex2 texture = { columns / 10. * (j / double(columns - 1)), rows / 10. * (i / double(rows - 1)) };
+			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale }; 
+			//Create repeated texture every 20x20 pixels
+			Vertex2 texture = { rows / 20. * (i / (double)rows, columns / 20. * (j / double(columns)) };
 
 			vertexData[i][j] = vertex;
 			textureCoords[i][j] = texture;
 		}
 	}
 	this->calculateNormals();
-	//XXX: just vertices and normals for now
+	//Create vertex data for easy rendering
 	vList.reserve(rows * columns * 3);
 	nList.reserve(rows * columns * 3);
 	tList.reserve(rows * columns * 2);
