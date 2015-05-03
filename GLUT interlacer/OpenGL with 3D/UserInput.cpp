@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "CameraUtil.h"
 #include <math.h>
+#include "World.h"
 
 void UserInput::handleKeyInput(unsigned char c, int x, int y)
 {

@@ -143,6 +143,8 @@
     <None Include="frag.txt" />
     <None Include="phong_frag.txt" />
     <None Include="phong_vert.txt" />
+    <None Include="selected_poly.fs" />
+    <None Include="selected_poly.vs" />
     <None Include="texture _ambient.vs" />
     <None Include="texture_ambient.fs" />
     <None Include="texture_diffuse.fs" />

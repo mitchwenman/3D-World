@@ -226,5 +226,11 @@
     <None Include="texture_normal.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="selected_poly.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="selected_poly.vs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

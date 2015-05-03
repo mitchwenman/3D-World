@@ -8,13 +8,20 @@
 #include "MaterialData.h"
 #include "Transformation.h"
 #include "WorldObject.h"
+#include "IShaderProgram.h"
 
 class World
 {
 private:
-	HeightMap *heightMap;
+	
+	IShaderProgram* hightlightShader;
 
-	World() {};
+	IShaderProgram* currentSelectedPolygonShader;
+
+	World();
+
+
+
 
 public:
 	std::vector<WorldObject *> objects;

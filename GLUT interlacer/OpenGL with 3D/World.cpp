@@ -13,6 +13,12 @@ World* World::getInstance()
 	return _instance;
 }
 
+World::World() : currentSelectedPolygonShader(NULL)
+{
+
+}
+
+
 void World::draw()
 {
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
