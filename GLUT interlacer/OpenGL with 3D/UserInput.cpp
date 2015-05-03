@@ -34,6 +34,12 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 		{
 			Camera* cam = Camera::getSingleton();
 			CameraUtil::MoveCamera(cam, -.1);
+			break;
+		}
+	case '\t':
+		{
+			World::getInstance()->toggleSelectedObject();
+			break;
 		}
 	default:
 		break;
