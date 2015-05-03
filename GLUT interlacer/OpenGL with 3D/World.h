@@ -13,7 +13,8 @@
 class World
 {
 private:
-	
+	int selectedObject;
+
 	IShaderProgram* hightlightShader;
 
 	IShaderProgram* currentSelectedPolygonShader;
@@ -32,4 +33,7 @@ public:
 
 	void insertObject(WorldObject *object);
 	
+	void toggleSelectedObject();
+
+	int getSelectedObject() { return selectedObject; }
 };
