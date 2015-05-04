@@ -5,17 +5,23 @@
 #include "Camera.h"
 
 
-Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
+Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-3.5), zOffset(-2.5)
 {
 	//Temporary maze for testing purposes
-	bool tempMaze[5][5] = {
-		{	true, true, true, true, true },
-		{	true, false, false, false, true },
-		{	true, false, false, false, true },
-		{	true, false, false, false, true },
-		{	true, true, true, true, true } };
-	rows = columns = 5;
-	this->maze.resize(5);
+	bool tempMaze[10][10] = {
+		{	true, true, true, true, true, true, true, true, true, true },
+		{	true, false, false, false, false, false, false, false, false, true },
+		{	true, false, false, false, false, false, false, false, false, true },
+		{	true, false, false, false, false, false, false, false, false, true },
+		{	true, false, false, false, false, false, false, false, false, true },
+		{	true, false, false, false, false, false, false, false, false, true }, 
+		{	true, false, false, false, false, false, false, false, false, true }, 
+		{	true, false, false, false, false, false, false, false, false, true }, 
+		{	true, false, false, false, false, false, false, false, false, true }, 
+		{	true, true, true, true, true, true, true, true, true, true }
+	};
+	rows = columns = 10;
+	this->maze.resize(rows);
 	for (int i = 0; i < rows; i++)
 	{
 		maze[i].resize(columns);
@@ -27,9 +33,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 	// Create objects from all walls
 	IShaderProgram *program = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
 	//For each wall, create object with translations, add to wall map
-	double xoffset = -2.5;
-	double zoffset = -3.5;
-	double yoffset = 0.5;
+	double yoffset = WALL_HEIGHT / 2.0;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -37,7 +41,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 			if (maze[i][j]) //If there's a wall
 			{
 				//Create transformation
-				Vertex4 trans = { j + xoffset, yoffset, i + zoffset, 0 };
+				Vertex4 trans = { j + xOffset, yoffset, i + zOffset, 0 };
 				Transformation *translate = new Transformation(TRANSLATE, trans);
 				//Create object
 				TangentPolygonWorldObject *poly = new TangentPolygonWorldObject(this->wall, program);
@@ -52,6 +56,8 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 
 void Maze::render(Vertex3 position, double angle, double fov)
 {
+	//Check if player inside maze, else render everything
+
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
 	gset->resetModelView();
 	Camera::getSingleton()->setCamera();

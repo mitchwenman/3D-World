@@ -25,11 +25,20 @@ private:
 	//! The depth of the wall
 	static const int WALL_DEPTH = 1;
 
+	//! The hight of the wall
+	static const int WALL_HEIGHT = 1;
+
 	//! The number of rows
 	int rows;
 
 	//! The number of columns
 	int columns;
+
+	//! The X offset to draw the maze
+	double xOffset;
+
+	//! The Z offset to draw the maze
+	double zOffset;
 
 	//! The object that is drawn if seen 
 	TangentWaveFrontPolygon* wall;
