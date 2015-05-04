@@ -44,6 +44,7 @@
 #include "SpecularColourMap.h"
 #include "SpecularNormalMap.h"
 #include "HighlightShaderProgram.h"
+#include "Maze.h"
 
 
 //----------------- globals ------------------------------------
@@ -67,41 +68,32 @@ void init()
 	int winhei = glutGet(GLUT_WINDOW_HEIGHT);
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
-	unsigned int shader = ShaderLoader::compile("phong_vert.txt", GL_VERTEX_SHADER);
-	unsigned int fragShader = ShaderLoader::compile("phong_frag.txt", GL_FRAGMENT_SHADER);
-	program = ShaderLoader::link(shader, fragShader);
 	
 	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Cube-mod.wob");
-	
 
+	//Shader programs
+	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
+	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
+	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
+
+
+	//--- Heightmap
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
-	
-	//Setup material
-	//-- usually	objects	have	a	white	specular	reflection
-	GLfloat	material_specular[4]	= {	1.0, 1.0, 1.0, 1.0f	};
-	//-- set the ambient	and	diffuse	colour	to	be	the	same
-	GLfloat	material_diffuse_and_ambient[4] = {	0, .75, .5,	1.0f };
-	//-- set	the	shininess	from	range	[0,128]
-	GLfloat	material_shininess[1] = { 20 };
-	MaterialData* matData = new MaterialData(material_specular, material_diffuse_and_ambient, 
-									material_diffuse_and_ambient, material_shininess);
-	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
-	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
 	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
-
 	Vertex4 trans = { 0, .5, -0.5, 0};
-	
 	world->insertObject(hm);	
 
 	
-	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
+	//Polygon
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
-	//----------------
+	
+	//Maze
+	Maze *maze = new Maze("", poly);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
