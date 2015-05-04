@@ -83,7 +83,6 @@ void init()
 	Vertex4 trans = { 0, .5, -0.5, 0};
 	world->insertObject(hm);	
 
-	
 	//Polygon
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);

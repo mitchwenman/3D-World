@@ -55,6 +55,6 @@ public:
 
 	///Sets the angle
 	///@param angle The new angle.
-	void setAngle(double angle) { this->angle = angle; }
+	void setAngle(double angle);
 
 };

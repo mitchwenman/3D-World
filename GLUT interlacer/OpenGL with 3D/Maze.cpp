@@ -56,13 +56,46 @@ void Maze::render(Vertex3 position, double angle, double fov)
 	double fovInRadians = GraphicsUtil::degreesToRadians(fov);
 	double leftArc = viewAngle + (fovInRadians / 2);
 	double rightArc = viewAngle - (fovInRadians / 2);
-
-
+	double angleIncrement = (leftArc - rightArc) / 60;
+	std::map<std::pair<int, int>, TangentPolygonWorldObject*> visibleWalls;
+	for (double ray = rightArc; ray <= leftArc; ray += angleIncrement)
+	{
+		int xHIntercept = -1;
+		int zHIntercept = -1;
+		int xH = posx;
+		int zH = posz;
+		int zDiff = (ray < PI) ? -1 : 1; //If ray is going down need to increase z
+		//Check for horizontal intersections
+		double xIncrease = WALL_WIDTH / tan(ray);
+		int scale = 1;
+		while (xH < columns && xH >= 0 &&
+				zH < rows && zH >= 0)
+		{			
+			xH += scale * xIncrease + (WALL_WIDTH / 2.0);
+			zH += zDiff;
+			if (walls[std::pair<int, int>(xH, zH)]) //Check for a wall
+			{
+				xHIntercept = xH;
+				zHIntercept = zH;
+				break;
+			}
+			scale++;
+		}
+				
+		//Check for vertical intersections
+		int xVIntercept = -1;
+		int zVIntercept = -1;
+		int xV = posx;
+		int zV = posz;
+		int xDiff;
+		//Compare distance
+	}
+	
 
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
 	gset->resetModelView();
 	Camera::getSingleton()->setCamera();
-	for (std::map<std::pair<int, int>, TangentPolygonWorldObject*>::iterator it = walls.begin(); it != walls.end(); it++)
+	for (std::map<std::pair<int, int>, TangentPolygonWorldObject*>::iterator it = visibleWalls.begin(); it != visibleWalls.end(); it++)
 	{
 		TangentPolygonWorldObject *wallObject = it->second;
 		wallObject->draw();

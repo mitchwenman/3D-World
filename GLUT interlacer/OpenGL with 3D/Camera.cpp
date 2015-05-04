@@ -58,3 +58,8 @@ Camera::Camera()
 	this->lookAt(0, .5, 1, 0, .5, 0, 0, 1, 0);
 	angle = 0.0;
 }
+
+void Camera::setAngle(double angle)
+{
+	this->angle = fmod(angle, 2 * (atan(1.0) * 4));
+}
