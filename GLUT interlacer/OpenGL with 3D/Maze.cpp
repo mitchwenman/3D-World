@@ -4,6 +4,8 @@
 #include "GraphicsSettings.h"
 #include "Camera.h"
 #include "MazeReader.h"
+#include "GraphicsUtil.h"
+#include <math.h>
 
 
 Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-3.5), zOffset(-2.5)
@@ -41,8 +43,21 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xO
 }
 
 void Maze::render(Vertex3 position, double angle, double fov)
-{
-	//Check if player inside maze, else render everything
+{	
+	const double PI = std::atan(1.0) * 4;
+	//Find position in grid
+	int posx = position.x - xOffset;
+	int posz = position.z - zOffset;
+	//Adjust angle - cam angle is 0 at PI / 2
+	double viewAngle = abs(angle) + PI / 2;
+	//Ray cast from right to left - check horizontal intersections then vertical
+	//Move to next ray when: outside grid or wall is found.
+	//If wall found on horizontal and vertical - compare distances
+	double fovInRadians = GraphicsUtil::degreesToRadians(fov);
+	double leftArc = viewAngle + (fovInRadians / 2);
+	double rightArc = viewAngle - (fovInRadians / 2);
+
+
 
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();
 	gset->resetModelView();

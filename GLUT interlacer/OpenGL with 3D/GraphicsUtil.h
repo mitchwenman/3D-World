@@ -3,6 +3,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 #include "libs\glm\glm.hpp"
+#include <math.h>
 
 //! Describes a 4D vertex. 
 typedef struct { double x; double y; double z; double w; } Vertex4;
@@ -24,6 +25,9 @@ namespace GraphicsUtil
 	//! @param v The glm vec3 to be converted.
 	//! @return A Vertex3 equivalent of the vec3
 	Vertex3 GLMVec3ToVertex3(glm::vec3 v);
-}
+
+	double degreesToRadians(double theta);
+
+};
 
 

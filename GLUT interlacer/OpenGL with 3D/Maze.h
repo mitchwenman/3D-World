@@ -57,6 +57,11 @@ private:
 	//! The walls in the map
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> walls;
 
-
+	//! Uses ray casting to identify walls that are visible to the camera.
+	//! @param position The position of the camera in the world.
+	//! @param angle The angle of the camera
+	//! @param fov The field of view.
+	//! @return A list of walls in view of the camera.
+	std::vector<TangentPolygonWorldObject*> rayCast(Vertex3 position, double angle, double fov);
 	
 };
