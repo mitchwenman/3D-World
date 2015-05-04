@@ -8,30 +8,14 @@
 
 Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-3.5), zOffset(-2.5)
 {
-	std::vector<std::vector<bool>> wallData = MazeReader::readFromFile(mazeFile);
+	this->maze = MazeReader::readFromFile(mazeFile);
 	//Temporary maze for testing purposes
-	bool tempMaze[10][10] = {
-		{	true, true, true, true, true, true, true, true, true, true },
-		{	true, false, false, false, false, false, false, false, false, true },
-		{	true, false, false, false, false, false, false, false, false, true },
-		{	true, false, false, false, false, false, false, false, false, true },
-		{	true, false, false, false, false, false, false, false, false, true },
-		{	true, false, false, false, false, false, false, false, false, true }, 
-		{	true, false, false, false, false, false, false, false, false, true }, 
-		{	true, false, false, false, false, false, false, false, false, true }, 
-		{	true, false, false, false, false, false, false, false, false, true }, 
-		{	true, true, true, true, true, true, true, true, true, true }
-	};
-	rows = columns = 10;
-	this->maze.resize(rows);
-	for (int i = 0; i < rows; i++)
-	{
-		maze[i].resize(columns);
-		for (int j = 0; j < columns; j++)
-		{
-			maze[i][j] = tempMaze[i][j];
-		}
-	}
+	rows = this->maze.size();
+	if (rows > 0)
+		columns = this->maze[0].size();
+	else 
+		columns = 0;
+
 	// Create objects from all walls
 	IShaderProgram *program = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
 	//For each wall, create object with translations, add to wall map
