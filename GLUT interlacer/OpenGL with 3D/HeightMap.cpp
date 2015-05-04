@@ -21,17 +21,17 @@ void HeightMap::loadFromImage(std::string path)
 	textureCoords = std::vector<std::vector<Vertex2>>(rows, std::vector<Vertex2>(columns));
 
 	//Copy values into vectors - scale to 0, 1 on Y axis and 1/5 size of image
-	double xoffset = -2.5;
-	double zoffset = -2.5;
+	double xoffset = -7.5;
+	double zoffset = -7.5;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
 			//Scale vertices
-			double xScale = double(j) / (.2 * double(columns - 1));
-			double zScale = double(i) / (.2 * double(rows - 1));
+			double xScale = double(j) / (.1 * double(columns - 1));
+			double zScale = double(i) / (.1 * double(rows - 1));
 			//Get pixel heigh value
-			double vertexHeight = image(i, j, 0, 0, 0) / 255.0; //Just use Red values if RGB
+			double vertexHeight = image(i, j, 0, 0, 0) / 128.; //Just use Red values if RGB
 			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale }; 
 			//Create repeated texture every 20x20 pixels
 			Vertex2 texture = { rows / 20. * (i / (double)rows), columns / 20. * (j / double(columns)) };
