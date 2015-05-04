@@ -3,10 +3,12 @@
 #include "Transformation.h"
 #include "GraphicsSettings.h"
 #include "Camera.h"
+#include "MazeReader.h"
 
 
 Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-3.5), zOffset(-2.5)
 {
+	std::vector<std::vector<bool>> wallData = MazeReader::readFromFile(mazeFile);
 	//Temporary maze for testing purposes
 	bool tempMaze[10][10] = {
 		{	true, true, true, true, true, true, true, true, true, true },

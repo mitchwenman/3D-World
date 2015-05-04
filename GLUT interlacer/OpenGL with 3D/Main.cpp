@@ -91,7 +91,7 @@ void init()
 	world->insertObject(pwo);
 	
 	//Maze
-	maze = new Maze("", poly);
+	maze = new Maze("Maze.txt", poly);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
