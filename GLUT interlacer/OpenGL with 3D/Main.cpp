@@ -53,9 +53,7 @@ long eyes = 10;			//- distance between eyes
 float angle = 0.5;
 unsigned int program;
 unsigned int test_texture_program;
-
-Texture* texture;
-Texture* normalMap;
+Maze* maze;
 //----------------- functions ----------------------------------
 
 void init()
@@ -93,7 +91,7 @@ void init()
 	world->insertObject(pwo);
 	
 	//Maze
-	Maze *maze = new Maze("", poly);
+	maze = new Maze("", poly);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
@@ -119,7 +117,7 @@ void renderScene()
 	gset->setGLMatrices();
 	//Light setup
 	DirectionalLight::getSingleton()->setLight();
-
+	maze->render(cam->getEye(), cam->getAngle(), 60);
 	
 	World::getInstance()->draw();
 	

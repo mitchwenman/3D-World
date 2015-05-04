@@ -28,10 +28,10 @@ void HeightMap::loadFromImage(std::string path)
 		for (int j = 0; j < columns; j++)
 		{
 			//Scale vertices
-			double xScale = double(j) / (.1 * double(columns - 1));
-			double zScale = double(i) / (.1 * double(rows - 1));
+			double xScale = double(j) / (.05 * double(columns - 1));
+			double zScale = double(i) / (.05 * double(rows - 1));
 			//Get pixel heigh value
-			double vertexHeight = image(i, j, 0, 0, 0) / 128.; //Just use Red values if RGB
+			double vertexHeight = image(i, j, 0, 0, 0) / 64.; //Just use Red values if RGB
 			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale }; 
 			//Create repeated texture every 20x20 pixels
 			Vertex2 texture = { rows / 20. * (i / (double)rows), columns / 20. * (j / double(columns)) };

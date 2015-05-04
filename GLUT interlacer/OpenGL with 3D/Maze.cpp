@@ -1,6 +1,8 @@
 #include "Maze.h"
 #include "SpecularNormalMap.h"
 #include "Transformation.h"
+#include "GraphicsSettings.h"
+#include "Camera.h"
 
 
 Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
@@ -25,6 +27,9 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 	// Create objects from all walls
 	IShaderProgram *program = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
 	//For each wall, create object with translations, add to wall map
+	double xoffset = -2.5;
+	double zoffset = -3.5;
+	double yoffset = 0.5;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -32,7 +37,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 			if (maze[i][j]) //If there's a wall
 			{
 				//Create transformation
-				Vertex4 trans = { j, 0, i, 0 };
+				Vertex4 trans = { j + xoffset, yoffset, i + zoffset, 0 };
 				Transformation *translate = new Transformation(TRANSLATE, trans);
 				//Create object
 				TangentPolygonWorldObject *poly = new TangentPolygonWorldObject(this->wall, program);
@@ -42,5 +47,20 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall)
 				walls[position] = poly;
 			}
 		}
+	}
+}
+
+void Maze::render(Vertex3 position, double angle, double fov)
+{
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	gset->resetModelView();
+	Camera::getSingleton()->setCamera();
+	for (std::map<std::pair<int, int>, TangentPolygonWorldObject*>::iterator it = walls.begin(); it != walls.end(); it++)
+	{
+		TangentPolygonWorldObject *wallObject = it->second;
+		wallObject->draw();
+		gset->resetModelView();
+		Camera::getSingleton()->setCamera();
+
 	}
 }
