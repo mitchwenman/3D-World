@@ -9,10 +9,18 @@
 #include <map>
 #include <utility>
 
+//! A class used to represent a maze with walls.
+/*!
+	Handles loading the maze from file and rendering it.
+*/
 class Maze
 {
 
 public:
+	//! Constructor for the maze object. Reads a maze from file and creates
+	//! a representation of it.
+	//! @param mazeFile The path to the file describing the maze.
+	//! @param wall The polygon that will be used to render a wall unit.
 	Maze(std::string mazeFile, TangentWaveFrontPolygon* wall);
 
 	//! Gets the list of polygons the camera can see and draws it.
