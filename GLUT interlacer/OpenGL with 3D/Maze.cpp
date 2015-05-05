@@ -49,7 +49,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 	int posx = position.x - xOffset;
 	int posz = position.z - zOffset;
 	//Adjust angle - cam angle is 0 at PI / 2
-	double viewAngle = abs(angle) + PI / 2;
+	double viewAngle = fmod(2 * PI - angle + PI / 2, 2 * PI);
 	//Ray cast from right to left - check horizontal intersections then vertical
 	//Move to next ray when: outside grid or wall is found.
 	//If wall found on horizontal and vertical - compare distances
@@ -71,9 +71,9 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		while (xH < columns && xH >= 0 &&
 				zH < rows && zH >= 0)
 		{			
-			xH += scale * xIncrease + (WALL_WIDTH / 2.0);
+			xH += scale * xIncrease;
 			zH += zDiff;
-			if (walls[std::pair<int, int>(xH, zH)]) //Check for a wall
+			if (walls.count(std::pair<int, int>(zH, xH)) == 1) //Check for a wall
 			{
 				xHIntercept = xH;
 				zHIntercept = zH;
@@ -87,8 +87,51 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zVIntercept = -1;
 		int xV = posx;
 		int zV = posz;
-		int xDiff;
+		int xDiff = (ray < PI / 2 || ray > 3 * PI / 2) ? 1 : -1;
+		double zIncrease = WALL_WIDTH * tan(ray);
+		scale = 1;
+		while (xV < columns && xV >= 0 &&
+				zV < rows && zV >= 0)
+		{
+			xV += xDiff;
+			zV += scale * zIncrease;
+			if (walls.count(std::pair<int, int>(zV, xV)) == 1)
+			{
+				xVIntercept = xV;
+				zVIntercept = zV;
+				break;
+			}
+			scale++;
+		}
 		//Compare distance
+		if (xVIntercept == -1 && xHIntercept != -1) //No vertical intercept
+		{
+			std::pair<int, int> coords(zHIntercept, xHIntercept);
+			visibleWalls[coords] = walls[coords];
+		} else if (xHIntercept == -1 && xVIntercept != -1) //No horizontal intercept
+		{
+			std::pair<int, int> coords(zVIntercept, xVIntercept);
+			visibleWalls[coords] = walls[coords];
+		} else if (xHIntercept != -1 && xVIntercept != -1)
+		{
+			int xHDist = xHIntercept - posx;
+			int zHDist = zHIntercept - posz;
+			double hDistance = sqrt((double)xHDist * xHDist + zHDist * zHDist);
+			int xVDist = xVIntercept - posx;
+			int zVDist = zVIntercept - posz;
+			double vDistance = sqrt((double)xVDist * xVDist + zVDist * zVDist);
+			std::pair<int, int> coords;
+			if (hDistance < vDistance)
+			{
+				coords = std::pair<int, int>(zHIntercept, xHIntercept);
+			} else
+			{
+				coords = std::pair<int, int>(zVIntercept, xVIntercept);
+			}
+			visibleWalls[coords] = walls[coords];
+		}
+			
+
 	}
 	
 

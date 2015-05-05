@@ -61,5 +61,5 @@ Camera::Camera()
 
 void Camera::setAngle(double angle)
 {
-	this->angle = fmod(angle, 2 * (atan(1.0) * 4));
+	this->angle = fmod(angle + 2 * (atan(1.0) * 4), 2 * (atan(1.0) * 4));
 }
