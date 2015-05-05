@@ -87,7 +87,7 @@ void init()
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
-	world->insertObject(pwo);
+	//world->insertObject(pwo);
 	
 	//Maze
 	maze = new Maze("Maze.txt", poly);
@@ -116,7 +116,7 @@ void renderScene()
 	gset->setGLMatrices();
 	//Light setup
 	DirectionalLight::getSingleton()->setLight();
-	maze->render(cam->getEye(), cam->getAngle(), 70);
+	maze->render(cam->getEye(), cam->getAngle(), 100);
 	
 	World::getInstance()->draw();
 	

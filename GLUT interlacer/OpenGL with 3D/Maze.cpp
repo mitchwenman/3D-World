@@ -56,25 +56,35 @@ void Maze::render(Vertex3 position, double angle, double fov)
 	double fovInRadians = GraphicsUtil::degreesToRadians(fov);
 	double leftArc = viewAngle + (fovInRadians / 2);
 	double rightArc = viewAngle - (fovInRadians / 2);
-	double angleIncrement = (leftArc - rightArc) / 60;
+	double angleIncrement = (leftArc - rightArc) / fov;
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> visibleWalls;
 	for (double ray = rightArc; ray <= leftArc; ray += angleIncrement)
 	{
+		double rayCalc = ray;
+		if (ray < PI && ray > PI / 2)
+			rayCalc = PI / 2 - (ray - PI / 2);
+		else if (ray < 3 * PI / 2 && ray > PI)
+			rayCalc = ray - GraphicsUtil::degreesToRadians(180);
+		else if (ray > 3 * PI / 2)
+			rayCalc = 2 * PI - ray;
 		int xHIntercept = -1;
 		int zHIntercept = -1;
 		int xH = posx;
 		int zH = posz;
+		double xIncrease = WALL_WIDTH / tan(rayCalc);
+		if (ray < 3 * PI / 2 && ray >= PI / 2) xIncrease *= -1;
 		int zDiff = (ray < PI) ? -1 : 1; //If ray is going down need to increase z
 		//Check for horizontal intersections
-		double xIncrease = WALL_WIDTH / tan(ray);
+		
 		int scale = 1;
 		while (xH < columns && xH >= 0 &&
 				zH < rows && zH >= 0)
 		{			
-			xH += scale * xIncrease;
+			xH = posx + scale * xIncrease + 1;
 			zH += zDiff;
 			if (walls.count(std::pair<int, int>(zH, xH)) == 1) //Check for a wall
-			{
+			{		
+				
 				xHIntercept = xH;
 				zHIntercept = zH;
 				break;
@@ -88,18 +98,20 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int xV = posx;
 		int zV = posz;
 		int xDiff = (ray < PI / 2 || ray > 3 * PI / 2) ? 1 : -1;
-		double zIncrease = WALL_WIDTH * tan(ray);
+		double zIncrease = WALL_WIDTH * tan(rayCalc);
+		if (ray < PI) zIncrease *= -1;
 		scale = 1;
 		while (xV < columns && xV >= 0 &&
 				zV < rows && zV >= 0)
 		{
 			xV += xDiff;
-			zV += scale * zIncrease;
+			zV = posz + scale * zIncrease;
 			if (walls.count(std::pair<int, int>(zV, xV)) == 1)
 			{
+				
 				xVIntercept = xV;
 				zVIntercept = zV;
-				break;
+				break; 
 			}
 			scale++;
 		}
