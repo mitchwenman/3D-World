@@ -107,13 +107,13 @@ void HeightMap::calculateNormals()
 			{
 				GraphicsUtil::vertex3ToGLMVec3(vertexData[i][j]),
 				GraphicsUtil::vertex3ToGLMVec3(vertexData[i + 1][j]),
-				GraphicsUtil::vertex3ToGLMVec3(vertexData[i + 1][j + 1])
+				GraphicsUtil::vertex3ToGLMVec3(vertexData[i][j + 1])
 			};
 			glm::vec3 tri1[] = 
 			{
-				GraphicsUtil::vertex3ToGLMVec3(vertexData[i + 1][j + 1]),
 				GraphicsUtil::vertex3ToGLMVec3(vertexData[i][j + 1]),
-				GraphicsUtil::vertex3ToGLMVec3(vertexData[i][j])
+				GraphicsUtil::vertex3ToGLMVec3(vertexData[i + 1][j]),
+				GraphicsUtil::vertex3ToGLMVec3(vertexData[i + 1][j + 1])
 			};
 			glm::vec3 triNorm0 = glm::cross(tri0[0] - tri0[1], tri0[1] - tri0[2]);
 			glm::vec3 triNorm1 = glm::cross(tri1[0] - tri1[1], tri1[1] - tri1[2]);
@@ -124,9 +124,9 @@ void HeightMap::calculateNormals()
 	//Add and normalise from 2 top left triangles, 1 top right, 2 bottom left, 1 right
 	/*
 	---------
-	| \	| \	|
+	|0/1| / |
 	----V----
-	| \ | \ |
+	| / | / |
 	---------
 	*/
 	normals = std::vector <std::vector<Vertex3 > >(rows, std::vector<Vertex3>(columns));
@@ -138,23 +138,26 @@ void HeightMap::calculateNormals()
 			//Top left
 			if (j != 0 && i != 0)
 			{
-				finalNorm += vNormals[0][i - 1][j - 1];
 				finalNorm += vNormals[1][i - 1][j - 1];
 			}
 			//Top right
 			if (i != 0 && j != columns - 1) 
 			{
 				finalNorm += vNormals[0][i - 1][j];
+				finalNorm += vNormals[1][i - 1][j];
 			}
 			//bottom right
 			if (i != rows - 1 && j != columns - 1)
 			{
 				finalNorm += vNormals[0][i][j];
-				finalNorm += vNormals[1][i][j];
 			}
 			//bottom left
 			if (i != rows - 1 && j != 0)
+			{
+				finalNorm += vNormals[0][i][j - 1];
 				finalNorm += vNormals[1][i][j - 1];
+			}
+				
 			//Average out value
 			finalNorm = glm::normalize(finalNorm);
 			normals[i][j] = GraphicsUtil::GLMVec3ToVertex3(finalNorm);
