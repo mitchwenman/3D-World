@@ -22,14 +22,16 @@ public:
 	void bind(GLenum textureUnit);
 
 private:
-
+	//! The id given to the texture by openGL
 	GLuint textureID;
 
+	//! The openGL texture target. TEXTURE_2D etc.
 	GLenum textureTarget;
 
+	//! The texture data blob that openGL will use to generate the texture.
 	std::vector<unsigned char> textureData;
 
-	//number of rows, number of columns in image
+	//! Number of rows, number of columns in image
 	int rows, columns;
 
 	///Loads a BMP and generates a texture from it .

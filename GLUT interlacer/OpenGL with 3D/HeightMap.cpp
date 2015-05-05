@@ -121,7 +121,7 @@ void HeightMap::calculateNormals()
 			vNormals[1][i][j] = glm::normalize(triNorm1);
 		}
 	}
-	//Add and normalise from 2 top left triangles, 1 top right, 2 bottom left, 1 right
+	//Add and normalise from 1 top left, 2 top right, 2 bottom left, 1 bottom right
 	/*
 	---------
 	|0/1| / |
