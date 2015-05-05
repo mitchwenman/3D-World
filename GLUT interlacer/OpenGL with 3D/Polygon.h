@@ -2,6 +2,12 @@
 #include "WaveFrontPolygon.h"
 
 //! A class representing an arbitrary polygon.
+/*!
+	This class creates a wrapper around a WaveFrontPolygon object
+	that has been loaded from an OBJ file. This class handles
+	the transformation of the model view matrix and the drawing of the 
+	polygon.
+*/
 class PolygonWorldObject : public WorldObject
 {
 private:
