@@ -54,33 +54,37 @@ void Maze::render(Vertex3 position, double angle, double fov)
 	//Move to next ray when: outside grid or wall is found.
 	//If wall found on horizontal and vertical - compare distances
 	double fovInRadians = GraphicsUtil::degreesToRadians(fov);
-	double leftArc = viewAngle + (fovInRadians / 2);
+	double leftArc = viewAngle + (fovInRadians / 2); //Create ray arc
 	double rightArc = viewAngle - (fovInRadians / 2);
 	double angleIncrement = (leftArc - rightArc) / fov;
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> visibleWalls;
 	for (double ray = rightArc; ray <= leftArc; ray += angleIncrement)
 	{
-		double rayCalc = ray;
-		if (ray < PI && ray > PI / 2)
-			rayCalc = PI / 2 - (ray - PI / 2);
-		else if (ray < 3 * PI / 2 && ray > PI)
-			rayCalc = ray - GraphicsUtil::degreesToRadians(180);
-		else if (ray > 3 * PI / 2)
+
+		double modRay = fmod(ray + 2 * PI, 2 * PI); //Get rid of negatives
+		double rayCalc = modRay;
+		//Adjust ray if outside of first quadrant
+		//Take care of the sign later
+		if (rayCalc < PI && rayCalc > PI / 2)
+			rayCalc = PI / 2 - (rayCalc - PI / 2);
+		else if (rayCalc < 3 * PI / 2 && rayCalc > PI)
+			rayCalc = rayCalc - PI;
+		else if (rayCalc > 3 * PI / 2)
 			rayCalc = 2 * PI - ray;
 		int xHIntercept = -1;
 		int zHIntercept = -1;
 		int xH = posx;
 		int zH = posz;
 		double xIncrease = WALL_WIDTH / tan(rayCalc);
-		if (ray < 3 * PI / 2 && ray >= PI / 2) xIncrease *= -1;
-		int zDiff = (ray < PI) ? -1 : 1; //If ray is going down need to increase z
+		if (modRay < 3 * PI / 2 && modRay >= PI / 2) xIncrease *= -1; //Q2/Q3 - going left
+		int zDiff = (modRay < PI) ? -1 : 1; //If ray is going down need to increase z
 		//Check for horizontal intersections
 		
 		int scale = 1;
 		while (xH < columns && xH >= 0 &&
 				zH < rows && zH >= 0)
 		{			
-			xH = posx + scale * xIncrease + 1;
+			xH = posx + scale * xIncrease;
 			zH += zDiff;
 			if (walls.count(std::pair<int, int>(zH, xH)) == 1) //Check for a wall
 			{		
@@ -97,9 +101,9 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zVIntercept = -1;
 		int xV = posx;
 		int zV = posz;
-		int xDiff = (ray < PI / 2 || ray > 3 * PI / 2) ? 1 : -1;
+		int xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? 1 : -1;
 		double zIncrease = WALL_WIDTH * tan(rayCalc);
-		if (ray < PI) zIncrease *= -1;
+		if (modRay < PI) zIncrease *= -1;
 		scale = 1;
 		while (xV < columns && xV >= 0 &&
 				zV < rows && zV >= 0)
@@ -136,11 +140,19 @@ void Maze::render(Vertex3 position, double angle, double fov)
 			if (hDistance < vDistance)
 			{
 				coords = std::pair<int, int>(zHIntercept, xHIntercept);
-			} else
+				visibleWalls[coords] = walls[coords];
+			} else if (vDistance < hDistance)
 			{
 				coords = std::pair<int, int>(zVIntercept, xVIntercept);
+				visibleWalls[coords] = walls[coords];
+			} else
+			{
+				coords = std::pair<int, int>(zHIntercept, xHIntercept);
+				visibleWalls[coords] = walls[coords];
+				coords = std::pair<int, int>(zVIntercept, xVIntercept);
+				visibleWalls[coords] = walls[coords];
 			}
-			visibleWalls[coords] = walls[coords];
+			
 		}
 			
 
