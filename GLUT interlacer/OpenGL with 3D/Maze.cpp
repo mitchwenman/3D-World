@@ -46,8 +46,8 @@ void Maze::render(Vertex3 position, double angle, double fov)
 {	
 	const double PI = std::atan(1.0) * 4;
 	//Find position in grid
-	int posx = position.x - xOffset;
-	int posz = position.z - zOffset;
+	double posx = position.x - xOffset;
+	double posz = position.z - zOffset;
 	//Adjust angle - cam angle is 0 at PI / 2
 	double viewAngle = fmod(2 * PI - angle + PI / 2, 2 * PI);
 	//Ray cast from right to left - check horizontal intersections then vertical
@@ -73,8 +73,8 @@ void Maze::render(Vertex3 position, double angle, double fov)
 			rayCalc = 2 * PI - ray;
 		int xHIntercept = -1;
 		int zHIntercept = -1;
-		int xH = posx;
-		int zH = posz;
+		double xH = posx;
+		double zH = posz;
 		double xIncrease = WALL_WIDTH / tan(rayCalc);
 		if (modRay < 3 * PI / 2 && modRay >= PI / 2) xIncrease *= -1; //Q2/Q3 - going left
 		int zDiff = (modRay < PI) ? -1 : 1; //If ray is going down need to increase z
@@ -86,11 +86,11 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		{			
 			xH = posx + scale * xIncrease;
 			zH += zDiff;
-			if (walls.count(std::pair<int, int>(zH, xH)) == 1) //Check for a wall
+			if (walls.count(std::pair<int, int>((int)zH, (int)xH)) == 1) //Check for a wall
 			{		
 				
-				xHIntercept = xH;
-				zHIntercept = zH;
+				xHIntercept = (int)xH;
+				zHIntercept = (int)zH;
 				break;
 			}
 			scale++;
@@ -99,8 +99,8 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		//Check for vertical intersections
 		int xVIntercept = -1;
 		int zVIntercept = -1;
-		int xV = posx;
-		int zV = posz;
+		double xV = posx;
+		double zV = posz;
 		int xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? 1 : -1;
 		double zIncrease = WALL_WIDTH * tan(rayCalc);
 		if (modRay < PI) zIncrease *= -1;
@@ -110,11 +110,11 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		{
 			xV += xDiff;
 			zV = posz + scale * zIncrease;
-			if (walls.count(std::pair<int, int>(zV, xV)) == 1)
+			if (walls.count(std::pair<int, int>((int)zV, (int)xV)) == 1)
 			{
 				
-				xVIntercept = xV;
-				zVIntercept = zV;
+				xVIntercept = (int)xV;
+				zVIntercept = (int)zV;
 				break; 
 			}
 			scale++;
@@ -130,12 +130,12 @@ void Maze::render(Vertex3 position, double angle, double fov)
 			visibleWalls[coords] = walls[coords];
 		} else if (xHIntercept != -1 && xVIntercept != -1)
 		{
-			int xHDist = xHIntercept - posx;
-			int zHDist = zHIntercept - posz;
-			double hDistance = sqrt((double)xHDist * xHDist + zHDist * zHDist);
-			int xVDist = xVIntercept - posx;
-			int zVDist = zVIntercept - posz;
-			double vDistance = sqrt((double)xVDist * xVDist + zVDist * zVDist);
+			double xHDist = xHIntercept - posx;
+			double zHDist = zHIntercept - posz;
+			double hDistance = sqrt(xHDist * xHDist + zHDist * zHDist);
+			double xVDist = xVIntercept - posx;
+			double zVDist = zVIntercept - posz;
+			double vDistance = sqrt(xVDist * xVDist + zVDist * zVDist);
 			std::pair<int, int> coords;
 			if (hDistance < vDistance)
 			{
