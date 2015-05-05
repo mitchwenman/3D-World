@@ -56,7 +56,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 	double fovInRadians = GraphicsUtil::degreesToRadians(fov);
 	double leftArc = viewAngle + (fovInRadians / 2); //Create ray arc
 	double rightArc = viewAngle - (fovInRadians / 2);
-	double angleIncrement = (leftArc - rightArc) / fov;
+	double angleIncrement =  (leftArc - rightArc) / fov;
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> visibleWalls;
 	for (double ray = rightArc; ray <= leftArc; ray += angleIncrement)
 	{

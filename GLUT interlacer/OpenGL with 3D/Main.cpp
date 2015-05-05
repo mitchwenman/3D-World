@@ -116,7 +116,7 @@ void renderScene()
 	gset->setGLMatrices();
 	//Light setup
 	DirectionalLight::getSingleton()->setLight();
-	maze->render(cam->getEye(), cam->getAngle(), 20);
+	maze->render(cam->getEye(), cam->getAngle(), 100);
 	
 	World::getInstance()->draw();
 	
