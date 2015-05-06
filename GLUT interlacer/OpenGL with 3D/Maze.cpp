@@ -1,5 +1,5 @@
 #include "Maze.h"
-#include "SpecularNormalMap.h"
+#include "SpecularColourMap.h"
 #include "Transformation.h"
 #include "GraphicsSettings.h"
 #include "Camera.h"
@@ -19,7 +19,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xO
 		columns = 0;
 
 	// Create objects from all walls
-	IShaderProgram *program = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
+	IShaderProgram *program = new SpecularColourMap("wood_floor.bmp");
 	//For each wall, create object with translations, add to wall map
 	double yoffset = WALL_HEIGHT / 2.0;
 	for (int i = 0; i < rows; i++)
@@ -29,7 +29,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xO
 			if (maze[i][j]) //If there's a wall
 			{
 				//Create transformation
-				Vertex4 trans = { j + xOffset, yoffset, i + zOffset, 0 };
+				Vertex4 trans = { j + xOffset, yoffset, i + zOffset , 0 };
 				Transformation *translate = new Transformation(TRANSLATE, trans);
 				//Create object
 				TangentPolygonWorldObject *poly = new TangentPolygonWorldObject(this->wall, program);
@@ -46,8 +46,8 @@ void Maze::render(Vertex3 position, double angle, double fov)
 {	
 	const double PI = std::atan(1.0) * 4;
 	//Find position in grid
-	double posx = position.x - xOffset;
-	double posz = position.z - zOffset;
+	double posx = position.x - xOffset + WALL_WIDTH / 2.0;
+	double posz = position.z - zOffset + WALL_DEPTH / 2.0;
 	//Adjust angle - cam angle is 0 at PI / 2
 	double viewAngle = fmod(2 * PI - angle + PI / 2, 2 * PI);
 	//Ray cast from right to left - check horizontal intersections then vertical
@@ -75,9 +75,9 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zHIntercept = -1;
 		double xH = posx;
 		double zH = posz;
-		double xIncrease = WALL_WIDTH / tan(rayCalc);
+		double xIncrease = .25 / tan(rayCalc);
 		if (modRay < 3 * PI / 2 && modRay >= PI / 2) xIncrease *= -1; //Q2/Q3 - going left
-		int zDiff = (modRay < PI) ? -1 : 1; //If ray is going down need to increase z
+		double zDiff = (modRay < PI) ? -.25 : .25; //If ray is going down need to increase z
 		//Check for horizontal intersections
 		
 		int scale = 1;
@@ -87,8 +87,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 			xH = posx + scale * xIncrease;
 			zH += zDiff;
 			if (walls.count(std::pair<int, int>((int)zH, (int)xH)) == 1) //Check for a wall
-			{		
-				
+			{						
 				xHIntercept = (int)xH;
 				zHIntercept = (int)zH;
 				break;
@@ -101,18 +100,17 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zVIntercept = -1;
 		double xV = posx;
 		double zV = posz;
-		int xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? 1 : -1;
-		double zIncrease = WALL_WIDTH * tan(rayCalc);
+		double xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? .25 : -.25;
+		double zIncrease = .25 * tan(rayCalc);
 		if (modRay < PI) zIncrease *= -1;
 		scale = 1;
 		while (xV < columns && xV >= 0 &&
 				zV < rows && zV >= 0)
 		{
-			xV += xDiff;
+			xV = posx + scale * xDiff;
 			zV = posz + scale * zIncrease;
 			if (walls.count(std::pair<int, int>((int)zV, (int)xV)) == 1)
-			{
-				
+			{				
 				xVIntercept = (int)xV;
 				zVIntercept = (int)zV;
 				break; 
@@ -147,7 +145,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 				visibleWalls[coords] = walls[coords];
 			} else
 			{
-				coords = std::pair<int, int>(zHIntercept, xHIntercept);
+				std::pair<int, int> coords = std::pair<int, int>(zHIntercept, xHIntercept);
 				visibleWalls[coords] = walls[coords];
 				coords = std::pair<int, int>(zVIntercept, xVIntercept);
 				visibleWalls[coords] = walls[coords];
