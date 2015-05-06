@@ -10,7 +10,7 @@ uniform mat4 gCameraMatrix;
 //Phong shading model (uses reflect vector rather than half vector)
 void main()
 {
-	float ambientIntensity = 0.5; //Constant intensity
+	float ambientIntensity = 1; //Constant intensity
 	vec4 ambientColour = gl_LightSource[0].ambient * ambientIntensity;
 	
 	//Calculate diffuse and specular

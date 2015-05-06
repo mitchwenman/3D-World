@@ -56,7 +56,7 @@ void main()
 		
 		vec3 lightReflection = normalize(reflect(-lightDir, nMapNormal));
 		vec3 vertEye = normalize(-position); //Vector from pixel to eye at (0,0,0)
-		float specularIntensity = max(0.0, pow(dot(vertEye, lightReflection), 8.0)); //Negative angle shouldn't see specular
+		float specularIntensity = max(0.0, pow(dot(vertEye, lightReflection), 4.0)); //Negative angle shouldn't see specular
 		specular += gl_LightSource[0].specular * specularIntensity;
 
 	}
