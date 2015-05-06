@@ -1,5 +1,5 @@
 #include "Maze.h"
-#include "SpecularColourMap.h"
+#include "SpecularNormalMap.h"
 #include "Transformation.h"
 #include "GraphicsSettings.h"
 #include "Camera.h"
@@ -19,7 +19,7 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xO
 		columns = 0;
 
 	// Create objects from all walls
-	IShaderProgram *program = new SpecularColourMap("wood_floor.bmp");
+	IShaderProgram *program = new SpecularNormalMap("brickwork-texture.bmp", "brickwork-normal.bmp");
 	//For each wall, create object with translations, add to wall map
 	double yoffset = WALL_HEIGHT / 2.0;
 	for (int i = 0; i < rows; i++)
@@ -76,7 +76,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zHIntercept = -1;
 		double xH = posx;
 		double zH = posz;
-		double xIncrease = .5 / tan(rayCalc);
+		double xIncrease = .5 / tan(rayCalc); // adj = opp / tan(x)
 		if (modRay < 3 * PI / 2 && modRay >= PI / 2) xIncrease *= -1; // Q2/Q3 - going left
 		double zDiff = (modRay < PI) ? -.5 : .5; //If ray is going down need to increase z
 		//Check for horizontal intersections
@@ -100,8 +100,8 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		int zVIntercept = -1;
 		double xV = posx;
 		double zV = posz;
-		double xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? .5 : -.5;
-		double zIncrease = .5 * tan(rayCalc);
+		double xDiff = (modRay < PI / 2 || modRay > 3 * PI / 2) ? .5 : -.5; // Q2/Q3 going left
+		double zIncrease = .5 * tan(rayCalc); // opp = adj * tan(x)
 		if (modRay < PI) zIncrease *= -1;
 		scale = 1;
 		while (xV < columns && xV >= 0 &&
@@ -143,7 +143,7 @@ void Maze::render(Vertex3 position, double angle, double fov)
 			{
 				coords = std::pair<int, int>(zVIntercept, xVIntercept);
 				visibleWalls[coords] = walls[coords];
-			} else // Both are the same distance away (probably equal), so add both to the list. 
+			} else // Both are the same distance away (probably same coords), so add both to the list. 
 			{
 				std::pair<int, int> coords = std::pair<int, int>(zHIntercept, xHIntercept);
 				visibleWalls[coords] = walls[coords];
