@@ -44,6 +44,22 @@ Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xO
 
 void Maze::render(Vertex3 position, double angle, double fov)
 {	
+	std::vector<TangentPolygonWorldObject *> visibleWallList = this->rayCast(position, angle, fov);
+	GraphicsSettings *gset = GraphicsSettings::getSingleton();
+	gset->resetModelView();
+	Camera *cam = Camera::getSingleton();
+	cam->setCamera();
+	for (std::vector<TangentPolygonWorldObject *>::iterator it = visibleWallList.begin();
+		it != visibleWallList.end(); it++)
+	{
+		(*it)->draw();
+		gset->resetModelView();
+		cam->setCamera();
+	}
+}
+
+std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double angle, double fov)
+{
 	const double PI = std::atan(1.0) * 4;
 	//Find position in grid
 	double posx = position.x - xOffset + WALL_WIDTH / 2.0; 
@@ -154,17 +170,11 @@ void Maze::render(Vertex3 position, double angle, double fov)
 		}
 			
 	}
-	
-	// Now draw the walls that are visible.
-	GraphicsSettings *gset = GraphicsSettings::getSingleton();
-	gset->resetModelView();
-	Camera::getSingleton()->setCamera();
+	std::vector<TangentPolygonWorldObject *> visibleWallList;
+	// Build list of the walls that are visible.
 	for (std::map<std::pair<int, int>, TangentPolygonWorldObject*>::iterator it = visibleWalls.begin(); it != visibleWalls.end(); it++)
 	{
-		TangentPolygonWorldObject *wallObject = it->second;
-		wallObject->draw();
-		gset->resetModelView();
-		Camera::getSingleton()->setCamera();
-
+		visibleWallList.push_back(it->second);
 	}
+	return visibleWallList;
 }
