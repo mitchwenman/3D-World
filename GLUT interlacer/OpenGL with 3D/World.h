@@ -35,5 +35,5 @@ public:
 	
 	void toggleSelectedObject();
 
-	int getSelectedObject() { return selectedObject; }
+	int getSelectedObjectIndex() { return selectedObject; }
 };

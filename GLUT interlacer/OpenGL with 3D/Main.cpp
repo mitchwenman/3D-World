@@ -96,7 +96,7 @@ void init()
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
 	Vertex4 position = { -50, -50, -100 , 0 };
 	Vertex4 diffuse = { 1, 1, 1, 1};
-	Vertex4 ambient = { .2, .2, .2, 1 };
+	Vertex4 ambient = { .3, .3, .3, 1 };
 	dirLight->setLight(position, ambient, diffuse);
 }
 
@@ -168,7 +168,6 @@ void kb(unsigned char c, int x, int y)
 {
 	switch (c) 
 	{ 
-	case 's': stereo ^= 1, eyes = 10;break;
 	case ']': eyes++;	break;
 	case '[': eyes--;	break;
 	case 27 : exit(0);	break;
