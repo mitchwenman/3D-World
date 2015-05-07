@@ -68,11 +68,13 @@ void init()
 	glewInit();
 	
 	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Cube-mod.wob");
+	WaveFrontPolygon *ball = new WaveFrontPolygon("soccer-ball.wob");
 
 	//Shader programs
 	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("box-wood-texture.bmp", "box-wood-normal.bmp");
+	SpecularColourMap *ballTex = new SpecularColourMap("soccer-ball.bmp");
 
 
 	//--- Heightmap
@@ -85,7 +87,9 @@ void init()
 
 	//Polygon
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
-	world->insertObject(pwo);
+	//world->insertObject(pwo);
+	PolygonWorldObject *ballWorldObj = new PolygonWorldObject(ball, ballTex);
+	world->insertObject(ballWorldObj);
 	
 	//Maze
 	maze = new Maze("Maze.txt", poly);
