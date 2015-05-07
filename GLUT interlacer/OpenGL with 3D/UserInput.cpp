@@ -89,7 +89,7 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 			if (selectedPolygonIndex != -1)
 			{
 				WorldObject *object = world->objects[selectedPolygonIndex];
-				ObjectTransform::rotateObject(object, 0.1, 1., 1., 1.);
+				ObjectTransform::rotateObject(object, 0.5, 1., 1., 1.);
 			}
 			break;
 		}
