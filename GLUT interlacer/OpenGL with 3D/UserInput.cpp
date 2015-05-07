@@ -5,10 +5,69 @@
 #include "CameraUtil.h"
 #include <math.h>
 #include "World.h"
-#include "WorldObject.h"
-#include "Transformation.h"
+#include "ObjectTransform.h"
 
 void UserInput::handleKeyInput(unsigned char c, int x, int y)
+{
+	switch (c)
+	{
+	case '\t':
+		{
+			World::getInstance()->toggleSelectedObject();
+			break;
+		}
+	case 'w':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, 0.0, 0.0, -0.1);
+			}
+			break;
+		}
+	case 's':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, 0.0, 0.0, 0.1);
+			}
+			break;
+		}
+	case 'a':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, -0.1, 0.0, 0.0);
+			}
+			break;
+		}
+	case 'd':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, 0.1, 0.0, 0.0);
+			}
+			break;
+		}
+
+
+	default:
+		break;
+	}
+}
+
+void UserInput::handleSpecialKeyInput(unsigned char c, int x, int y)
 {
 	switch (c)
 	{
@@ -36,46 +95,6 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 		{
 			Camera* cam = Camera::getSingleton();
 			CameraUtil::MoveCamera(cam, -.1);
-			break;
-		}
-	case '\t':
-		{
-			World::getInstance()->toggleSelectedObject();
-			break;
-		}
-	case 'w':
-		{
-			World *world = World::getInstance();
-			int selectedPolygonIndex = world->getSelectedObjectIndex();
-			if (selectedPolygonIndex != -1)
-			{
-				WorldObject *object = world->objects[selectedPolygonIndex];
-				std::vector<Transformation *> objectTransformations = object->transformations;
-				Transformation *translateTrans = NULL;
-				//Find first transformation that is a translate
-				unsigned int i;
-				for (i = 0; i < objectTransformations.size(); i++)
-				{
-					if (objectTransformations[i]->type == TRANSLATE)
-					{
-						translateTrans = objectTransformations[i];
-						break;
-					}
-				}
-				if (translateTrans == NULL)
-				{
-					Vertex4 values = { 0, 0, 0, 0 };
-					translateTrans = new Transformation(TRANSLATE, values);
-				}					
-				//Add -z value to translation
-				translateTrans->values.z -= 0.1;
-				//Add to transformation list if wasn't in there before
-				if (i == objectTransformations.size())
-				{
-					objectTransformations.push_back(translateTrans);
-				} 
-				object->transformations = objectTransformations;
-			}
 			break;
 		}
 	default:

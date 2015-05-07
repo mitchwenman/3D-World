@@ -96,6 +96,7 @@
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeReader.cpp" />
     <ClCompile Include="ModelTransform.cpp" />
+    <ClCompile Include="ObjectTransform.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="SpecularColourMap.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Maze.h" />
     <ClInclude Include="MazeReader.h" />
     <ClInclude Include="ModelTransform.h" />
+    <ClInclude Include="ObjectTransform.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="IShaderProgram.h" />

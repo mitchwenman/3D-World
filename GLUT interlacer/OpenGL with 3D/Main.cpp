@@ -178,7 +178,7 @@ void kb(unsigned char c, int x, int y)
 
 void special(int key, int x, int y)
 {
-	kb((unsigned char)key, x, y);
+	UserInput::handleSpecialKeyInput(key, x, y);
 }
 
 void reshape(int w,int h)
