@@ -9,6 +9,18 @@
 */
 namespace ObjectTransform
 {
+	//! Adds a (or modifies an existing) translation transformation to an object.
+	//! @param object The object to be modified.
+	//! @param dx The x axis translation.
+	//! @param dy The y axis translation.
+	//! @param dz The z axis translation.
 	void translateObject(WorldObject *object, double dx, double dy, double dz);
+
+	//! Adds a (or modifies an existing) rotation transformation to an object.
+	//! @param object The object to be modified.
+	//! @param dx The x axis rotation.
+	//! @param dy The y axis rotation.
+	//! @param dz The z axis rotation.
+	void rotateObject(WorldObject *object, double angle, double dx, double dy, double dz);
 
 }
