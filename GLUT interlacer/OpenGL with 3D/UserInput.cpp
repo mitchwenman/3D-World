@@ -60,8 +60,28 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 			}
 			break;
 		}
-
-
+	case 'e':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, 0.0, 0.1, 0.0);
+			}
+			break;
+		}
+	case 'f':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::translateObject(object, 0.0, -0.1, 0.0);
+			}
+			break;
+		}
 	default:
 		break;
 	}
