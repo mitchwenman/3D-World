@@ -31,11 +31,7 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 		objectTransformations[i] = translateTrans;
 	else 
 	{
-		int position = getTranslateInsertPosition(object);
-		if (position == -1)
-			objectTransformations.push_back(translateTrans);
-		else
-		objectTransformations.insert(objectTransformations.begin() + position, translateTrans);	
+		objectTransformations.insert(objectTransformations.begin(), translateTrans);	
 	}
 	
 	object->transformations = objectTransformations;

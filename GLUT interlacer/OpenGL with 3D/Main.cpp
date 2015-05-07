@@ -72,7 +72,7 @@ void init()
 	//Shader programs
 	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
-	SpecularNormalMap *nMap = new SpecularNormalMap("wood_floor.bmp", "wood_normal.bmp");
+	SpecularNormalMap *nMap = new SpecularNormalMap("box-wood-texture.bmp", "box-wood-normal.bmp");
 
 
 	//--- Heightmap
@@ -85,8 +85,6 @@ void init()
 
 	//Polygon
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
-	Transformation *translate = new Transformation(TRANSLATE, trans);
-	pwo->transformations.push_back(translate);
 	world->insertObject(pwo);
 	
 	//Maze
