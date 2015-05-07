@@ -67,36 +67,7 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 														   //Easier to offset position than take this into account when ray casting.
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> visibleWalls;
 	// Check bounds
-	if (position.x < xOffset || position.x > xOffset + WALL_WIDTH * columns ||
-		position.z < zOffset || position.z > zOffset + WALL_DEPTH * rows)
-	{
-		//Render all outside blocks
-		for (unsigned int i = 0; i < maze.size(); i++)
-		{
-			if ((i == 0 && position.z < zOffset) || //Top or bottom
-				(i == maze.size() - 1 && position.z > zOffset + WALL_DEPTH * columns ))
-			{
-				for (unsigned int j = 0; j < maze[i].size(); j++)
-				{
-					if (maze[i][j]) 
-					{
-						std::pair<int, int> coords(i, j);
-						visibleWalls[coords] = walls[coords];
-					}
-				}
-			} 
-			if (maze[i][0] && position.x < xOffset) //left edge
-			{
-				std::pair<int, int> coords(i, 0);
-				visibleWalls[coords] = walls[coords];
-			} else if (maze[i][maze[i].size() - 1] && position.x > xOffset + WALL_WIDTH * rows) //right edge
-			{
-				std::pair<int, int> coords(i, maze[i].size() - 1);
-				visibleWalls[coords] = walls[coords];
-			}
-		}
-	} else
-	{
+
 		//Adjust angle - cam angle is 0 at PI / 2
 		double viewAngle = fmod(2 * PI - angle + PI / 2, 2 * PI);
 		//Ray cast from right to left - check horizontal intersections then vertical
@@ -129,18 +100,23 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 			double zDiff = (modRay < PI) ? -.5 : .5; //If ray is going down need to increase z
 			//Check for horizontal intersections
 			int scale = 1;
-			while (xH < columns && xH >= 0 &&
-					zH < rows && zH >= 0)
+			while (abs(zH - posz) < rows * 1.5 &&
+					abs(xH - posx) < columns * 1.5)
 			{			
 				xH = posx + scale * xIncrease;
 				zH += zDiff;
-				if (walls.count(std::pair<int, int>((int)zH, (int)xH)) == 1) //Check for a wall
-				{						
-					xHIntercept = (int)xH;
-					zHIntercept = (int)zH;
-					break;
+				if (xH < columns && xH >= 0 &&
+					zH < rows && zH >= 0)
+				{
+					if (walls.count(std::pair<int, int>((int)zH, (int)xH)) == 1) //Check for a wall
+					{						
+						xHIntercept = (int)xH;
+						zHIntercept = (int)zH;
+						break;
+					}
 				}
 				scale++;
+
 			}
 				
 			//Check for vertical intersections
@@ -152,16 +128,20 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 			double zIncrease = .5 * tan(rayCalc); // opp = adj * tan(x)
 			if (modRay < PI) zIncrease *= -1;
 			scale = 1;
-			while (xV < columns && xV >= 0 &&
-					zV < rows && zV >= 0)
+			while (abs(xV - posx) < columns * 1.5 &&
+					abs(zV - posz) < rows * 1.5)
 			{
 				xV = posx + scale * xDiff;
 				zV = posz + scale * zIncrease;
-				if (walls.count(std::pair<int, int>((int)zV, (int)xV)) == 1)
-				{				
-					xVIntercept = (int)xV;
-					zVIntercept = (int)zV;
-					break; 
+				if (xV < columns && xV >= 0 &&
+					zV < rows && zV >= 0)
+				{
+					if (walls.count(std::pair<int, int>((int)zV, (int)xV)) == 1)
+					{				
+						xVIntercept = (int)xV;
+						zVIntercept = (int)zV;
+						break; 
+					}
 				}
 				scale++;
 			}
@@ -201,8 +181,7 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 			
 			}
 			
-		}
-	}
+		}	
 
 	std::vector<TangentPolygonWorldObject *> visibleWallList;
 	// Build list of the walls that are visible.
