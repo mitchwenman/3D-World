@@ -87,7 +87,7 @@ void init()
 	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
 	Transformation *translate = new Transformation(TRANSLATE, trans);
 	pwo->transformations.push_back(translate);
-	//world->insertObject(pwo);
+	world->insertObject(pwo);
 	
 	//Maze
 	maze = new Maze("Maze.txt", poly);
