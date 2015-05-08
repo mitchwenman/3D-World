@@ -24,9 +24,6 @@
     <ClCompile Include="Interlacer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WFObjectLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ModelTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,9 +117,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WFObjectLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WaveFrontPolygon.h">

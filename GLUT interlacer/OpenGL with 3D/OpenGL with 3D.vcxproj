@@ -110,7 +110,6 @@
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="WaveFrontPolygon.cpp" />
     <ClCompile Include="WaveFrontPolygonDrawer.cpp" />
-    <ClCompile Include="WFObjectLoader.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +142,6 @@
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="WaveFrontPolygon.h" />
     <ClInclude Include="WaveFrontPolygonDrawer.h" />
-    <ClInclude Include="WFObjectLoader.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldObject.h" />
   </ItemGroup>
