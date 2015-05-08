@@ -97,13 +97,13 @@ void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, dou
 		objectTransformations[i] = scaleTrans;
 	else 
 	{
-		objectTransformations.insert(objectTransformations.begin(), scaleTrans);	
+		objectTransformations.push_back(scaleTrans);	
 	}
 	
 	object->transformations = objectTransformations;
 }
 
-
+//Returns an
 int getTranslateInsertPosition(WorldObject *object)
 {
 	std::vector<Transformation *> transformations = object->transformations;
@@ -131,7 +131,7 @@ int getTranslateInsertPosition(WorldObject *object)
 	else if (currentRotatePosition < size)
 		return currentRotatePosition - 1;
 	else if (size == 1) //must be a scale operation
-		return 0;
+		return 1;
 	else
 		return -1;
 }
