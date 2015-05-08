@@ -26,4 +26,6 @@ public:
 	//! Applies the transformations to model view matrix and renders polygon to the screen using shaderProgram.
 	void draw();
 
+	bool collides(WorldObject *object) { return false; }
+
 };

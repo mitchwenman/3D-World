@@ -18,4 +18,9 @@ public:
 
 	//! Draws the heightmap to the screen.
 	void draw();
+
+	//! Tests whether an object collides with this heightmap. Always returns false.
+	//! @param otherObject A pointer to the object to be tested for a collision.
+	//! @return No collision detection is performed for height maps, so this always returns false.
+	bool collides(WorldObject *otherObject) { return false; }
 };

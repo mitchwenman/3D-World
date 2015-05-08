@@ -11,7 +11,7 @@ class BoundingSphere
 public:	
 	double radius;
 
-	glm::vec4 centrePoint;
+	glm::vec3 centrePoint;
 
 	bool collides(BoundingSphere otherSphere);
 
@@ -19,4 +19,20 @@ public:
 
 	BoundingSphere(WaveFrontPolygon polygon);
 
+};
+
+
+class TransformableBoundingSphere : public BoundingSphere
+{
+private:
+	glm::vec3 worldSpaceCentrePoint;
+
+	double worldRadius;
+
+	glm::mat4 worldMatrix;
+
+public:
+	BoundingSphere transform(std::vector<Transformation *> transforms);
+
+	BoundingSphere transform(); 
 };

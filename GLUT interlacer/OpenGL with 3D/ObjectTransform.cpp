@@ -1,7 +1,11 @@
 #include "ObjectTransform.h"
 
+#include "World.h"
+
 //Returns -1 if at the back
 int getTranslateInsertPosition(WorldObject *object);
+
+bool collidesWithWorld(WorldObject* object);
 
 void ObjectTransform::translateObject(WorldObject *object, double dx, double dy, double dz)
 {
@@ -32,9 +36,17 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 	else 
 	{
 		objectTransformations.insert(objectTransformations.begin(), translateTrans);	
+		i = 0;
 	}
-	
 	object->transformations = objectTransformations;
+	if (collidesWithWorld(object))
+	{
+		//Reset
+		Transformation *newTrans = objectTransformations[i];
+		newTrans->values.x -= dx;
+		newTrans->values.y -= dy;
+		newTrans->values.z -= dz;
+	}
 }
 
 void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx, double dy, double dz)
@@ -67,6 +79,15 @@ void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx,
 		objectTransformations.push_back(rotateTrans);
 	} 
 	object->transformations = objectTransformations;
+	if (collidesWithWorld(object))
+	{
+		//Reset
+		Transformation *newRotate = objectTransformations[i];
+		newRotate->values.x -= angle;
+		newRotate->values.y -= dx;
+		newRotate->values.z -= dy;
+		newRotate->values.w -= dz;
+	}
 }
 
 void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, double sz)
@@ -134,4 +155,23 @@ int getTranslateInsertPosition(WorldObject *object)
 		return 1;
 	else
 		return -1;
+}
+
+bool collidesWithWorld(WorldObject* object)
+{
+	World *world = World::getInstance();
+	std::vector<WorldObject*> objects = world->objects;
+
+	unsigned int numCollisions = 0;
+	for (std::vector<WorldObject*>::iterator it = objects.begin();
+		it != objects.end(); it++)
+	{
+		if (object->collides((*it)))
+		{
+			numCollisions++;
+			if (numCollisions == 2) //The object will collide with itself
+				break;
+		}
+	}
+	return numCollisions == 2;
 }

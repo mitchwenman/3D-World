@@ -27,4 +27,6 @@ public:
 	//! Renders the polygon to the screen using the given shader program.
 	//! First applies the set of transformations in transformations.
 	void draw();
+
+	bool collides(WorldObject *object) { return false; }
 };

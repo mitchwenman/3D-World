@@ -23,6 +23,9 @@ public:
 	//! Virtual method to draw the object. To be implemented by the subclass.
 	virtual void draw() = 0;
 
+	//! Virtual method to test whether this object in world space collides with another. To be implemented by sub class.
+	virtual bool collides(WorldObject* object) = 0;
+
 	//! Constructor for the object. Simply sets the given values.
 	//! @param shaderProgram The shader program to be used to draw the object.
 	//! @param trans The set of model view transformations to be applied prior to drawing.
