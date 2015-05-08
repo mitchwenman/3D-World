@@ -92,7 +92,7 @@ void init()
 
 	
 	//Maze
-	maze = new Maze("Maze.txt", wall);
+	maze = new Maze("Maze.txt", poly);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();

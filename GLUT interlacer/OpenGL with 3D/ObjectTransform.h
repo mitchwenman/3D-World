@@ -23,4 +23,11 @@ namespace ObjectTransform
 	//! @param dz The z axis rotation.
 	void rotateObject(WorldObject *object, double angle, double dx, double dy, double dz);
 
+	//! Adds a (or modifies an existing) scale transformation to an object.
+	//! @param object The object to be modified.
+	//! @param dx The x axis scale factor.
+	//! @param dy The y axis scale factor.
+	//! @param dz The z axis scale factor.
+	void scaleObject(WorldObject *object, double sx, double sy, double sz);
+
 }

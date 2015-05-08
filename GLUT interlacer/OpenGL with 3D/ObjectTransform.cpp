@@ -69,6 +69,41 @@ void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx,
 	object->transformations = objectTransformations;
 }
 
+void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, double sz)
+{
+	std::vector<Transformation *> objectTransformations = object->transformations;
+	Transformation *scaleTrans = NULL;
+	//Find first transformation that is a translate
+	unsigned int i;
+	for (i = 0; i < objectTransformations.size(); i++)
+	{
+		if (objectTransformations[i]->type == SCALE)
+		{
+			scaleTrans = objectTransformations[i];
+			break;
+		}
+	}
+	if (scaleTrans == NULL)
+	{
+		Vertex4 values = { 1, 1, 1, 0 };
+		scaleTrans = new Transformation(SCALE, values);
+	}					
+	//Add -z value to translation
+	scaleTrans->values.x *= sx;
+	scaleTrans->values.y *= sy;
+	scaleTrans->values.z *= sz;
+	//Add to transformation list if wasn't in there before
+	if (i < objectTransformations.size())
+		objectTransformations[i] = scaleTrans;
+	else 
+	{
+		objectTransformations.insert(objectTransformations.begin(), scaleTrans);	
+	}
+	
+	object->transformations = objectTransformations;
+}
+
+
 int getTranslateInsertPosition(WorldObject *object)
 {
 	std::vector<Transformation *> transformations = object->transformations;

@@ -93,6 +93,17 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 			}
 			break;
 		}
+	case '+':
+		{
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::scaleObject(object, 1.1, 1.1, 1.1);
+			}
+			break;
+		}
 	default:
 		break;
 	}
