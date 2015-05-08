@@ -67,14 +67,14 @@ void init()
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
 	
-	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("crate.wob");
-	TangentWaveFrontPolygon* wall = new TangentWaveFrontPolygon("cube-mod.wob");
+	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Table.wob");
+	TangentWaveFrontPolygon* wall = new TangentWaveFrontPolygon("crate.wob");
 
 
 	//Shader programs
 	SpecularColourMap *cmap = new SpecularColourMap("wood_floor.bmp");
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
-	SpecularNormalMap *nMap = new SpecularNormalMap("box-wood-texture.bmp", "box-wood-normal.bmp");
+	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
 
 
 
@@ -92,7 +92,7 @@ void init()
 
 	
 	//Maze
-	maze = new Maze("Maze.txt", poly);
+	maze = new Maze("Maze.txt", wall);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
