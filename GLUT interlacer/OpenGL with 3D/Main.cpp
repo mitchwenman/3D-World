@@ -85,10 +85,11 @@ void init()
 	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
 	world->insertObject(hm);	
 
-	//Polygon
+	//Table
 	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);
 	world->insertObject(table);
 
+	// Moon
 	Vertex4 scaleVals = { 0.5, 0.5, 0.5, 0 };
 	Transformation *scaleTrans = new Transformation(SCALE, scaleVals);
 
@@ -103,6 +104,7 @@ void init()
 	moonWO->transformations.push_back(trans);
 	moonWO->transformations.push_back(scaleTrans);
 
+	//Earth
 	PolygonWorldObject *earthWO = new PolygonWorldObject(moon, earthTex);
 	Vertex4 earthTransVals = { 0, 3.5, 0, 0 };
 	Transformation *earthTrans = new Transformation(TRANSLATE, earthTransVals);
