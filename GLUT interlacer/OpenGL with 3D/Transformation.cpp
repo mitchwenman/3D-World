@@ -13,7 +13,7 @@ void Transformation::apply()
 	}
 	case ROTATE:
 	{
-		ModelTransform::rotate(values.x, values.y, values.y, values.z);
+		ModelTransform::rotate(values.x, values.y, values.z, values.w);
 		break;
 	}
 	case SCALE:

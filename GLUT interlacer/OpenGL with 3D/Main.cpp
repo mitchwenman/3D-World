@@ -45,6 +45,7 @@
 #include "SpecularNormalMap.h"
 #include "HighlightShaderProgram.h"
 #include "Maze.h"
+#include "Animation.h"
 
 
 //----------------- globals ------------------------------------
@@ -77,20 +78,26 @@ void init()
 	SpecularColourMap *moonTex = new SpecularColourMap("earth.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
 
-
-
 	//--- Heightmap
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
 	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
-	Vertex4 trans = { 0, .5, -0.5, 0};
 	world->insertObject(hm);	
 
 	//Polygon
 	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);
 	world->insertObject(table);
+
+	Vertex4 values = { 0, 0, 0, 0 };
+	Vertex4 aniValues = { 0.5, 0, 1, 0 };
+	Animation *ani = new Animation(ROTATE, values, 50, aniValues);
+
+	Vertex4 transVals = { 0, 0, 2, 0 };
+	Transformation *trans = new Transformation(TRANSLATE, transVals);
 	PolygonWorldObject *moonWO = new PolygonWorldObject(moon, moonTex);
+	moonWO->transformations.push_back(ani);
+	moonWO->transformations.push_back(trans);
 	world->insertObject(moonWO);
 
 	

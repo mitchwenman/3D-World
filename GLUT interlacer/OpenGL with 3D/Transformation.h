@@ -21,5 +21,5 @@ public:
 	Transformation(TransformationType t, Vertex4 v) : type(t), values(v) {};
 
 	//! Applies the transformation by multiplying the current model view matrix by the generated transformation matrix.
-	void apply();
+	virtual void apply();
 };
