@@ -72,10 +72,10 @@ void init()
 	TangentWaveFrontPolygon* wall = new TangentWaveFrontPolygon("crate.wob");
 	WaveFrontPolygon* moon = new WaveFrontPolygon("sphere.wob");
 
-
 	//Shader programs
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
-	SpecularColourMap *moonTex = new SpecularColourMap("earth.bmp");
+	SpecularColourMap *moonTex = new SpecularColourMap("moon-texture.bmp");
+	SpecularColourMap *earthTex = new SpecularColourMap("earth.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
 
 	//--- Heightmap
@@ -89,16 +89,28 @@ void init()
 	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);
 	world->insertObject(table);
 
+	Vertex4 scaleVals = { 0.5, 0.5, 0.5, 0 };
+	Transformation *scaleTrans = new Transformation(SCALE, scaleVals);
+
 	Vertex4 values = { 0, 0, 0, 0 };
 	Vertex4 aniValues = { 0.5, 0, 1, 0 };
 	Animation *ani = new Animation(ROTATE, values, 50, aniValues);
-
-	Vertex4 transVals = { 0, 0, 2, 0 };
+	Vertex4 transVals = { 0, 3.5, 1.75, 0 };
 	Transformation *trans = new Transformation(TRANSLATE, transVals);
 	PolygonWorldObject *moonWO = new PolygonWorldObject(moon, moonTex);
+	
 	moonWO->transformations.push_back(ani);
 	moonWO->transformations.push_back(trans);
+	moonWO->transformations.push_back(scaleTrans);
+
+	PolygonWorldObject *earthWO = new PolygonWorldObject(moon, earthTex);
+	Vertex4 earthTransVals = { 0, 3.5, 0, 0 };
+	Transformation *earthTrans = new Transformation(TRANSLATE, earthTransVals);
+	earthWO->transformations.push_back(earthTrans);
+	earthWO->transformations.push_back(ani);
+
 	world->insertObject(moonWO);
+	world->insertObject(earthWO);
 
 	
 	//Maze
