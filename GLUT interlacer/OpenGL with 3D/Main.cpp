@@ -69,10 +69,12 @@ void init()
 	
 	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Table.wob");
 	TangentWaveFrontPolygon* wall = new TangentWaveFrontPolygon("crate.wob");
+	WaveFrontPolygon* moon = new WaveFrontPolygon("sphere.wob");
 
 
 	//Shader programs
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
+	SpecularColourMap *moonTex = new SpecularColourMap("earth.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
 
 
@@ -86,8 +88,10 @@ void init()
 	world->insertObject(hm);	
 
 	//Polygon
-	TangentPolygonWorldObject *pwo = new TangentPolygonWorldObject(poly, nMap);
-	world->insertObject(pwo);
+	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);
+	world->insertObject(table);
+	PolygonWorldObject *moonWO = new PolygonWorldObject(moon, moonTex);
+	world->insertObject(moonWO);
 
 	
 	//Maze
@@ -117,7 +121,7 @@ void renderScene()
 	gset->setGLMatrices();
 	//Light setup
 	DirectionalLight::getSingleton()->setLight();
-	maze->render(cam->getEye(), cam->getAngle(), 70);
+	maze->render(cam->getEye(), cam->getAngle(), 85);
 	
 	World::getInstance()->draw();
 	

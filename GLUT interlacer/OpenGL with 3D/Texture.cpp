@@ -24,9 +24,9 @@ void Texture::loadFromPath(std::string path)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			textureData.push_back(*image.data(i, j, 0, 0));
-			textureData.push_back(*image.data(i, j, 0, 1));
-			textureData.push_back(*image.data(i, j, 0, 2));
+			textureData.push_back(*image.data(j, i, 0, 0));
+			textureData.push_back(*image.data(j, i, 0, 1));
+			textureData.push_back(*image.data(j, i, 0, 2));
 		}		
 	}
 
