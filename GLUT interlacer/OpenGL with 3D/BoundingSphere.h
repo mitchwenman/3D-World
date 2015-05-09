@@ -34,7 +34,10 @@ private:
 	glm::mat4 worldMatrix;
 
 public:
-	BoundingSphere transform(std::vector<Transformation *> transforms);
+	TransformableBoundingSphere(WaveFrontPolygon polygon);
 
+	void setTransform(std::vector<Transformation *> transforms);
+
+	//! Produces a bounding sphere
 	BoundingSphere transform(); 
 };

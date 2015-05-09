@@ -107,6 +107,7 @@
     <ClCompile Include="TangentWaveFrontPolygon.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
+    <ClCompile Include="TransformableBoundingSphere.cpp" />
     <ClCompile Include="Transformation.cpp" />
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="WaveFrontPolygon.cpp" />
