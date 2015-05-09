@@ -21,4 +21,12 @@ void PolygonWorldObject::draw()
 		glUseProgram(0);
 	
 	WaveFrontPolygonDrawer::draw(*this->polygon);
+	glutWireSphere(boundingSphere.radius, 16, 16);
+}
+
+PolygonWorldObject::PolygonWorldObject(WaveFrontPolygon* polygon,
+						IShaderProgram* shaderProgram, 
+						std::vector<Transformation*> trans) : WorldObject(shaderProgram, trans), polygon(polygon)
+{
+	boundingSphere = *(new BoundingSphere(*polygon));	
 }

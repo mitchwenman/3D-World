@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BoundingSphere.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraUtil.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />

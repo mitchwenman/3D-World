@@ -1,5 +1,6 @@
 #include "WorldObject.h"
 #include "WaveFrontPolygon.h"
+#include "BoundingSphere.h"
 
 //! A class representing an arbitrary polygon.
 /*!
@@ -22,11 +23,13 @@ public:
 	//! @param trans A set of transformations to be applied to the object before rendering.
 	PolygonWorldObject(WaveFrontPolygon* polygon,
 						IShaderProgram* shaderProgram = NULL, 
-						std::vector<Transformation*> trans = std::vector<Transformation*>()) : WorldObject(shaderProgram, trans) { this->polygon = polygon; };
+						std::vector<Transformation*> trans = std::vector<Transformation*>());
 
 	//! Renders the polygon to the screen using the given shader program.
 	//! First applies the set of transformations in transformations.
 	void draw();
 
 	bool collides(WorldObject *object) { return false; }
+
+	BoundingSphere boundingSphere;
 };

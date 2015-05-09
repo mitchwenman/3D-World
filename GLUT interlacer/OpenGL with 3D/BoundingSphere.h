@@ -15,7 +15,9 @@ public:
 
 	bool collides(BoundingSphere otherSphere);
 
-	BoundingSphere(glm::vec3 center, double radius);
+	BoundingSphere() {};
+
+	BoundingSphere(glm::vec3 center, double radius) : centrePoint(center), radius(radius) {};
 
 	BoundingSphere(WaveFrontPolygon polygon);
 

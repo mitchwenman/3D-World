@@ -2,6 +2,7 @@
 
 #include "WorldObject.h"
 #include "TangentWaveFrontPolygon.h"
+#include "BoundingSphere.h"
 
 //! A wrapper around an abitrary TangentWaveFrontPolygon object that has been loaded from file.
 /*!
@@ -20,12 +21,14 @@ public:
 	//! @param trans The transformations that will be applied to the model view matrix prior to rendering the object.
 	TangentPolygonWorldObject(TangentWaveFrontPolygon* polygon,
 						IShaderProgram* shaderProgram = NULL, 
-						std::vector<Transformation*> trans = std::vector<Transformation*>()) : WorldObject(shaderProgram, trans) { this->polygon = polygon; };
+						std::vector<Transformation*> trans = std::vector<Transformation*>()); 
 
 
 	//! Applies the transformations to model view matrix and renders polygon to the screen using shaderProgram.
 	void draw();
 
 	bool collides(WorldObject *object) { return false; }
+
+	BoundingSphere boundingSphere;
 
 };
