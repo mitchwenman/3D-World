@@ -136,9 +136,15 @@ void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, dou
 	else 
 	{
 		objectTransformations.push_back(scaleTrans);	
-	}
-	
+	}	
 	object->transformations = objectTransformations;
+	if (collidesWithWorld(object))
+	{
+		scaleTrans->values.x /= sx;
+		scaleTrans->values.y /= sy;
+		scaleTrans->values.z /= sz;
+		object->transformations = objectTransformations;
+	}
 }
 
 //Returns an
