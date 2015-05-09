@@ -35,7 +35,7 @@ void TransformableBoundingSphere::setTransform(std::vector<Transformation *> tra
 				{
 					glm::vec3 values = glm::vec3(transform->values.y, transform->values.z, 
 												transform->values.w);
-					worldMatrix = glm::rotate(worldMatrix, angle, values);
+					worldMatrix = glm::rotate(worldMatrix, float(angle * (3.14/180)), values);
 				}
 				
 				break;
