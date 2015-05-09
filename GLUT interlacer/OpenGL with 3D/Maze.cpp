@@ -191,3 +191,15 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 	}
 	return visibleWallList;
 }
+
+
+bool Maze::collides(WorldObject* object)
+{
+	for (std::map<std::pair<int, int>, TangentPolygonWorldObject*>::iterator it = walls.begin(); it != walls.end(); it++)
+	{
+		WorldObject *wall = it->second;
+		if (wall->collides(object))
+			return true;
+	}
+	return false;
+}

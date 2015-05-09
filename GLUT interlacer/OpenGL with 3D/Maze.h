@@ -29,7 +29,7 @@ public:
 	//! Checks if a given object collides with any wall in the maze.
 	//! @param object A pointer to the object to be checked.
 	//! @return True if the object collides, else false.
-	bool collides(WorldObject* object) { return false; }
+	bool collides(WorldObject* object);
 
 private:
 	//! The width of the wall
