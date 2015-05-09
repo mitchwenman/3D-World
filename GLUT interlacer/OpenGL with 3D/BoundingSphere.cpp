@@ -66,3 +66,11 @@ BoundingSphere::BoundingSphere(WaveFrontPolygon polygon)
 	double maxZCoordDist = std::max(glm::distance(maxZCoord, centrePoint), glm::distance(minZCoord, centrePoint));
 	this->radius = std::max((maxXCoordDist, maxYCoordDist), maxZCoordDist);
 }
+
+bool BoundingSphere::collides(BoundingSphere otherSphere)
+{
+	//True if distance between centre points is greater than sum of radii
+	double distance = glm::distance(this->centrePoint, otherSphere.centrePoint);
+	double radiiSum = this->radius + otherSphere.radius;
+	return distance < radiiSum;
+}
