@@ -26,6 +26,12 @@ void World::draw()
 	Camera* cam = Camera::getSingleton();
 	gset->resetModelView();
 	cam->setCamera();
+	if (maze != NULL)
+	{
+		maze->render(cam->getEye(), cam->getAngle(), 85);
+		gset->resetModelView();
+		cam->setCamera();
+	}
 	for (unsigned int i = 0; i < objects.size(); i++)
 	{		
 		gset->setGLMatrices();

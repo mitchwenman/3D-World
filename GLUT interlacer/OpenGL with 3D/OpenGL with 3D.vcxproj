@@ -84,6 +84,7 @@
     <ClCompile Include="BoundingSphere.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraUtil.cpp" />
+    <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="BoundingSphere.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraUtil.h" />
+    <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="GraphicsUtil.h" />

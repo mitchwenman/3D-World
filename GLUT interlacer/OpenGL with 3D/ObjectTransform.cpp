@@ -2,11 +2,10 @@
 
 #include "World.h"
 #include <iostream>
+#include "CollisionDetection.h"
 
 //Returns -1 if at the back
 int getTranslateInsertPosition(WorldObject *object);
-
-bool collidesWithWorld(WorldObject* object);
 
 void ObjectTransform::translateObject(WorldObject *object, double dx, double dy, double dz)
 {
@@ -41,7 +40,7 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 	}
 	object->transformations = objectTransformations;
 	object->boundingSphere.setTransform(objectTransformations);
-	if (collidesWithWorld(object))
+	if (CollisionDetection::collidesWithWorld(object))
 	{
 		//Reset
 		Transformation *newTrans = objectTransformations[i];
@@ -83,7 +82,7 @@ void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx,
 	} 
 	object->transformations = objectTransformations;
 	object->boundingSphere.setTransform(objectTransformations);
-	if (collidesWithWorld(object))
+	if (CollisionDetection::collidesWithWorld(object))
 	{
 		//If we created this then delete it, else reset the values
 		Transformation *newRotate = objectTransformations[i];
@@ -138,7 +137,7 @@ void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, dou
 		objectTransformations.push_back(scaleTrans);	
 	}	
 	object->transformations = objectTransformations;
-	if (collidesWithWorld(object))
+	if (CollisionDetection::collidesWithWorld(object))
 	{
 		scaleTrans->values.x /= sx;
 		scaleTrans->values.y /= sy;
@@ -180,24 +179,3 @@ int getTranslateInsertPosition(WorldObject *object)
 		return -1;
 }
 
-bool collidesWithWorld(WorldObject* object)
-{
-	World *world = World::getInstance();
-	std::vector<WorldObject*> objects = world->objects;
-
-	unsigned int numCollisions = 0;
-	for (std::vector<WorldObject*>::iterator it = objects.begin();
-		it != objects.end(); it++)
-	{
-		std::cout << "Checking: " << (*it)->boundingSphere.radius << std::endl;
-		if ((*it)->collides(object))
-		{
-			if (object->boundingSphere.radius != (*it)->boundingSphere.radius)
-				std::cout << "Collides. Sphere: " << (*it)->boundingSphere.radius << std::endl;
-			numCollisions++;
-			if (numCollisions == 2) //The object will collide with itself
-				break;
-		}
-	}
-	return numCollisions == 2;
-}

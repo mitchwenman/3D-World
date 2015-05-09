@@ -9,6 +9,7 @@
 #include "Transformation.h"
 #include "WorldObject.h"
 #include "IShaderProgram.h"
+#include "Maze.h"
 
 //! A class to define the scene/world.
 /*!
@@ -33,13 +34,14 @@ private:
 
 	//! Private constructor for the singleton pattern. Creates the shader program held by highlightShader.
 	World();
-
-
-
+		
 
 public:
 	//! All standalone objects in the world.
 	std::vector<WorldObject *> objects;
+
+	//! The world's maze
+	Maze *maze;
 
 	//! Gets the singleton instance of the class.
 	//! @return The singleton instance of the class.
@@ -59,4 +61,6 @@ public:
 	//! Gets the index of the currently selected object.
 	//! @return The index of the curently selected object.
 	int getSelectedObjectIndex() { return selectedObject; }
+
+
 };

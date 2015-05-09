@@ -51,10 +51,7 @@
 //----------------- globals ------------------------------------
 bool stereo = false;	//- turns it on or off
 long eyes = 10;			//- distance between eyes
-float angle = 0.5;
-unsigned int program;
-unsigned int test_texture_program;
-Maze* maze;
+
 //----------------- functions ----------------------------------
 
 void init()
@@ -119,7 +116,8 @@ void init()
 
 	
 	//Maze
-	maze = new Maze("Maze.txt", wall);
+	Maze *maze = new Maze("Maze.txt", wall);
+	world->maze = maze;
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
@@ -145,7 +143,6 @@ void renderScene()
 	gset->setGLMatrices();
 	//Light setup
 	DirectionalLight::getSingleton()->setLight();
-	maze->render(cam->getEye(), cam->getAngle(), 85);
 	
 	World::getInstance()->draw();
 	
