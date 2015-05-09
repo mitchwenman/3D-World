@@ -1,6 +1,7 @@
 #include "ObjectTransform.h"
 
 #include "World.h"
+#include <iostream>
 
 //Returns -1 if at the back
 int getTranslateInsertPosition(WorldObject *object);
@@ -182,8 +183,11 @@ bool collidesWithWorld(WorldObject* object)
 	for (std::vector<WorldObject*>::iterator it = objects.begin();
 		it != objects.end(); it++)
 	{
-		if (object->collides((*it)))
+		std::cout << "Checking: " << (*it)->boundingSphere.radius << std::endl;
+		if ((*it)->collides(object))
 		{
+			if (object->boundingSphere.radius != (*it)->boundingSphere.radius)
+				std::cout << "Collides. Sphere: " << (*it)->boundingSphere.radius << std::endl;
 			numCollisions++;
 			if (numCollisions == 2) //The object will collide with itself
 				break;
