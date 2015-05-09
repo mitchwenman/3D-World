@@ -25,5 +25,10 @@ TangentPolygonWorldObject::TangentPolygonWorldObject(TangentWaveFrontPolygon* po
 						IShaderProgram* shaderProgram, 
 						std::vector<Transformation*> trans) : WorldObject(shaderProgram, trans), polygon(polygon)
 { 
-	boundingSphere = *(new BoundingSphere(*polygon));
+	boundingSphere = *(new TransformableBoundingSphere(*polygon));
+}
+
+bool TangentPolygonWorldObject::collides(WorldObject *object)
+{
+	return this->boundingSphere.transform().collides(object->boundingSphere.transform());
 }

@@ -14,6 +14,8 @@ private:
 	//! The WaveFrontPolygon object that will be drawn.
 	TangentWaveFrontPolygon *polygon;
 
+	
+
 public:
 	//! Constructor for the object.
 	//! @param polygon The polygon that will be drawn.
@@ -27,8 +29,6 @@ public:
 	//! Applies the transformations to model view matrix and renders polygon to the screen using shaderProgram.
 	void draw();
 
-	bool collides(WorldObject *object) { return false; }
-
-	BoundingSphere boundingSphere;
+	bool collides(WorldObject *object);
 
 };

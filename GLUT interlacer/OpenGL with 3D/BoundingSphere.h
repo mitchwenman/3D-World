@@ -36,6 +36,8 @@ private:
 public:
 	TransformableBoundingSphere(WaveFrontPolygon polygon);
 
+	TransformableBoundingSphere() {};
+
 	void setTransform(std::vector<Transformation *> transforms);
 
 	//! Produces a bounding sphere

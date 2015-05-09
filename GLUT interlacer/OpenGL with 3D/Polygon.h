@@ -31,5 +31,4 @@ public:
 
 	bool collides(WorldObject *object) { return false; }
 
-	BoundingSphere boundingSphere;
 };

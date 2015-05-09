@@ -3,6 +3,7 @@
 #include "MaterialData.h"
 #include "Transformation.h"
 #include "IShaderProgram.h"
+#include "BoundingSphere.h"
 #include <vector>
 
 //! Defines an interface for a generic wrapper for extra information about a polygon.
@@ -19,6 +20,8 @@ public:
 
 	//! The shader program to be used when drawing the object.
 	IShaderProgram* shaderProgram;
+
+	TransformableBoundingSphere boundingSphere;
 	
 	//! Virtual method to draw the object. To be implemented by the subclass.
 	virtual void draw() = 0;

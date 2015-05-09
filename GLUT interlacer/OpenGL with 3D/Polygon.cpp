@@ -28,5 +28,5 @@ PolygonWorldObject::PolygonWorldObject(WaveFrontPolygon* polygon,
 						IShaderProgram* shaderProgram, 
 						std::vector<Transformation*> trans) : WorldObject(shaderProgram, trans), polygon(polygon)
 {
-	boundingSphere = *(new BoundingSphere(*polygon));	
+	boundingSphere = *(new TransformableBoundingSphere(*polygon));	
 }
