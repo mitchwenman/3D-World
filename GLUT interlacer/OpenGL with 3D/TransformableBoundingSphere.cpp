@@ -13,6 +13,7 @@ void TransformableBoundingSphere::setTransform(std::vector<Transformation *> tra
 {
 	//Reset to identity
 	this->worldMatrix = glm::mat4();
+	this->worldRadius = this->radius;
 
 	//Create the model view matrix
 	for (unsigned int i = 0; i < transforms.size(); i++)
@@ -30,9 +31,13 @@ void TransformableBoundingSphere::setTransform(std::vector<Transformation *> tra
 		case ROTATE:
 			{
 				float angle = transform->values.x;
-				glm::vec3 values = glm::vec3(transform->values.y, transform->values.z, 
+				if (angle > 0)
+				{
+					glm::vec3 values = glm::vec3(transform->values.y, transform->values.z, 
 												transform->values.w);
-				worldMatrix = glm::rotate(worldMatrix, angle, values);
+					worldMatrix = glm::rotate(worldMatrix, angle, values);
+				}
+				
 				break;
 			}
 		case SCALE:
@@ -53,8 +58,8 @@ void TransformableBoundingSphere::setTransform(std::vector<Transformation *> tra
 	this->worldSpaceCentrePoint = glm::vec3(newCentre);
 }
 
-BoundingSphere TransformableBoundingSphere::transform()
+BoundingSphere* TransformableBoundingSphere::transform()
 {
 	BoundingSphere *bsphere = new BoundingSphere(this->worldSpaceCentrePoint, this->worldRadius);
-	return *bsphere;
+	return bsphere;
 }

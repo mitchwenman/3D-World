@@ -29,6 +29,6 @@ public:
 	//! First applies the set of transformations in transformations.
 	void draw();
 
-	bool collides(WorldObject *object) { return false; }
+	bool collides(WorldObject *object);
 
 };

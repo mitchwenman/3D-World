@@ -39,6 +39,7 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 		i = 0;
 	}
 	object->transformations = objectTransformations;
+	object->boundingSphere.setTransform(objectTransformations);
 	if (collidesWithWorld(object))
 	{
 		//Reset
@@ -46,6 +47,7 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 		newTrans->values.x -= dx;
 		newTrans->values.y -= dy;
 		newTrans->values.z -= dz;
+		object->boundingSphere.setTransform(objectTransformations);
 	}
 }
 
@@ -79,14 +81,28 @@ void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx,
 		objectTransformations.push_back(rotateTrans);
 	} 
 	object->transformations = objectTransformations;
+	object->boundingSphere.setTransform(objectTransformations);
 	if (collidesWithWorld(object))
 	{
-		//Reset
+		//If we created this then delete it, else reset the values
 		Transformation *newRotate = objectTransformations[i];
-		newRotate->values.x -= angle;
-		newRotate->values.y -= dx;
-		newRotate->values.z -= dy;
-		newRotate->values.w -= dz;
+		if (newRotate->values.x == angle &&
+			newRotate->values.y == dx &&
+			newRotate->values.z == dy &&
+			newRotate->values.w == dz)
+		{
+			delete(newRotate);
+			objectTransformations.erase(objectTransformations.begin() + i);
+		} else
+		{
+			//Reset
+			newRotate->values.x -= angle;
+			newRotate->values.y -= dx;
+			newRotate->values.z -= dy;
+			newRotate->values.w -= dz;
+		}
+		object->transformations = objectTransformations;	
+		object->boundingSphere.setTransform(objectTransformations);
 	}
 }
 

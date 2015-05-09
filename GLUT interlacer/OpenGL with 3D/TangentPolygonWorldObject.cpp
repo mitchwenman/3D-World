@@ -30,5 +30,12 @@ TangentPolygonWorldObject::TangentPolygonWorldObject(TangentWaveFrontPolygon* po
 
 bool TangentPolygonWorldObject::collides(WorldObject *object)
 {
-	return this->boundingSphere.transform().collides(object->boundingSphere.transform());
+	this->boundingSphere.setTransform(this->transformations);
+	object->boundingSphere.setTransform(object->transformations);
+	BoundingSphere *thisSphere = this->boundingSphere.transform();
+	BoundingSphere *otherSphere = object->boundingSphere.transform();
+	bool coll = thisSphere->collides(*otherSphere);
+	delete(thisSphere);
+	delete(otherSphere);
+	return coll;
 }

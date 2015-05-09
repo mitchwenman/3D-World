@@ -111,8 +111,11 @@ void init()
 	earthWO->transformations.push_back(earthTrans);
 	earthWO->transformations.push_back(ani);
 
+	moonWO->boundingSphere.setTransform(moonWO->transformations);
+	//earthWO->boundingSphere.setTransform(earthWO->transformations);
+
 	world->insertObject(moonWO);
-	world->insertObject(earthWO);
+	//world->insertObject(earthWO);
 
 	
 	//Maze

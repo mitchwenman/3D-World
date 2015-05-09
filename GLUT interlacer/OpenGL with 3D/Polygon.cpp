@@ -30,3 +30,15 @@ PolygonWorldObject::PolygonWorldObject(WaveFrontPolygon* polygon,
 {
 	boundingSphere = *(new TransformableBoundingSphere(*polygon));	
 }
+
+bool PolygonWorldObject::collides(WorldObject *object)
+{
+	this->boundingSphere.setTransform(this->transformations);
+	object->boundingSphere.setTransform(object->transformations);
+	BoundingSphere *thisSphere = this->boundingSphere.transform();
+	BoundingSphere *otherSphere = object->boundingSphere.transform();
+	bool coll = thisSphere->collides(*otherSphere);
+	delete(thisSphere);
+	delete(otherSphere);
+	return coll;
+}

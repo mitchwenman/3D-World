@@ -41,5 +41,5 @@ public:
 	void setTransform(std::vector<Transformation *> transforms);
 
 	//! Produces a bounding sphere
-	BoundingSphere transform(); 
+	BoundingSphere* transform(); 
 };
