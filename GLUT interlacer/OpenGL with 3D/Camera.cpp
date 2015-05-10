@@ -57,7 +57,7 @@ glm::mat4 Camera::getLookAtMatrix()
 Camera::Camera()
 {
 	this->boundingSphere = *(new TransformableBoundingSphere());
-	this->lookAt(0, .5, 2, 0, .5, -1, 0, 1, 0);
+	this->lookAt(5.5, .5, 9, 5.5, .5, 8, 0, 1, 0);
 	angle = 0.0;
 	
 	

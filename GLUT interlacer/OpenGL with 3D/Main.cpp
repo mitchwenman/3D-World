@@ -65,27 +65,67 @@ void init()
 	createInterlaceStencil(winwid,winhei);
 	glewInit();
 	
-	TangentWaveFrontPolygon* poly = new TangentWaveFrontPolygon("Table.wob");
-	TangentWaveFrontPolygon* wall = new TangentWaveFrontPolygon("crate.wob");
+	// Object Files
+	std::cout << "Loading object files...";
+	TangentWaveFrontPolygon* tableObj = new TangentWaveFrontPolygon("Table.wob");
+	TangentWaveFrontPolygon* cube = new TangentWaveFrontPolygon("crate.wob");
 	WaveFrontPolygon* moon = new WaveFrontPolygon("sphere.wob");
+	std::cout << "Done." << std::endl;
 
 	//Shader programs
+	std::cout << "Loading textures...";
 	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
 	SpecularColourMap *moonTex = new SpecularColourMap("moon-texture.bmp");
 	SpecularColourMap *earthTex = new SpecularColourMap("earth.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
+	SpecularNormalMap *crateTexture = new SpecularNormalMap("box-wood-texture.bmp", "box-wood-normal.bmp");
+	std::cout << "Done." << std::endl;
 
 	//--- Heightmap
+	std::cout << "Loading terrain...";
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
 	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
 	world->heightMap = hm;
+	std::cout << "Done." << std::endl;
 
 	//Table
-	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);
+	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(tableObj, nMap);
+	Vertex4 tableTrans = { 5.0, .25, 6, 0 };
+	Transformation *tableTranslate = new Transformation(TRANSLATE, tableTrans);
+	table->transformations.push_back(tableTranslate);
+	Vertex4 tableSc = { 2, 2, 2, 0 };
+	Transformation *tableScale = new Transformation(SCALE, tableSc);
+	table->transformations.push_back(tableScale);
 	world->insertObject(table);
+	
+	TangentPolygonWorldObject *table2 = new TangentPolygonWorldObject(tableObj, nMap);
+	Vertex4 table2Trans = { 11.0, 3.5, 5, 0 };
+	Transformation *table2Translate = new Transformation(TRANSLATE, tableTrans);
+	table2->transformations.push_back(table2Translate);
+	Vertex4 table2Sc = { 2, 2, 2, 0 };
+	Transformation *table2Scale = new Transformation(SCALE, table2Sc);
+	table2->transformations.push_back(table2Scale);
+	world->insertObject(table2);
+	
 
+	//Box
+	TangentPolygonWorldObject *crate1 = new TangentPolygonWorldObject(cube, crateTexture); 
+	Vertex4 crate1TransVals = { 7.5, .25, .5, 0 };
+	Transformation *crate1Translate = new Transformation(TRANSLATE, crate1TransVals);
+	Vertex4 crate1ScaleVals = { 0.5, 0.5, 0.5, 0 };
+	Transformation *crate1Scale = new Transformation(SCALE, crate1ScaleVals);
+	crate1->transformations.push_back(crate1Translate);
+	crate1->transformations.push_back(crate1Scale);
+	world->insertObject(crate1);
+
+	TangentPolygonWorldObject* crate2 = new TangentPolygonWorldObject(cube, crateTexture);
+	Vertex4 crate2TransVals = { 11, .5, -.5, 0 };
+	Transformation *crate2Translate = new Transformation(TRANSLATE, crate2TransVals);
+	crate2->transformations.push_back(crate2Translate);
+	world->insertObject(crate2);
+	
 	// Moon
 	Vertex4 scaleVals = { 0.5, 0.5, 0.5, 0 };
 	Transformation *scaleTrans = new Transformation(SCALE, scaleVals);
@@ -116,7 +156,7 @@ void init()
 
 	
 	//Maze
-	Maze *maze = new Maze("Maze.txt", wall);
+	Maze *maze = new Maze("Maze.txt", cube);
 	world->maze = maze;
 
 	//Setup light

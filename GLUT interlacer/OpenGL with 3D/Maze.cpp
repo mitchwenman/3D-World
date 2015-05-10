@@ -8,7 +8,7 @@
 #include <math.h>
 
 
-Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-3.5), zOffset(-2.5)
+Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-1.5), zOffset(-2.5)
 {
 	this->maze = MazeReader::readFromFile(mazeFile);
 	//Temporary maze for testing purposes
