@@ -21,15 +21,15 @@ void HeightMap::loadFromImage(std::string path)
 	textureCoords = std::vector<std::vector<Vertex2>>(rows, std::vector<Vertex2>(columns));
 
 	//Copy values into vectors - scale to 0, 1 on Y axis and 1/5 size of image
-	double xoffset = -7.5;
-	double zoffset = -7.5;
+	double xoffset = -15.5;
+	double zoffset = -15.5;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
 			//Scale vertices
-			double xScale = double(j) / (.05 * double(columns - 1));
-			double zScale = double(i) / (.05 * double(rows - 1));
+			double xScale = double(j) / (.02 * double(columns - 1));
+			double zScale = double(i) / (.03 * double(rows - 1));
 			//Get pixel heigh value
 			double vertexHeight = image(i, j, 0, 0, 0) / 64.; //Just use Red values if RGB
 			Vertex3 vertex = { xoffset + xScale, vertexHeight, zoffset + zScale }; 

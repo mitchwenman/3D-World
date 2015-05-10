@@ -28,7 +28,7 @@ void Camera::lookAt(double eyex, double eyey, double eyez, double centrex, doubl
 	this->center = center;
 	this->up = up;
 	this->boundingSphere.centrePoint = GraphicsUtil::vertex3ToGLMVec3(eye);
-	boundingSphere.radius = .5;
+	boundingSphere.radius = .25;
 }
 
 void Camera::moveEye(double eyex, double eyey, double eyez)
