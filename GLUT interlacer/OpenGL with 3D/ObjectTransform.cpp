@@ -40,7 +40,7 @@ void ObjectTransform::translateObject(WorldObject *object, double dx, double dy,
 	}
 	object->transformations = objectTransformations;
 	object->boundingSphere.setTransform(objectTransformations);
-	if (CollisionDetection::collidesWithWorld(object))
+	if (CollisionDetection::objectCollidesWithWorld(object))
 	{
 		//Reset
 		Transformation *newTrans = objectTransformations[i];
@@ -82,7 +82,7 @@ void ObjectTransform::rotateObject(WorldObject *object, double angle, double dx,
 	} 
 	object->transformations = objectTransformations;
 	object->boundingSphere.setTransform(objectTransformations);
-	if (CollisionDetection::collidesWithWorld(object))
+	if (CollisionDetection::objectCollidesWithWorld(object))
 	{
 		//If we created this then delete it, else reset the values
 		Transformation *newRotate = objectTransformations[i];
@@ -137,7 +137,7 @@ void ObjectTransform::scaleObject(WorldObject *object, double sx, double sy, dou
 		objectTransformations.push_back(scaleTrans);	
 	}	
 	object->transformations = objectTransformations;
-	if (CollisionDetection::collidesWithWorld(object))
+	if (CollisionDetection::objectCollidesWithWorld(object))
 	{
 		scaleTrans->values.x /= sx;
 		scaleTrans->values.y /= sy;

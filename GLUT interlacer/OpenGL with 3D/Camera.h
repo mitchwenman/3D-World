@@ -2,8 +2,9 @@
 
 #include "GraphicsUtil.h"
 #include "libs\glm\glm.hpp"
+#include "WorldObject.h"
 
-class Camera
+class Camera : public WorldObject
 {
 private:
 	Vertex3 eye;
@@ -56,5 +57,9 @@ public:
 	///Sets the angle
 	///@param angle The new angle.
 	void setAngle(double angle);
+
+	void draw() {};
+
+	bool collides(WorldObject *otherObject);
 
 };

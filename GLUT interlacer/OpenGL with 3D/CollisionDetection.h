@@ -4,5 +4,12 @@
 
 namespace CollisionDetection
 {
-	bool collidesWithWorld(WorldObject *object);
+	bool objectCollidesWithWorld(WorldObject *object);
+
+	bool camCollidesWithWorld();
+
+	bool objectCollidesWithWalls(WorldObject *object);
+
+	bool objectCollidesWithObjects(WorldObject *object);
+
 };

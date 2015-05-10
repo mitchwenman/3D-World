@@ -57,9 +57,25 @@ Camera::Camera()
 {
 	this->lookAt(0, .5, 0, 0, .5, -1, 0, 1, 0);
 	angle = 0.0;
+	this->boundingSphere = *(new TransformableBoundingSphere());
+	boundingSphere.radius = .75;
 }
 
 void Camera::setAngle(double angle)
 {
 	this->angle = fmod(angle + 2 * (atan(1.0) * 4), 2 * (atan(1.0) * 4));
+}
+
+bool Camera::collides(WorldObject *otherObject)
+{
+	//Create transformation for bounding sphere
+	std::vector<Transformation*> transforms;
+		
+	boundingSphere.centrePoint = GraphicsUtil::vertex3ToGLMVec3(eye);
+	otherObject->boundingSphere.setTransform(otherObject->transformations);
+	BoundingSphere *otherSphere = otherObject->boundingSphere.transform();
+
+	bool collides = boundingSphere.collides(*otherSphere);
+	delete(otherSphere);
+	return collides;
 }
