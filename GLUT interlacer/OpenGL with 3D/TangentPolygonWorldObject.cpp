@@ -18,7 +18,8 @@ void TangentPolygonWorldObject::draw()
 		glUseProgram(0);
 	
 	WaveFrontPolygonDrawer::drawNormalMapPolygon(*this->polygon);
-	glutWireSphere(boundingSphere.radius, 16, 16);
+	if (GraphicsSettings::getSingleton()->drawBoundingSphere)
+		glutWireSphere(boundingSphere.radius, 16, 16);
 }
 
 TangentPolygonWorldObject::TangentPolygonWorldObject(TangentWaveFrontPolygon* polygon,

@@ -54,8 +54,8 @@ bool CollisionDetection::objectCollidesWithWalls(WorldObject *object)
 {
 	World *world = World::getInstance();
 	Maze *maze = world->maze;
-	if (maze->collides(object))
-		return true;
+	return maze->collides(object);
+		
 }
 
 bool CollisionDetection::objectCollidesWithObjects(WorldObject *object)

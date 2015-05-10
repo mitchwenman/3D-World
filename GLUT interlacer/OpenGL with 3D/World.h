@@ -10,6 +10,7 @@
 #include "WorldObject.h"
 #include "IShaderProgram.h"
 #include "Maze.h"
+#include "HeightMapWorldObject.h"
 
 //! A class to define the scene/world.
 /*!
@@ -42,6 +43,9 @@ public:
 
 	//! The world's maze
 	Maze *maze;
+
+	//! The world's terrain
+	HeightMapWorldObject* heightMap;
 
 	//! Gets the singleton instance of the class.
 	//! @return The singleton instance of the class.

@@ -6,6 +6,7 @@
 #include <math.h>
 #include "World.h"
 #include "ObjectTransform.h"
+#include "GraphicsSettings.h"
 
 void UserInput::handleKeyInput(unsigned char c, int x, int y)
 {
@@ -105,16 +106,22 @@ void UserInput::handleKeyInput(unsigned char c, int x, int y)
 			break;
 		}
 	case '-':
-	{
-		World *world = World::getInstance();
-		int selectedPolygonIndex = world->getSelectedObjectIndex();
-		if (selectedPolygonIndex != -1)
 		{
-			WorldObject *object = world->objects[selectedPolygonIndex];
-			ObjectTransform::scaleObject(object, 0.9, 0.9, 0.9);
+			World *world = World::getInstance();
+			int selectedPolygonIndex = world->getSelectedObjectIndex();
+			if (selectedPolygonIndex != -1)
+			{
+				WorldObject *object = world->objects[selectedPolygonIndex];
+				ObjectTransform::scaleObject(object, 0.9, 0.9, 0.9);
+			}
+			break;
 		}
-		break;
-	}
+	case 'b':
+		{
+			GraphicsSettings* gset = GraphicsSettings::getSingleton();
+			gset->drawBoundingSphere = !gset->drawBoundingSphere;
+			break;
+		}
 		
 	default:
 		break;

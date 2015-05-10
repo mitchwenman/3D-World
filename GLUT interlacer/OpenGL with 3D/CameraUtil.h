@@ -20,4 +20,4 @@ namespace CameraUtil
 	///@param cam The camera to be moved
 	///@param scalar The amount of movement
 	void MoveCamera(Camera *cam, double scalar);
-}
+};

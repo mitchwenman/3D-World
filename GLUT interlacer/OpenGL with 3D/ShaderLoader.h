@@ -20,4 +20,4 @@ namespace ShaderLoader
 
 	//! Creates a shader program by linking s
 	unsigned int link(unsigned int vertexShader, unsigned int fragmentShader);
-}
+};

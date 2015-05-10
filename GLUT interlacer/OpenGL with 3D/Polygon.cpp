@@ -21,7 +21,8 @@ void PolygonWorldObject::draw()
 		glUseProgram(0);
 	
 	WaveFrontPolygonDrawer::draw(*this->polygon);
-	glutWireSphere(boundingSphere.radius, 16, 16);
+	if (GraphicsSettings::getSingleton()->drawBoundingSphere)
+		glutWireSphere(boundingSphere.radius, 16, 16);
 }
 
 PolygonWorldObject::PolygonWorldObject(WaveFrontPolygon* polygon,

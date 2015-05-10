@@ -30,4 +30,4 @@ namespace ObjectTransform
 	//! @param dz The z axis scale factor.
 	void scaleObject(WorldObject *object, double sx, double sy, double sz);
 
-}
+};

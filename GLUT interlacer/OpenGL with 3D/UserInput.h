@@ -14,4 +14,4 @@ namespace UserInput
 	//! @param x The x coordindate of the mouse when the key was pressed.
 	//! @param The y coordinate of the mouse when the key was pressed.
 	void handleSpecialKeyInput(unsigned char c, int x, int y);
-}
+};

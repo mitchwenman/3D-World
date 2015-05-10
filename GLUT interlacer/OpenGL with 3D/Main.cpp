@@ -80,7 +80,7 @@ void init()
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
 	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
-	world->insertObject(hm);	
+	world->heightMap = hm;
 
 	//Table
 	TangentPolygonWorldObject *table = new TangentPolygonWorldObject(poly, nMap);

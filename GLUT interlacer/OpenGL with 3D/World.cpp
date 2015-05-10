@@ -26,6 +26,12 @@ void World::draw()
 	Camera* cam = Camera::getSingleton();
 	gset->resetModelView();
 	cam->setCamera();
+	if (this->heightMap)
+	{
+		heightMap->draw();
+		gset->resetModelView();
+		cam->setCamera();
+	}
 	if (maze != NULL)
 	{
 		maze->render(cam->getEye(), cam->getAngle(), 85);

@@ -14,4 +14,4 @@ namespace WaveFrontPolygonDrawer
 	//! this method also passes the polygon's surface tangents to openGL via a glColour pointer.
 	//! @param polygon The polygon to be draw.
 	void drawNormalMapPolygon(TangentWaveFrontPolygon polygon);
-}
+};

@@ -10,7 +10,7 @@ static GraphicsSettings* _instance;
 #include "libs\glm\ext.hpp"
 #include "Camera.h"
 
-GraphicsSettings::GraphicsSettings() {};
+GraphicsSettings::GraphicsSettings() : drawBoundingSphere(false) {};
 
 GraphicsSettings* GraphicsSettings::getSingleton()
 {
