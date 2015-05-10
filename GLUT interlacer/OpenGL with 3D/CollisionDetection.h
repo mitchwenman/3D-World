@@ -6,7 +6,7 @@ namespace CollisionDetection
 {
 	bool objectCollidesWithWorld(WorldObject *object);
 
-	bool camCollidesWithWorld();
+	bool cameraCollidesWithWorld();
 
 	bool objectCollidesWithWalls(WorldObject *object);
 

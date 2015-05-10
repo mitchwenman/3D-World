@@ -1,6 +1,7 @@
 #include "CameraUtil.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtc\matrix_transform.hpp"
+#include "CollisionDetection.h"
 
 Vertex3 CameraUtil::calculateRightEye(Camera cam, double eyeDist)
 {
@@ -48,8 +49,12 @@ void CameraUtil::MoveCamera(Camera *cam, double scalar)
 		double lx = sin(angle);
 		double lz = -cos(angle);
 		//Move both eye and lookAt along same path
-		Vertex3 eye = cam->getEye();
-		Vertex3 centre = cam->getCentre();
+		Vertex3 eye, oldEye;
+		eye = oldEye = cam->getEye();
+
+		Vertex3 centre, oldCentre;
+		centre = oldCentre = cam->getCentre();
+
 		Vertex3 up = cam->getUp();
 
 		eye.x += lx * scalar;
@@ -57,6 +62,10 @@ void CameraUtil::MoveCamera(Camera *cam, double scalar)
 		centre.x += lx * scalar;
 		centre.z += lz * scalar;
 		cam->lookAt(eye.x, eye.y, eye.z, centre.x, centre.y, centre.z, up.x, up.y, up.z);
+		if (CollisionDetection::cameraCollidesWithWorld())
+		{
+			cam->lookAt(oldEye.x, oldEye.y, oldEye.z, oldCentre.x, oldCentre.y, oldCentre.z, up.x, up.y, up.z);
+		}
 
 	}
 	

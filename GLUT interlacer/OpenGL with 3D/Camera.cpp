@@ -27,7 +27,8 @@ void Camera::lookAt(double eyex, double eyey, double eyez, double centrex, doubl
 	this->eye = eye;
 	this->center = center;
 	this->up = up;
-	//angle = asin(centrex - eyex);
+	this->boundingSphere.centrePoint = GraphicsUtil::vertex3ToGLMVec3(eye);
+	boundingSphere.radius = .5;
 }
 
 void Camera::moveEye(double eyex, double eyey, double eyez)
@@ -55,10 +56,11 @@ glm::mat4 Camera::getLookAtMatrix()
 
 Camera::Camera()
 {
-	this->lookAt(0, .5, 0, 0, .5, -1, 0, 1, 0);
-	angle = 0.0;
 	this->boundingSphere = *(new TransformableBoundingSphere());
-	boundingSphere.radius = .75;
+	this->lookAt(0, .5, 2, 0, .5, -1, 0, 1, 0);
+	angle = 0.0;
+	
+	
 }
 
 void Camera::setAngle(double angle)

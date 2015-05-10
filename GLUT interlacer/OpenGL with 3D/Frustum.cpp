@@ -4,7 +4,7 @@
 
 static Frustum* _instance;
 
-Frustum::Frustum() : left(-1), right(1), top(1), bottom(-1), nearPlane(1.), farPlane(25)
+Frustum::Frustum() : left(-.75), right(.75), top(1), bottom(-.5), nearPlane(1), farPlane(20)
 {
 	frustumMatrix = glm::frustum(left, right, bottom, top, nearPlane, farPlane);
 }

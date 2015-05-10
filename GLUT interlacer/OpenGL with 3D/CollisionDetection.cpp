@@ -28,9 +28,25 @@ bool CollisionDetection::objectCollidesWithWorld(WorldObject *object)
 	return false;
 }
 
-bool CollisionDetection::camCollidesWithWorld()
+bool CollisionDetection::cameraCollidesWithWorld()
 {
-	//Create object for camera
+	Camera *cam = Camera::getSingleton();
+	if (objectCollidesWithWalls(cam))
+		return true;
+
+	//Check other objects
+	World *world = World::getInstance();
+	std::vector<WorldObject*> objects = world->objects;
+	unsigned int numCollisions = 0;
+	for (std::vector<WorldObject*>::iterator it = objects.begin();
+		it != objects.end(); it++)
+	{
+		if ((*it)->collides(cam))
+		{
+			return true;
+		}
+	}
+	
 	return false;
 }
 
