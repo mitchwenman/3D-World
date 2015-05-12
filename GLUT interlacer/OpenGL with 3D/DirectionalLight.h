@@ -18,12 +18,11 @@ private:
 	Vertex4	diffuse;
 
 public:
-	///Returns the singleton light object
+	//!Returns the singleton light object
 	///@return The singleton Directional Light object.
 	static DirectionalLight* getSingleton();
 
-	///
-	///Calls the openGL lightfv functions with the current matrix.
+	//! Calls the openGL lightfv functions with the member values.
 	void setLight();
 	
 	///Sets the light values, but does not make openGL calls.
