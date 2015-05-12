@@ -74,7 +74,7 @@ void init()
 
 	//Shader programs
 	std::cout << "Loading textures...";
-	SpecularColourMap *grass = new SpecularColourMap("grass.bmp");
+	SpecularColourMap *mars = new SpecularColourMap("Mars.bmp");
 	SpecularColourMap *moonTex = new SpecularColourMap("moon-texture.bmp");
 	SpecularColourMap *earthTex = new SpecularColourMap("earth.bmp");
 	SpecularNormalMap *nMap = new SpecularNormalMap("marble-texture.bmp", "marble-normal.bmp");
@@ -86,7 +86,7 @@ void init()
 	HeightMap *h = new HeightMap();
 	h->loadFromImage("terrain-heightmap-surround.bmp");
 	World* world = world->getInstance();
-	HeightMapWorldObject *hm = new HeightMapWorldObject(h, grass);
+	HeightMapWorldObject *hm = new HeightMapWorldObject(h, mars);
 	world->heightMap = hm;
 	std::cout << "Done." << std::endl;
 
