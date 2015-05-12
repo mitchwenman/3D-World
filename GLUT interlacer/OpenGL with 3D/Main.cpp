@@ -101,8 +101,8 @@ void init()
 	world->insertObject(table);
 	
 	TangentPolygonWorldObject *table2 = new TangentPolygonWorldObject(tableObj, nMap);
-	Vertex4 table2Trans = { 11.0, 3.5, 5, 0 };
-	Transformation *table2Translate = new Transformation(TRANSLATE, tableTrans);
+	Vertex4 table2Trans = { 12.25, .25, 4, 0 };
+	Transformation *table2Translate = new Transformation(TRANSLATE, table2Trans);
 	table2->transformations.push_back(table2Translate);
 	Vertex4 table2Sc = { 2, 2, 2, 0 };
 	Transformation *table2Scale = new Transformation(SCALE, table2Sc);

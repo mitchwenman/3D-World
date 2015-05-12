@@ -24,6 +24,9 @@ public:
 	Maze(std::string mazeFile, TangentWaveFrontPolygon* wall);
 
 	//! Gets the list of polygons the camera can see and draws it.
+	//! @param position The position of the camera in the world.
+	//! @param angle The angle of the camera
+	//! @param fov The field of view.
 	void render(Vertex3 position, double angle, double fov);
 
 	//! Checks if a given object collides with any wall in the maze.
