@@ -5,6 +5,12 @@
 #include "libs\glm\glm.hpp"
 #include "GraphicsUtil.h"
 
+//! A class for representing terrain generated from a height map.
+/*!
+	This class loads and creates a mesh representation of a heightmap, which can later be used
+	for rendering terrain. The heightmap is loaded such that it can be drawn using triangle strips
+	and openGl's primitive restart function. The vertex normals of the heightmap are also calculated.
+*/
 class HeightMap
 {
 public:

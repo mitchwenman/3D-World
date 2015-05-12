@@ -2,6 +2,10 @@
 
 #include "IShaderProgram.h"
 
+//! Extends IShaderProgram. A shader program used to highlight an object on the screen.
+/*
+	This shader program is used by the World class to indicate which object is currently selected by the user.
+*/
 class HighlightShaderProgram : public IShaderProgram
 {
 public:

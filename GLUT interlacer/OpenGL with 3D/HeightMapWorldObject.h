@@ -3,6 +3,12 @@
 #include "WorldObject.h"
 #include "HeightMap.h"
 
+//! A wrapper around a height map pointer.
+/*!
+	This class creates a wrapper around a height map pointer, allowing
+	a set of transformations to be stored with the heightmap. This class also stores
+	the shader program that is used to render the heightmap.
+*/
 class HeightMapWorldObject : public WorldObject
 {
 private:

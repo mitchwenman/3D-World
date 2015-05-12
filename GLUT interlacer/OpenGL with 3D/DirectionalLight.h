@@ -5,13 +5,17 @@
 class DirectionalLight
 {
 private:
-	///Private constructor for the singleton pattern.
-	///
+	///Private constructor for the singleton pattern. Simply instantiates the object. Does not set any values.
 	DirectionalLight() {};
-
+	
+	//! The direction of the light as a vector.
 	Vertex4 direction;
-	Vertex4 ambient,
-			diffuse;
+	
+	//! The ambient colour of the light.
+	Vertex4 ambient;
+
+	//! The diffuse colour of the light.
+	Vertex4	diffuse;
 
 public:
 	///Returns the singleton light object

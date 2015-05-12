@@ -5,6 +5,7 @@
 
 #include "GraphicsUtil.h"
 
+//! A namespace for grouping together functions for setting up directional, point and spotlights.
 namespace Lighting
 {
 	//! Sets up a directional light with the given values.

@@ -31,15 +31,6 @@ void Camera::lookAt(double eyex, double eyey, double eyez, double centrex, doubl
 	boundingSphere.radius = .25;
 }
 
-void Camera::moveEye(double eyex, double eyey, double eyez)
-{
-	eyex += eye.x;
-	eyey += eye.y;
-	eyez += eye.z;
-	angle = asin(this->center.x - this->eye.x);
-	this->lookAt(eyex, eyey, eyez, center.x, center.y, center.z, up.x, up.y, up.z);
-}
-
 void Camera::setCamera()
 {
 	GraphicsSettings::getSingleton()->modelViewMatrix *= this->getLookAtMatrix();

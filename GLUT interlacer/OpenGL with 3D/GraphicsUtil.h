@@ -14,6 +14,7 @@ typedef struct { double x; double y; double z; } Vertex3;
 //! Describes a 2D vertex
 typedef struct { double x; double y; } Vertex2;
 
+//! A namespace for grouping together miscellaneous but useful functions.
 namespace GraphicsUtil
 {
 	//! Converts a Vertex3 to glm vec3
@@ -26,6 +27,9 @@ namespace GraphicsUtil
 	//! @return A Vertex3 equivalent of the vec3
 	Vertex3 GLMVec3ToVertex3(glm::vec3 v);
 
+	//! Converts a value in degrees to radians.
+	//! @param theta The value in degrees.
+	//! @return Theta converted into radians.
 	double degreesToRadians(double theta);
 
 };

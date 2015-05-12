@@ -12,10 +12,11 @@ public:
 	double		left, right, top, bottom,
 				nearPlane, farPlane;
 
+	//! The matrix representing the frustum transformation.
 	glm::mat4 frustumMatrix;
 
 	///Returns the frustum singleton instance
-	///@return the frustum singleton instance
+	///@return The frustum singleton instance
 	static Frustum* getSingleton();
 
 	///Multiplies the projection matrix by the frustum matrix

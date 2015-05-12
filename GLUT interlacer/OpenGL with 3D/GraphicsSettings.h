@@ -16,19 +16,18 @@ public:
 	//! Global option for whether bounding spheres for objects should be drawn
 	bool drawBoundingSphere;
 
-	///Resets the current model view matrix to identity.
-	///Sets GL_MODELVIEW to identity
+	//!Resets the current model view matrix to identity. Also sets GL_MODELVIEW to identity.
 	void resetModelView(); 
 
-	///Resets the current projection view matrix to identity
+	///Resets the current projection view matrix to identity.
 	///Sets GL_PROJECTION to identity.
 	void resetProjectionView();
 
-	///
+
 	///Sets the open gl matrices to the current model view/projection matrices
 	void setGLMatrices();
 
-	///Sets the window dimension variables
+	///Sets the window dimension variables.
 	///@param x The x dimension
 	///@param y The y dimension
 	void setFrameDimensions(int x, int y) { frameDimensions.x = x; frameDimensions.y = y; }
@@ -38,9 +37,7 @@ public:
 	static GraphicsSettings* getSingleton();
 
 private:
-	///
-	///Private constructor for the singleton pattern
-	///Sets up both matrices
+	//!  Private constructor for the singleton pattern. Initialises the model and projection matrices to identity.
 	GraphicsSettings();
 
 };

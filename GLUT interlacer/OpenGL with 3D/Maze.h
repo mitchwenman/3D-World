@@ -11,7 +11,8 @@
 
 //! A class used to represent a maze with walls.
 /*!
-	Handles loading the maze from file and rendering it.
+	Handles loading the maze from file and rendering it. Rendering of the maze uses raycasting in order to only send to openGL
+	the walls that are currently within the user's field of view.
 */
 class Maze
 {
@@ -66,6 +67,20 @@ private:
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> walls;
 
 	//! Uses ray casting to identify walls that are visible to the camera.
+	/*! Pseudocode:
+		@verbatim
+		for (each ray in fov)
+			while (ray within bounds)
+				extend ray using constant x increment
+				if (ray(x,z).isWall())
+					visibleWalls.Add(walls[x,z]) //Add to visible wall list
+			while (ray within bounds)
+				extend ray using constant z increment
+				if (ray(x,z).isWall())
+					visibleWalls.Add(walls[x,z])
+		return visibleWalls			
+		@endverbatim
+	*/
 	//! @param position The position of the camera in the world.
 	//! @param angle The angle of the camera
 	//! @param fov The field of view.
