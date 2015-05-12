@@ -12,6 +12,15 @@ namespace CollisionDetection
 {
 	//! Tests if a particular object collides with any object in the game world, including
 	//! walls, polygons and the camera.
+	/*!
+		Pseudocode:
+		@verbatim
+			if (!objectCollidesWithWorld() && !objectCollidesWithCamera() && !objectCollidesWithObjects())
+				return false
+			else
+				return true
+		@endverbatim
+	*/
 	//! @param object The object that potentially collides with the world and will be tested.
 	//! @returns True if the object collides with any other object, otherwise false.
 	bool objectCollidesWithWorld(WorldObject *object);
@@ -21,11 +30,29 @@ namespace CollisionDetection
 	bool cameraCollidesWithWorld();
 
 	//! Tests if an object collides with any wall in the world's Maze.
+	/*!
+		Pseudocode:
+		@verbatim
+			for (each wall in Maze)
+				if (wall.collides(object))
+					return true
+			return false
+		@endverbatim
+	*/
 	//! @param object The object to be tested for collisions in the Maze.
 	//! @return True if the object collides with a wall in the maze, otherwise false.
 	bool objectCollidesWithWalls(WorldObject *object);
 
 	//! Tests if an object collides with any other polygon in the world (does not include world walls)
+	/*!
+		Pseudocode:
+		@verbatim
+			for (each polygon in World)
+				if (polygon.collides(object))
+					return true
+				return false
+		@endverbatim
+	*/
 	//! @param The object to be tested for collisions.
 	//! @return True if the object collides with another polygon, otherwise false.
 	bool objectCollidesWithObjects(WorldObject *object);

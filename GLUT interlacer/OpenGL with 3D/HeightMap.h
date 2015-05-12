@@ -16,6 +16,21 @@ class HeightMap
 public:
 	//! Generates a heightmap from an image.
 	//! Also calculates normals and texture coordinates.
+	/*!
+		Pseudocode:
+		@verbatim
+			for (i < image.rows)
+				for (j < image.columns)
+					Vertices.add(i * scale, image[i][j] / 64, j * scale)
+					Texture.add(i * texScaleX, j * texScaleZ)
+			calculateNormals()
+			//Build triangle strip
+			for (i < rows - 1)
+				for (j < rows - 1)
+					indices.add(i * columns + j)
+					indices.add((i + 1) * columns + j)
+		@endverbatim
+	*/
 	//! @param path The path to the image used to generate the heightmap.
 	void loadFromImage(std::string path);
 
@@ -61,6 +76,29 @@ private:
 	std::vector<double> tList;
 
 	//! Calculates the normals for every vertex in the heightmap. Puts result in normals.
+	/*! 
+		Pseudocode:
+		@verbatim
+			for (each quad)
+				calculateNormal(leftTriangle)
+				calculateNormal(rightTriangle)
+			for (i < rows)
+				for (j < columns)
+					normal = vec3(0)
+					if (!topRow && !leftColumn)
+						normal += topLeftQuad.RightTriangle.Normal
+					if (!topRow && !rightColumn)
+						normal += topRightQuad.LeftTriangle.Normal
+						normal += topRightQuad.RightTriangle.Normal
+					if (!bottomRow && !leftColumn)
+						normal += bottomLeftQuad.LeftTriangle.Normal
+						normal += bottomRightQuad.RightTriangle.Normal
+					if (!bottomRow && !rightColumn)
+						normal += bottomRightQuad.LeftTriangle.Normal
+					finalNormal = normalise(normal)
+					normals[i][j] = finalNormal					
+		@endverbatim
+	*/
 	void calculateNormals();
 
 };

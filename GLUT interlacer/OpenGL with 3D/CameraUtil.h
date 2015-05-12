@@ -12,6 +12,16 @@ namespace CameraUtil
 	Vertex3 calculateRightEye(Camera cam, double eyeDist);
 
 	///Rotates the camera by a given angle.
+	/*!
+		Pseudocode:
+		@verbatim
+			newAngle = angle + diffAngle
+			lOfSightX = sin(newAngle)
+			lOfSightZ = -cos(newAngle)
+			cam.centre.x = cam.eye.x + lOfSightX
+			cam.centre.z = cam.eye.z + lOfSightZ
+		@endverbatim
+	*/
 	///@param cam The camera to be rotated.
 	///@param diffAngle The angle to be rotated.
 	void RotateCamera(Camera *cam, double diffAngle);

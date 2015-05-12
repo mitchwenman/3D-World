@@ -20,6 +20,16 @@ class Maze
 public:
 	//! Constructor for the maze object. Reads a maze from file and creates
 	//! a representation of it.
+	/*!
+		Pseudocode:
+		@verbatim
+			vector<vector<bool> boolMaze loadMaze(file)
+			for (i < rows)
+				for (j < columns)
+					if (boolMaze[i][j])
+						walls.Add([i, j], wallPolygon) //Add wall for coordinate key
+		@endverbatim
+	*/
 	//! @param mazeFile The path to the file describing the maze.
 	//! @param wall The polygon that will be used to render a wall unit.
 	Maze(std::string mazeFile, TangentWaveFrontPolygon* wall);

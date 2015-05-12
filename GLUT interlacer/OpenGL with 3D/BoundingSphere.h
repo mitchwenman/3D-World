@@ -23,6 +23,13 @@ public:
 
 	//! Tests whether the bounding sphere collides with another bounding sphere. This is calculated
 	//! by checking if the sum of the radii is greater than the distance between the two centre points.
+	/*!
+		Pseudocode:
+		@vertbatim
+			radiiSum = this.radius + otherSphere.radius
+			return (otherSphere.centrePoint - this.centrePoint < radiiSum)
+		@endverbatim
+	*/
 	//! @param otherSphere The other sphere which potentionally intersects/collides with this bounding sphere.
 	//! @return True if otherSphere collides with this bounding sphere, else false.
 	bool collides(BoundingSphere otherSphere);
@@ -38,6 +45,19 @@ public:
 	//! Creates a bounding sphere by calculating the centre point and radius of a given polygon.
 	//! Uses a bounding box to find the centre. The vertex from the bounding box with the greatest distance from the centre point
 	//! is used to calculate the radius.
+	/*!
+		Pseudocode:
+		@verbatim
+			box = createBoundingBox(polygon)
+			centre = box.center
+			maxXCoordinateDist = max(box.minXCoordFromCenter, box.maxXCoordFromCenter)
+			maxYCoordinateDist = max(box.minYCoordFromCenter, box.maxYCoordFromCenter)
+			maxZCoordinateDist = max(box.minZCoordFromCenter, box.maxZCoordFromCenter)
+
+			maxCoordFromCenter = max(maxXCoordinateDist, maxYCoordinateDist, maxZCoordinateDist)
+			radius = magnitude(maxCoordFromCenter)
+		@endverbatim	
+	*/
 	//! @param polygon The polygon that the bounding sphere will be calculated from.
 	BoundingSphere(WaveFrontPolygon polygon);
 
@@ -74,6 +94,20 @@ public:
 
 	//! Transforms the worldMatrix, radius and centre point of the bounding sphere and sets these values in
 	//! worldRadius and worldSpaceCentrePoint. 
+	/*! Pseudocode:
+		@verbatim
+		worldRadius = radius
+		worldCenterPoint = centerPoint
+		for (each transformation)
+			if (TRANSLATE)
+				translate(worldMatrix)
+			else if (SCALE)
+				scale(worldRadius)
+			else if (ROTATE)
+				rotate(worldMatrix)
+			worldCenterPoint = worldMatrix * centerPoint
+		@endverbatim
+	*/
 	//! @param transforms The set of transforms to be applied to the bounding sphere.
 	void setTransform(std::vector<Transformation *> transforms);
 

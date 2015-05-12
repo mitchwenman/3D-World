@@ -22,6 +22,13 @@ public:
 	double rate;
 
 	//! Applies the animationValues to the base transformation values if the time specified by rate has passed since the last update.
+	/*! Pseudocode:
+		@verbatim
+			interval = GetCurrentTime() - lastUpdated
+			if (interval > rate)
+				this.values += animationValues
+		@endvertbatim
+	*/
 	void apply();
 
 	//! Constructor for the object.
