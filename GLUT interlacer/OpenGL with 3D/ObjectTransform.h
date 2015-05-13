@@ -10,7 +10,7 @@
 namespace ObjectTransform
 {
 	//! Adds a (or modifies an existing) translation transformation to an object.
-	/*
+	/*!
 		Pseudocode:
 		@verbatim
 			Transformation translate
@@ -32,7 +32,7 @@ namespace ObjectTransform
 	void translateObject(WorldObject *object, double dx, double dy, double dz);
 
 	//! Adds a (or modifies an existing) rotation transformation to an object.
-	/*
+	/*!
 		Pseudocode:
 		@verbatim
 			Transformation rotate
@@ -57,7 +57,7 @@ namespace ObjectTransform
 	void rotateObject(WorldObject *object, double angle, double dx, double dy, double dz);
 
 	//! Adds a (or modifies an existing) scale transformation to an object.
-	/*
+	/*!
 		Pseudocode:
 		@verbatim
 			Transformation scale

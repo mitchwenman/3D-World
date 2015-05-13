@@ -27,7 +27,7 @@ public:
 			interval = GetCurrentTime() - lastUpdated
 			if (interval > rate)
 				this.values += animationValues
-		@endvertbatim
+		@endverbatim
 	*/
 	void apply();
 
