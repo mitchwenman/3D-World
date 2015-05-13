@@ -13,12 +13,13 @@
 class Texture
 {
 public:
-	///Constructor
-	///@param textureTarget TEXTURE_2D, TEXTURE_3D etc.
-	///@param file The BMP file of the texture.
+	//! Loads the image from file and creates an openGL texture from it.
+	//! @param textureTarget TEXTURE_2D, TEXTURE_3D etc.
+	//! @param file The BMP file of the texture.
 	Texture(GLenum textureTarget, std::string file);
 
-	///Binds this texture to the active texture GL_TEXTURE0
+	//! Binds this texture as the active texture for unit textureUnit
+	//! @param textureUnit The openGL texture unit to bind the texture to.
 	void bind(GLenum textureUnit);
 
 private:
@@ -34,8 +35,8 @@ private:
 	//! Number of rows, number of columns in image
 	int rows, columns;
 
-	///Loads a BMP and generates a texture from it .
-	///@param file The BMP image.
+	//! Loads a BMP and generates a texture from it .
+	//! @param file The BMP image.
 	void loadFromPath(std::string file);
 
 	

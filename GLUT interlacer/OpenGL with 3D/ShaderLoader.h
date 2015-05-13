@@ -18,6 +18,9 @@ namespace ShaderLoader
 	//! return The shader id returned by glCreateShader.
 	unsigned int compile(std::string file, int shaderType);
 
-	//! Creates a shader program by linking s
+	//! Creates a shader program by linking the vertex and fragment shader
+	//! @param vertexShader The openGL ID of the compiled vertex shader.
+	//! @param fragmentShader The openGL ID of the fragment shader.
+	//! @return The ID of the linked shader program provided by openGL.
 	unsigned int link(unsigned int vertexShader, unsigned int fragmentShader);
 };

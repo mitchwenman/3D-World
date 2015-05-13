@@ -60,6 +60,18 @@ public:
 	//! Increments currently selected object. Replaces the previously selected object's shader program,
 	//! increments selectedObject and takes a copy of the selected object's shader program before replacing it with hightlightShader.
 	//! If the currently selected object is at the back of the object list, then selected object is set to -1.
+	/*!
+		Pseudocode:
+		@verbatim
+			if (index != -1)
+				replaceShaderProgram(polygons[index])
+			index++
+			if (index == polygons.size())
+				index = -1
+				break
+			swapShaderProgram(polygons[index], highlightShaderProgram)
+		@endverbatim
+	*/
 	void toggleSelectedObject();
 
 	//! Gets the index of the currently selected object.

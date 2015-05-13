@@ -29,6 +29,19 @@ public:
 	//! First applies the set of transformations in transformations.
 	void draw();
 
+	//! Tests whether this polygon collides with another object using bounding spheres.
+	/*!
+		Pseudocode:
+		@verbatim
+			thisBoundingSphere.setTransformations(this.transformations)
+			objectBoundingSphere.setTranformations(objectTransformations)
+			thisTransformedSphere = thisBoundingSphere.transform()
+			objectTransformedSphere = objectBoundingSphere.transform()
+			return collides(thisTransformedSphere, objectTransformedSphere)
+		@endverbatim
+	*/
+	//! @param object The other object to be tested for a collision.
+	//! @return True if the object collides with this polygon, else false.
 	bool collides(WorldObject *object);
 
 };

@@ -21,5 +21,14 @@ public:
 
 	//! Binds the texture and invokes glUseProgram. Must be called prior to drawing the object.
 	//! All future draw calls will use this program (until another is used).
+	/*!
+		Pseudocode:
+		@verbatim
+			bindTexture()
+			passTextureSampler()
+			passLightUniform()
+			passCameraMatrix()
+		@endverbatim
+	*/
 	void useProgram();
 };

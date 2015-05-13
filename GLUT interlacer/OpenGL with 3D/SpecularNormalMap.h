@@ -23,6 +23,17 @@ public:
 
 	//! Binds both texture files and invokes glUseProgram. Must be called prior to drawing the object.
 	//! All future draw calls will use this program (until another is used).
+	/*!
+		Pseudocode:
+		@verbatim
+			bindTexture(colourMap)
+			setSamplerUniform(colourMap)
+			bindTexture(normalMap)
+			setSamplerUniform(normalMap)
+			setLightUniform()
+			setCameraMatrixUniform()
+		@endverbatim
+	*/
 	void useProgram();
 
 };

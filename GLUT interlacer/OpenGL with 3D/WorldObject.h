@@ -21,6 +21,7 @@ public:
 	//! The shader program to be used when drawing the object.
 	IShaderProgram* shaderProgram;
 
+	//! The bounding sphere to be used for collision detect for the object
 	TransformableBoundingSphere boundingSphere;
 	
 	//! Virtual method to draw the object. To be implemented by the subclass.
