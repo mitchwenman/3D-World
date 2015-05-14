@@ -51,6 +51,7 @@ namespace ObjectTransform
 		@endverbatim
 	*/
 	//! @param object The object to be modified.
+	//! @param angle The angle of the rotation.
 	//! @param dx The x axis rotation.
 	//! @param dy The y axis rotation.
 	//! @param dz The z axis rotation.
@@ -73,9 +74,9 @@ namespace ObjectTransform
 		@endverbatim
 	*/
 	//! @param object The object to be modified.
-	//! @param dx The x axis scale factor.
-	//! @param dy The y axis scale factor.
-	//! @param dz The z axis scale factor.
+	//! @param sx The x axis scale factor.
+	//! @param sy The y axis scale factor.
+	//! @param sz The z axis scale factor.
 	void scaleObject(WorldObject *object, double sx, double sy, double sz);
 
 };

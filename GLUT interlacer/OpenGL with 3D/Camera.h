@@ -14,7 +14,8 @@ private:
 	//! Angle between the eye and center vectors, offset by -90 degrees.
 	double angle; 
 
-	//! Creates a camera with the following values: eye(5.5, .5, 9) center(5.5, .5, 8), up(0, 1, 0)
+	//! Creates a camera with the following values: eye(5.5, .5, 9) center(5.5, .5, 8), up(0, 1, 0). These values are the starting position for the game.
+	//! Creates the "look at" matrix but does not set it until setCamera() is called.
 	Camera();
 
 public:
@@ -29,7 +30,7 @@ public:
 	///@param upx, upy, upz The up vector.
 	void lookAt(double eyex, double eyey, double eyez, double centrex, double centrey, double centrez, double upx, double upy, double upz );
 
-	///Multiplies the model view matrix by the current camera values
+	///Multiplies the model view matrix by the current camera "look at" matrix
 	void setCamera();
 
 	///Gets the current camera matrix

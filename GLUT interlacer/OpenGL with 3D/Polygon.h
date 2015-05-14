@@ -19,7 +19,7 @@ public:
 
 	//! Constructor the class.
 	//! @param polygon The actual polygon to be rendered.
-	//! @shaderProgram The shader program to be used when rendering the object.
+	//! @param shaderProgram The shader program to be used when rendering the object.
 	//! @param trans A set of transformations to be applied to the object before rendering.
 	PolygonWorldObject(WaveFrontPolygon* polygon,
 						IShaderProgram* shaderProgram = NULL, 

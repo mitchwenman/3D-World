@@ -4,7 +4,6 @@
 #include <string>
 
 //! A namespace for grouping together functions related to reading a Maze from file.
-
 namespace MazeReader
 {
 	//! Reads a maze file at the given path and constructs
@@ -20,6 +19,7 @@ namespace MazeReader
 					else 
 						vector[i][j] = false
 		return vector
+		@endverbatim
 	*/
 	//! @param path The path to the file.
 	//! @returns A 2D vector of booleans, where true represents a wall at position i,j.

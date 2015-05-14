@@ -53,7 +53,7 @@ namespace CollisionDetection
 				return false
 		@endverbatim
 	*/
-	//! @param The object to be tested for collisions.
+	//! @param object The object to be tested for collisions.
 	//! @return True if the object collides with another polygon, otherwise false.
 	bool objectCollidesWithObjects(WorldObject *object);
 

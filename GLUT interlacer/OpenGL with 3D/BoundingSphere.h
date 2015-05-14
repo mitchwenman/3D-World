@@ -25,7 +25,7 @@ public:
 	//! by checking if the sum of the radii is greater than the distance between the two centre points.
 	/*!
 		Pseudocode:
-		@vertbatim
+		@verbatim
 			radiiSum = this.radius + otherSphere.radius
 			return (otherSphere.centrePoint - this.centrePoint < radiiSum)
 		@endverbatim

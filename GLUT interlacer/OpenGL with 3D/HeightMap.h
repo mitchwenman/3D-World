@@ -29,6 +29,7 @@ public:
 				for (j < rows - 1)
 					indices.add(i * columns + j)
 					indices.add((i + 1) * columns + j)
+			indices.add(row * columns) //Add primitive restart index
 		@endverbatim
 	*/
 	//! @param path The path to the image used to generate the heightmap.
