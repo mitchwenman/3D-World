@@ -76,7 +76,7 @@ std::vector<TangentPolygonWorldObject*> Maze::rayCast(Vertex3 position, double a
 		double fovInRadians = GraphicsUtil::degreesToRadians(fov);
 		double leftArc = viewAngle + (fovInRadians / 2); //Create ray arc
 		double rightArc = viewAngle - (fovInRadians / 2);
-		double angleIncrement =  (leftArc - rightArc) / fov;
+		double angleIncrement = (leftArc - rightArc) / 600;
 
 		for (double ray = rightArc; ray <= leftArc; ray += angleIncrement)
 		{
