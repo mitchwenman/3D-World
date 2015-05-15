@@ -51,15 +51,14 @@ MazeWalker::MazeWalker(WaveFrontPolygon *polygon, IShaderProgram *program, Maze*
 
 glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 {
-	return position;
-
+	return position + glm::vec3(0, 1, 0);
 }
 
 Animation* MazeWalker::createAnimation(glm::vec3 position, glm::vec3 target)
 {
 	Vertex4 baseValues = { position.x, position.y, position.z, 0 };
-	Vertex4 aniValues = { (target.x - position.x) / 10, 0, (target.z - position.z) / 10, 0 };
-	Animation *ani = new Animation(TRANSLATE, baseValues, 50, aniValues);
+	Vertex4 aniValues = { (target.x - position.x) / 10, (target.y - position.y) / 10, (target.z - position.z) / 10, 0 };
+	Animation *ani = new Animation(TRANSLATE, baseValues, 1000, aniValues);
 	return ani;
 }
 
@@ -73,5 +72,8 @@ void MazeWalker::draw()
 		//Calculate path to target
 
 		//Update transformation
+	// Check if it made it to target
+		
+	//Snap to target
 	PolygonWorldObject::draw();
 }
