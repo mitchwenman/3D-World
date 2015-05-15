@@ -146,7 +146,8 @@ void init()
 	Vertex4 earthTransVals = { 0, 3.5, 0, 0 };
 	Transformation *earthTrans = new Transformation(TRANSLATE, earthTransVals);
 	earthWO->transformations.push_back(earthTrans);
-	earthWO->transformations.push_back(ani);
+	Animation *earthAni = new Animation(ROTATE, values, 50, aniValues);
+	earthWO->transformations.push_back(earthAni);
 
 	moonWO->boundingSphere.setTransform(moonWO->transformations);
 	earthWO->boundingSphere.setTransform(earthWO->transformations);
