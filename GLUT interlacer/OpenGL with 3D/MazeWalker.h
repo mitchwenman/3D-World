@@ -31,6 +31,8 @@ private:
 
 	Animation* createAnimation(glm::vec3 position, glm::vec3 target);
 
+	bool isAtTarget(glm::vec3 position, glm::vec3 target);
+
 public:
 	void draw();
 

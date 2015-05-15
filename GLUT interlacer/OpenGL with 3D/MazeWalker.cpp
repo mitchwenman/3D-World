@@ -51,7 +51,7 @@ MazeWalker::MazeWalker(WaveFrontPolygon *polygon, IShaderProgram *program, Maze*
 
 glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 {
-	return position + glm::vec3(0, 1, 0);
+	return position + glm::vec3(1, 1, 1);
 }
 
 Animation* MazeWalker::createAnimation(glm::vec3 position, glm::vec3 target)
@@ -62,18 +62,33 @@ Animation* MazeWalker::createAnimation(glm::vec3 position, glm::vec3 target)
 	return ani;
 }
 
+bool MazeWalker::isAtTarget(glm::vec3 position, glm::vec3 target)
+{
+	double xDiff = target.x - position.x;
+	double zDiff = target.z - position.z;
+	return xDiff < 0.1 && zDiff < 0.1;
+}
 
 void MazeWalker::draw()
 {
 	//Check for collisions
-		
+	if (false) 
+	{
 		//Get adjacent position
 
 		//Calculate path to target
 
 		//Update transformation
-	// Check if it made it to target
-		
-	//Snap to target
+	}	
+	//Snap to target if close to target
+	else if (isAtTarget(position, target))
+	{
+		position = target;
+		target = getTargetForPosition(position);
+		delete(movingAnimation);
+		movingAnimation = createAnimation(position, target);
+		transformations[0] = movingAnimation;
+
+	}
 	PolygonWorldObject::draw();
 }
