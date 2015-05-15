@@ -51,6 +51,13 @@ public:
 	//! The Z offset to draw the maze
 	double zOffset;
 
+	//! The 2D vector representing the maze
+	std::vector<std::vector<bool>> maze;
+
+	int getRows() { return rows; }
+
+	int getColumns() { return columns; }
+
 private:
 	//! The width of the wall
 	static const int WALL_WIDTH = 1;
@@ -71,8 +78,7 @@ private:
 	//! The object that is drawn if seen 
 	TangentWaveFrontPolygon* wall;
 
-	//! The 2D vector representing the maze
-	std::vector<std::vector<bool>> maze;
+	
 
 	//! The walls in the map
 	std::map<std::pair<int, int>, TangentPolygonWorldObject*> walls;

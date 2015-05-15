@@ -1,3 +1,5 @@
+#pragma once
+
 #include "WorldObject.h"
 #include "WaveFrontPolygon.h"
 #include "BoundingSphere.h"

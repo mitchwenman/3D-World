@@ -46,6 +46,7 @@
 #include "HighlightShaderProgram.h"
 #include "Maze.h"
 #include "Animation.h"
+#include "MazeWalker.h"
 
 
 //----------------- globals ------------------------------------
@@ -159,6 +160,10 @@ void init()
 	//Maze
 	Maze *maze = new Maze("Maze.txt", cube);
 	world->maze = maze;
+
+	//Maze walker
+	MazeWalker *mazeWalker = new MazeWalker(cube, crateTexture, maze);
+	world->objects.push_back(mazeWalker);
 
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();

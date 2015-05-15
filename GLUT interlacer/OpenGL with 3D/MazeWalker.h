@@ -7,12 +7,19 @@
 #include "libs\glm\glm.hpp"
 #include "Animation.h"
 
-class MazeWalker : PolygonWorldObject
+#include <vector>
+#include <map>
+#include <utility>
+
+class MazeWalker : public PolygonWorldObject
 {
 private:
-	WaveFrontPolygon* polygon;
+
+	WaveFrontPolygon *polygon;
 	
 	Maze *maze;
+
+	std::map<std::pair<int, int>, void*> positions;
 
 	glm::vec3 position;
 
