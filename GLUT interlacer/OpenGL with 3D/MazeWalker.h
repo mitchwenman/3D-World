@@ -27,6 +27,10 @@ private:
 
 	Animation* movingAnimation;
 
+	glm::vec3 getTargetForPosition(glm::vec3 position);
+
+	Animation* createAnimation(glm::vec3 position, glm::vec3 target);
+
 public:
 	void draw();
 

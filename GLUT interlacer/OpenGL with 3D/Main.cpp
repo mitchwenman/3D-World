@@ -162,9 +162,8 @@ void init()
 	world->maze = maze;
 
 	//Maze walker
-	MazeWalker *mazeWalker = new MazeWalker(cube, crateTexture, maze);
-	world->objects.push_back(mazeWalker);
-
+	MazeWalker *mazeWalker = new MazeWalker(cube, crateTexture, maze); //Inserts itself into the world
+	
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
 	Vertex4 position = { -50, -50, -100 , 0 };
