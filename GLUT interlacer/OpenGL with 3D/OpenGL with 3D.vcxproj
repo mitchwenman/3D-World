@@ -87,6 +87,7 @@
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="GraphicsUtil.cpp" />
     <ClCompile Include="HeightMap.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="CameraUtil.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="Frustum.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="GraphicsUtil.h" />
     <ClInclude Include="HeightMap.h" />

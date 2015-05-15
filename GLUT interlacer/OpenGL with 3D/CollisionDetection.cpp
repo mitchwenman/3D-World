@@ -2,6 +2,7 @@
 #include "World.h"
 #include "Camera.h"
 #include "GraphicsUtil.h"
+#include "Game.h"
 
 bool CollisionDetection::objectCollidesWithWorld(WorldObject *object)
 {
@@ -31,6 +32,9 @@ bool CollisionDetection::objectCollidesWithWorld(WorldObject *object)
 bool CollisionDetection::cameraCollidesWithWorld()
 {
 	Camera *cam = Camera::getSingleton();
+	Game* game = Game::getInstance();
+	if (!game->insideBoundary(cam->getEye()))
+		return true;
 	if (objectCollidesWithWalls(cam))
 		return true;
 

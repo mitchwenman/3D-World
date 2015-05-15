@@ -34,7 +34,7 @@ void World::draw()
 	}
 	if (maze != NULL)
 	{
-		maze->render(cam->getEye(), cam->getAngle(), 120);
+		maze->render(cam->getEye(), cam->getAngle(), 85);
 		gset->resetModelView();
 		cam->setCamera();
 	}
