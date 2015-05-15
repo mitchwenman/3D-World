@@ -99,6 +99,7 @@
     <ClCompile Include="MaterialData.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeReader.cpp" />
+    <ClCompile Include="MazeWalker.cpp" />
     <ClCompile Include="ModelTransform.cpp" />
     <ClCompile Include="ObjectTransform.cpp" />
     <ClCompile Include="Polygon.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="MaterialData.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="MazeReader.h" />
+    <ClInclude Include="MazeWalker.h" />
     <ClInclude Include="ModelTransform.h" />
     <ClInclude Include="ObjectTransform.h" />
     <ClInclude Include="Polygon.h" />
