@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "GraphicsUtil.h"
 #include "Game.h"
+#include <iostream>
 
 bool CollisionDetection::objectCollidesWithWorld(WorldObject *object)
 {

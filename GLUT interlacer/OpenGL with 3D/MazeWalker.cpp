@@ -6,7 +6,7 @@
 
 #include <cstdlib>
 #include <Windows.h>
-
+#include <iostream>
 
 MazeWalker::MazeWalker(WaveFrontPolygon *polygon, IShaderProgram *program, Maze* maze) : 
 								PolygonWorldObject(polygon, program) , maze(maze)
@@ -114,18 +114,18 @@ void MazeWalker::draw()
 		target = getTargetForPosition(position);
 		delete(movingAnimation);
 		movingAnimation = createAnimation(position, target);
-		transformations[0] = movingAnimation;
+		
 
 	}
-	movingAnimation->apply();	
+	movingAnimation->apply();
+	this->transformations[0] = movingAnimation;
 	if (CollisionDetection::objectCollidesWithCamera(this) ||
 		CollisionDetection::objectCollidesWithObjects(this))
 	{
 			target = getTargetForPosition(position);
 			delete(movingAnimation);
 			movingAnimation = createAnimation(position, target);
-			//Apply so we can check collision again
-		
+			transformations[0] = movingAnimation;
 		
 	}
 	GraphicsSettings::getSingleton()->setGLMatrices();
