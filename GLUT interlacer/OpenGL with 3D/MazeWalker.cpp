@@ -58,34 +58,22 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 	std::pair<int, int> mazeCoord(mazePos.second, mazePos.first); //Z axis is rows
 	
 	std::vector<std::pair<int, int>> possibleTargets;
-	//Top left
-	std::pair<int, int> topLeft(mazeCoord.first - 1, mazeCoord.second - 1);
-	if (positions.count(topLeft) == 1)
-		possibleTargets.push_back(topLeft);
+
 	//Above
 	std::pair<int, int> above(mazeCoord.first - 1, mazeCoord.second);
 	if (positions.count(above) == 1)
 		possibleTargets.push_back(above);
-	//Top right
-	std::pair<int, int> topRight(mazeCoord.first - 1, mazeCoord.second + 1);
-	if (positions.count(topRight) == 1)
-		possibleTargets.push_back(topRight);
+
 	//Right
 	std::pair<int, int> right(mazeCoord.first, mazeCoord.second + 1);
 	if (positions.count(right) == 1)
 		possibleTargets.push_back(right);
-	//Bottom right
-	std::pair<int, int> bottomRight(mazeCoord.first + 1, mazeCoord.second + 1);
-	if (positions.count(bottomRight) == 1)
-		possibleTargets.push_back(bottomRight);
+
 	//Bottom
 	std::pair<int, int> bottom(mazeCoord.first + 1, mazeCoord.second);
 	if (positions.count(bottom) == 1)
 		possibleTargets.push_back(bottom);
-	//Bottom left
-	std::pair<int, int> bottomLeft(mazeCoord.first + 1, mazeCoord.second - 1);
-	if (positions.count(bottomLeft) == 1)
-		possibleTargets.push_back(bottomLeft);
+
 	//Left
 	std::pair<int, int> left(mazeCoord.first, mazeCoord.second - 1);
 	if (positions.count(left) == 1)
@@ -109,20 +97,28 @@ bool MazeWalker::isAtTarget(glm::vec3 position, glm::vec3 target)
 {
 	double xDiff = abs(target.x - position.x);
 	double zDiff = abs(target.z - position.z);
-	return xDiff < 0.05 && zDiff < 0.05;
+	return xDiff < 0.01 && zDiff < 0.01;
 }
 
 void MazeWalker::draw()
 {
 	position = glm::vec3(movingAnimation->values.x, movingAnimation->values.y, movingAnimation->values.z);
 	//Check for collisions
-	if (false) 
+	if (CollisionDetection::objectCollidesWithObjects(this)) 
 	{
-		//Get adjacent position
+		do
+		{
+			//Get adjacent position
+			Vertex4 aniValues = movingAnimation->animationValues;
+			position -= glm::vec3(aniValues.x, aniValues.y, aniValues.z);
+			target = getTargetForPosition(position);
+			delete(movingAnimation);
+			movingAnimation = createAnimation(position, target);
+			transformations[0] = movingAnimation;
+			//Calculate path to target
 
-		//Calculate path to target
-
-		//Update transformation
+			//Update transformation
+		} while (CollisionDetection::objectCollidesWithObjects(this));
 	}	
 	
 	//Snap to target if close to target

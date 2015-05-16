@@ -162,7 +162,8 @@ void init()
 	world->maze = maze;
 
 	//Maze walker
-	MazeWalker *mazeWalker = new MazeWalker(cube, crateTexture, maze); //Inserts itself into the world
+	IShaderProgram *program = new SpecularNormalMap("brickwork-texture.bmp", "brickwork-normal.bmp");
+	MazeWalker *mazeWalker = new MazeWalker(cube, program, maze); //Inserts itself into the world
 	
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
