@@ -15,8 +15,6 @@ class MazeWalker : public PolygonWorldObject
 {
 private:
 
-	WaveFrontPolygon *polygon;
-	
 	Maze *maze;
 
 	std::map<std::pair<int, int>, void*> positions;

@@ -80,3 +80,16 @@ bool CollisionDetection::objectCollidesWithObjects(WorldObject *object)
 	}
 	return numCollisions == 2;
 }
+
+bool CollisionDetection::objectCollidesWithCamera(WorldObject *object)
+{
+	Camera* cam = Camera::getSingleton();
+	glm::vec3 eye = GraphicsUtil::vertex3ToGLMVec3(cam->getEye());
+	BoundingSphere camSphere = cam->boundingSphere;
+	camSphere.centrePoint = eye;
+	object->boundingSphere.setTransform(object->transformations);
+	BoundingSphere *objSphere = object->boundingSphere.transform();
+	bool collidesWithCam = camSphere.collides(*objSphere);
+	delete(objSphere);
+	return collidesWithCam;
+}

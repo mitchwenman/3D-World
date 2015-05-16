@@ -162,9 +162,14 @@ void init()
 	world->maze = maze;
 
 	//Maze walker
-	IShaderProgram *program = new SpecularNormalMap("brickwork-texture.bmp", "brickwork-normal.bmp");
+	IShaderProgram *program = new SpecularColourMap("brickwork-texture.bmp");
 	MazeWalker *mazeWalker = new MazeWalker(cube, program, maze); //Inserts itself into the world
-	
+	MazeWalker *mazeWalker2 = new MazeWalker(cube, program, maze);
+	MazeWalker* mazeWalker3 = new MazeWalker(cube, program, maze);
+	new MazeWalker(cube, program, maze);
+	new MazeWalker(cube, program, maze);
+
+
 	//Setup light
 	DirectionalLight *dirLight = DirectionalLight::getSingleton();
 	Vertex4 position = { -50, -50, -100 , 0 };

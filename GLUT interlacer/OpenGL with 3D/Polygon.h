@@ -13,7 +13,7 @@
 */
 class PolygonWorldObject : public WorldObject
 {
-private:
+protected:
 	//! The actual polygon to be rendered. Must not be null.
 	WaveFrontPolygon* polygon;
 

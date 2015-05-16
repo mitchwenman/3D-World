@@ -57,4 +57,6 @@ namespace CollisionDetection
 	//! @return True if the object collides with another polygon, otherwise false.
 	bool objectCollidesWithObjects(WorldObject *object);
 
+	bool objectCollidesWithCamera(WorldObject *object);
+
 };

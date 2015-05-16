@@ -1,7 +1,8 @@
 #include "MazeWalker.h"
 #include "CollisionDetection.h"
 #include "World.h"
-
+#include "GraphicsSettings.h"
+#include "WaveFrontPolygonDrawer.h"
 
 #include <cstdlib>
 #include <Windows.h>
@@ -79,6 +80,9 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 	if (positions.count(left) == 1)
 		possibleTargets.push_back(left);
 
+	if (possibleTargets.size() == 0)
+		return position;
+	possibleTargets.push_back(mazeCoord);
 	int nextTargetIndex = rand() % possibleTargets.size();
 	std::pair<int, int> nextTargetCoord = possibleTargets[nextTargetIndex];
 	glm::vec3 nextTarget = glm::vec3(nextTargetCoord.second + xOff, 0.5, nextTargetCoord.first + zOff);
@@ -88,8 +92,8 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 Animation* MazeWalker::createAnimation(glm::vec3 position, glm::vec3 target)
 {
 	Vertex4 baseValues = { position.x, position.y, position.z, 0 };
-	Vertex4 aniValues = { (target.x - position.x) / 20, (target.y - position.y) / 20, (target.z - position.z) / 20, 0 };
-	Animation *ani = new Animation(TRANSLATE, baseValues, 50, aniValues);
+	Vertex4 aniValues = { (target.x - position.x) / 50, (target.y - position.y) / 50, (target.z - position.z) / 50, 0 };
+	Animation *ani = new Animation(TRANSLATE, baseValues, 10, aniValues);
 	return ani;
 }
 
@@ -102,27 +106,9 @@ bool MazeWalker::isAtTarget(glm::vec3 position, glm::vec3 target)
 
 void MazeWalker::draw()
 {
-	position = glm::vec3(movingAnimation->values.x, movingAnimation->values.y, movingAnimation->values.z);
-	//Check for collisions
-	if (CollisionDetection::objectCollidesWithObjects(this)) 
-	{
-		do
-		{
-			//Get adjacent position
-			Vertex4 aniValues = movingAnimation->animationValues;
-			position -= glm::vec3(aniValues.x, aniValues.y, aniValues.z);
-			target = getTargetForPosition(position);
-			delete(movingAnimation);
-			movingAnimation = createAnimation(position, target);
-			transformations[0] = movingAnimation;
-			//Calculate path to target
-
-			//Update transformation
-		} while (CollisionDetection::objectCollidesWithObjects(this));
-	}	
 	
 	//Snap to target if close to target
-	else if (isAtTarget(position, target))
+	if (isAtTarget(position, target))
 	{
 		position = target;
 		target = getTargetForPosition(position);
@@ -131,5 +117,25 @@ void MazeWalker::draw()
 		transformations[0] = movingAnimation;
 
 	}
-	PolygonWorldObject::draw();
+	movingAnimation->apply();	
+	if (CollisionDetection::objectCollidesWithCamera(this) ||
+		CollisionDetection::objectCollidesWithObjects(this))
+	{
+			target = getTargetForPosition(position);
+			delete(movingAnimation);
+			movingAnimation = createAnimation(position, target);
+			//Apply so we can check collision again
+		
+		
+	}
+	GraphicsSettings::getSingleton()->setGLMatrices();
+	if (this->shaderProgram)
+		shaderProgram->useProgram();
+	else
+		glUseProgram(0);
+	
+	WaveFrontPolygonDrawer::draw(*this->polygon);
+	if (GraphicsSettings::getSingleton()->drawBoundingSphere)
+		glutWireSphere(boundingSphere.radius, 16, 16);
+	position = glm::vec3(movingAnimation->values.x, movingAnimation->values.y, movingAnimation->values.z);
 }
