@@ -55,7 +55,7 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 	// Get position in maze
 	double zOff = maze->zOffset;
 	double xOff = maze->xOffset;
-	std::pair<int, int> mazePos(position.x - xOff, position.z - zOff);
+	std::pair<int, int> mazePos(position.x - xOff + .5, position.z - zOff + .5);
 	std::pair<int, int> mazeCoord(mazePos.second, mazePos.first); //Z axis is rows
 	
 	std::vector<std::pair<int, int>> possibleTargets;
@@ -117,6 +117,7 @@ void MazeWalker::draw()
 		
 
 	}
+	//Check for imminent collisions
 	movingAnimation->apply();
 	this->transformations[0] = movingAnimation;
 	if (CollisionDetection::objectCollidesWithCamera(this) ||
