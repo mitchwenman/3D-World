@@ -55,8 +55,8 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 	// Get position in maze
 	double zOff = maze->zOffset;
 	double xOff = maze->xOffset;
-	std::pair<int, int> mazePos(position.x - xOff + .5, position.z - zOff + .5);
-	std::pair<int, int> mazeCoord(mazePos.second, mazePos.first); //Z axis is rows
+	std::pair<double, double> mazePos(position.x - xOff + .5, position.z - zOff + .5);
+	std::pair<double, double> mazeCoord(mazePos.second, mazePos.first); //Z axis is rows
 	
 	std::vector<std::pair<int, int>> possibleTargets;
 
@@ -82,7 +82,7 @@ glm::vec3 MazeWalker::getTargetForPosition(glm::vec3 position)
 
 	if (possibleTargets.size() == 0)
 		return position;
-	possibleTargets.push_back(mazeCoord);
+	possibleTargets.push_back(std::pair<int, int>(mazeCoord.first, mazeCoord.second));
 	int nextTargetIndex = rand() % possibleTargets.size();
 	std::pair<int, int> nextTargetCoord = possibleTargets[nextTargetIndex];
 	glm::vec3 nextTarget = glm::vec3(nextTargetCoord.second + xOff, 0.5, nextTargetCoord.first + zOff);
