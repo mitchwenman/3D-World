@@ -41,7 +41,7 @@ bool CollisionDetection::cameraCollidesWithWorld()
 
 	//Check other objects
 	World *world = World::getInstance();
-	std::vector<WorldObject*> objects = world->objects;
+	std::vector<WorldObject*> objects = world->getAllObjects();
 	unsigned int numCollisions = 0;
 	for (std::vector<WorldObject*>::iterator it = objects.begin();
 		it != objects.end(); it++)
@@ -67,7 +67,7 @@ bool CollisionDetection::objectCollidesWithObjects(WorldObject *object)
 {
 	//Check other objects
 	World *world = World::getInstance();
-	std::vector<WorldObject*> objects = world->objects;
+	std::vector<WorldObject*> objects = world->getAllObjects();
 	unsigned int numCollisions = 0;
 	for (std::vector<WorldObject*>::iterator it = objects.begin();
 		it != objects.end(); it++)

@@ -38,8 +38,11 @@ private:
 		
 
 public:
-	//! All standalone objects in the world.
+	//! All selectable objects in the world.
 	std::vector<WorldObject *> objects;
+
+	//! All non selectable objects
+	std::vector<WorldObject *> staticObjects;
 
 	//! The world's maze
 	Maze *maze;
@@ -78,5 +81,7 @@ public:
 	//! @return The index of the curently selected object.
 	int getSelectedObjectIndex() { return selectedObject; }
 
-
+	//! Gets a list of all the objects in the world - static and selectable
+	//! @return All objects in the world.
+	std::vector<WorldObject *> getAllObjects();
 };

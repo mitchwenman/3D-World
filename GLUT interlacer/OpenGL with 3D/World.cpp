@@ -38,10 +38,13 @@ void World::draw()
 		gset->resetModelView();
 		cam->setCamera();
 	}
-	for (unsigned int i = 0; i < objects.size(); i++)
+	std::vector<WorldObject *> allObjects;
+	allObjects.insert(allObjects.begin(), objects.begin(), objects.end());
+	allObjects.insert(allObjects.end(), staticObjects.begin(), staticObjects.end());
+	for (unsigned int i = 0; i < allObjects.size(); i++)
 	{		
 		gset->setGLMatrices();
-		objects[i]->draw();
+		allObjects[i]->draw();
 		gset->resetModelView();
 		cam->setCamera();
 	}
@@ -69,4 +72,12 @@ void World::toggleSelectedObject()
 	//Swap out shader program
 	currentSelectedPolygonShader = objects[selectedObject]->shaderProgram;
 	objects[selectedObject]->shaderProgram = hightlightShader;
+}
+
+std::vector<WorldObject *> World::getAllObjects()
+{
+	std::vector<WorldObject *> allObjects;
+	allObjects.insert(allObjects.begin(), objects.begin(), objects.end());
+	allObjects.insert(allObjects.end(), staticObjects.begin(), staticObjects.end());
+	return allObjects;
 }

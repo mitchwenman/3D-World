@@ -11,7 +11,7 @@
 MazeWalker::MazeWalker(WaveFrontPolygon *polygon, IShaderProgram *program, Maze* maze) : 
 								PolygonWorldObject(polygon, program) , maze(maze)
 {
-	World::getInstance()->objects.push_back(this);
+	World::getInstance()->staticObjects.push_back(this);
 	//Get list of wall positions
 	std::vector< std::vector<bool> > mazeWallDef = maze->maze;
 	double zOff = maze->zOffset;
