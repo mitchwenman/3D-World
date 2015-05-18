@@ -7,7 +7,7 @@ uniform vec3 lightDirection;
 uniform mat4 gCameraMatrix;
 
 
-//Phong shading model (uses reflect vector rather than half vector)
+//! Implements Phong shading using a reflection vector (rather than an interpolated half vector).
 void main()
 {
 	float ambientIntensity = 1; //Constant intensity

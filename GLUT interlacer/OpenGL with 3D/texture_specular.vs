@@ -2,6 +2,7 @@ varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;
 
+//! A simple vertex shader for use with Phong shading and texture maps.
 void main()
 {
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;

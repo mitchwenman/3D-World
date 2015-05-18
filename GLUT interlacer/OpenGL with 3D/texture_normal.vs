@@ -3,6 +3,11 @@ varying vec3 normal;
 varying vec3 position;
 varying vec3 tangent;
 
+//! A vertex shader for normal mapping. 
+/*!
+	Transforms the tangent vector (passed in via a gl_Color pointer)
+	into world space.
+*/
 void main()
 {
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;

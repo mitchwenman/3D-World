@@ -1,10 +1,10 @@
-varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;
 
 uniform vec3 lightDirection;
 uniform mat4 gCameraMatrix;
 
+//! A simple fragment shader that applies Phong shading with a yellow material.
 void main()
 {
 	float ambientIntensity = 0.5; //Constant intensity

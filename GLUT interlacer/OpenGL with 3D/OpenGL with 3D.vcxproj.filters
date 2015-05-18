@@ -235,36 +235,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vert.txt">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="frag.txt">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="phong_vert.txt">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="phong_frag.txt">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="basic_texture.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="basic_texture.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture _ambient.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture_ambient.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture_diffuse.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture_diffuse.vs">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="texture_specular.fs">
       <Filter>Shaders</Filter>
     </None>
