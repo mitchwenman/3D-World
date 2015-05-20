@@ -22,7 +22,7 @@ public:
 	SpecularNormalMap(std::string texture, std::string normalMap);
 
 	//! Binds both texture files and invokes glUseProgram. Must be called prior to drawing the object.
-	//! All future draw calls will use this program (until another is used).
+	//! @sideeffect All future draw calls will use this program until another is specified.
 	/*!
 		Pseudocode:
 		@verbatim

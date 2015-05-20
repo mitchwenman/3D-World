@@ -1,10 +1,15 @@
+/*!
+	@class SelectedPolyShader
+	Fragment Shader: A simple fragment shader that applies Phong shading with a yellow material.
+*/
+
 varying vec3 normal;
 varying vec3 position;
 
 uniform vec3 lightDirection;
 uniform mat4 gCameraMatrix;
 
-//! A simple fragment shader that applies Phong shading with a yellow material.
+/*! The main routine: A simple fragment shader that applies Phong shading with a yellow material. */
 void main()
 {
 	float ambientIntensity = 0.5; //Constant intensity

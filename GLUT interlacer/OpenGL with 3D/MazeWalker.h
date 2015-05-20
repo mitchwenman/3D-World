@@ -13,10 +13,10 @@
 
 //! A class that represents an object moving around a maze.
 /*!
-	The class inserts a random object, defined by given polygon, into the maze.
+	The class inserts a random object, defined by the given polygon, into the maze.
 	The object is inserted into the world and enters into the draw loop. The object
 	simply moves from it's current tile to the the adjacent tiles randomly while avoiding
-	other objects in the world. Collision detect is not performed on the walls, as the objects
+	other objects in the world. Collision detection is not performed on the walls, as the 
 	movement algorithm avoids collision with walls.
 */
 class MazeWalker : public PolygonWorldObject
@@ -114,6 +114,7 @@ public:
 			draw(polygon)
 		 @endverbatim
 	*/
+	//! @sideeffect The values of movingAnimation may be modified if the animation is triggered i.e. the object is due to be animated.
 	void draw();
 
 	//! Creates a maze walker given a polygon to represent it, a shader program and the maze it will traverse.

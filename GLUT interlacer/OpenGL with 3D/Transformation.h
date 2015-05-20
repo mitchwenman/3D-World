@@ -21,6 +21,7 @@ public:
 	Transformation(TransformationType t, Vertex4 v) : type(t), values(v) {};
 
 	//! Applies the transformation by multiplying the current model view matrix by the generated transformation matrix.
+	//! @sideeffect The model view matrix is scaled, rotated or translated according to the object's values.
 	/*!
 		Pseudocode:
 		@verbatim

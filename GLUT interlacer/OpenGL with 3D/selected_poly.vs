@@ -1,3 +1,8 @@
+/*!
+	@class SelectedPolyShader
+	Vertex Shader: Transforms the normal and position into world space.
+*/
+
 varying vec3 normal;
 varying vec3 position;
 

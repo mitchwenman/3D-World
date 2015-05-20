@@ -2,6 +2,7 @@
 
 #include "GraphicsUtil.h"
 
+//! This class provides a small interface for setting up a directional light in the game world.
 class DirectionalLight
 {
 private:

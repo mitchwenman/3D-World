@@ -57,6 +57,9 @@ namespace CollisionDetection
 	//! @return True if the object collides with another polygon, otherwise false.
 	bool objectCollidesWithObjects(WorldObject *object);
 
+	//! Tests if an object collides with the current position of the camera.
+	//! @param object The object that will be tested for a collision with the camera.
+	//! @return True if the object collides with the camera, else false.
 	bool objectCollidesWithCamera(WorldObject *object);
 
 };

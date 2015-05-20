@@ -1,3 +1,8 @@
+/*!
+	@class TextureSpecularShader
+	Fragment Shader: A fragment shader that applies Phong shading to an object with a colour map
+*/
+
 varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;

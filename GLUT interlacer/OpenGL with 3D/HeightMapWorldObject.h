@@ -25,6 +25,7 @@ public:
 
 
 	//! Draws the heightmap to the screen.
+	//! @sideeffect If animations are present in the transformations vector then the transformation values may be modified
 	void draw();
 
 	//! Tests whether an object collides with this heightmap. Always returns false.

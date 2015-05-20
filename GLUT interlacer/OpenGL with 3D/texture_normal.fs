@@ -1,3 +1,12 @@
+/*!
+	@class TextureNormalShader
+	Fragment Shader: Uses the incoming tangent and normal vectors to build
+	a Tangent, Bitangent, Normal matrix which is used to 
+	transform the normal map vector into world space. Lighting
+	calculations are then performed using this normal map vector
+	rather than the vertex's original normal.
+*/
+
 varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;
@@ -12,11 +21,7 @@ uniform mat4 gCameraMatrix;
 
 //! A fragment shader for normal mapping.
 /*!
-	Uses the incoming tangent and normal vectors to build
-	a Tangent, Bitangent, Normal matrix which is used to 
-	transform the normal map vector into world space. Lighting
-	calculations are then performed using this normal map vector
-	rather than the vertex's original normal.
+	
 */
 void main()
 {

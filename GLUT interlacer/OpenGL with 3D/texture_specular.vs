@@ -1,3 +1,8 @@
+/*!
+	@class TextureSpecularShader
+	Vertex Shader: Transforms the normal and texture coordinate into world space.
+*/
+
 varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;

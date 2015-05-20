@@ -35,7 +35,7 @@ public:
 	//! @param path The path to the image used to generate the heightmap.
 	void loadFromImage(std::string path);
 
-	//!Renders the heightmap using a triangle strip and primitive restarts.
+	//! Renders the heightmap using a triangle strip and primitive restarts.
 	void render();
 
 	//! Gets the number of rows of the image.
@@ -77,6 +77,7 @@ private:
 	std::vector<double> tList;
 
 	//! Calculates the normals for every vertex in the heightmap. Puts result in normals.
+	//! @sideeffect The results of the calculations are placed into the normals vector.
 	/*! 
 		Pseudocode:
 		@verbatim

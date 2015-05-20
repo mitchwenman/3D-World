@@ -25,6 +25,7 @@ namespace ObjectTransform
 				translate -= vec4(dx, dy, dz, 0)
 		@endverbatim
 	*/
+	//! @sideeffect The object's transformation vector will be modified (assuming no collisions).
 	//! @param object The object to be modified.
 	//! @param dx The x axis translation.
 	//! @param dy The y axis translation.
@@ -50,6 +51,7 @@ namespace ObjectTransform
 					rotate -= vec4(angle, dx, dy, dz)
 		@endverbatim
 	*/
+	//! @sideeffect The object's transformation vector will be modified (assuming no collisions).
 	//! @param object The object to be modified.
 	//! @param angle The angle of the rotation.
 	//! @param dx The x axis rotation.
@@ -73,6 +75,7 @@ namespace ObjectTransform
 				scale = componentDivide(scale, vec4(dx, dy, dz, 1))
 		@endverbatim
 	*/
+	//! @sideeffect The object's transformation vector will be modified (assuming no collisions).
 	//! @param object The object to be modified.
 	//! @param sx The x axis scale factor.
 	//! @param sy The y axis scale factor.

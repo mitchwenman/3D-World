@@ -20,7 +20,7 @@ public:
 	SpecularColourMap(std::string textureFile);
 
 	//! Binds the texture and invokes glUseProgram. Must be called prior to drawing the object.
-	//! All future draw calls will use this program (until another is used).
+	//! @sideeffect All future draw calls will use this program until another is specified.
 	/*!
 		Pseudocode:
 		@verbatim

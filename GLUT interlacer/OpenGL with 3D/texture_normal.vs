@@ -1,3 +1,9 @@
+/*!
+	@class TextureNormalShader
+	Vertex Shader: Transforms the tangent vector (passed in via a gl_Color pointer)
+	into world space.
+*/
+
 varying vec2 textureCoord;
 varying vec3 normal;
 varying vec3 position;

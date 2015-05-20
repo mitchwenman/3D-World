@@ -2,6 +2,12 @@
 
 #include "libs\glm\glm.hpp"
 
+//! An OOP wrapper for setting up a Frustum projection. 
+/*!
+	This class implements the singleton pattern. Calls to setFrustum()
+	modify the projection matrix held by the GraphicsSettings singleton object,
+	which is eventually given to openGL.
+*/
 class Frustum
 {
 private:
@@ -21,6 +27,7 @@ public:
 	static Frustum* getSingleton();
 
 	//! Multiplies the projection matrix by the frustum matrix
+	//! @sideeffect All objects drawn after this call will use the frustum matrix defined in this object until the projection matrix is reset.
 	void setFrustum();
 
 	//! Modifies the frustum matrix held by this object to reflect the given values. Does not set the projection

@@ -6,6 +6,7 @@
 namespace ShaderLoader
 {
 	//! Reads the file into the character buffer.
+	//! @sideeffect The contents of the file will be read into the provided buffer.
 	//! @param name The path to the file.
 	//! @param buffer The character buffer that will store the file.
 	//! @param bufferLen The length of buffer.

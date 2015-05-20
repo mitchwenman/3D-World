@@ -29,6 +29,7 @@ public:
 
 	//! Renders the polygon to the screen using the given shader program.
 	//! First applies the set of transformations in transformations.
+	//! @sideeffect If animations are present in the transformations vector then the transformation values may be modified if the animation is due to trigger.
 	void draw();
 
 	//! Tests whether this polygon collides with another object using bounding spheres.

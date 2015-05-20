@@ -35,6 +35,7 @@ private:
 	double maxX;
 
 	//! A simple constructor for the game world. Sets the world boundaries.
+	//! @sideeffect Invoking of this function will limit the camera's movement in the game world by the values defined internally in the constructor.
 	Game() : minX(-3), maxX(20), minZ(-6.5), maxZ(9.5) {};
 
 

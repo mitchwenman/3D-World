@@ -25,6 +25,7 @@ public:
 
 
 	//! Applies the transformations to model view matrix and renders polygon to the screen using shaderProgram.
+	//! @sideeffect If animations are present in the transformations vector then the transformation values may be modified if the animation is due to trigger.
 	void draw();
 
 	//! Tests whether this polygon collides with another object using bounding spheres.
