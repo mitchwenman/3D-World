@@ -1,10 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: WaveFrontPolygonDrawer.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Draws a wave front polygon.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "WaveFrontPolygonDrawer.h"
 #include "GraphicsSettings.h"
 #include "GraphicsUtil.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-
+// ============== FUNCTIONS =================//
 void WaveFrontPolygonDrawer::draw(WaveFrontPolygon polygon)
 {
 	glEnableClientState(GL_VERTEX_ARRAY);

@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: MazeWalker.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Dfines an object that moves around the world's maze.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "MazeWalker.h"
 #include "CollisionDetection.h"
 #include "World.h"
@@ -8,6 +16,7 @@
 #include <Windows.h>
 #include <iostream>
 
+// ============== FUNCTIONS =================//
 MazeWalker::MazeWalker(WaveFrontPolygon *polygon, IShaderProgram *program, Maze* maze) : 
 								PolygonWorldObject(polygon, program) , maze(maze)
 {

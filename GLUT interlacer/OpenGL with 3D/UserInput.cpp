@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: UserInput.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Handles user input.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "UserInput.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
@@ -8,6 +16,7 @@
 #include "ObjectTransform.h"
 #include "GraphicsSettings.h"
 
+// ============== FUNCTIONS =================//
 void UserInput::handleKeyInput(unsigned char c, int x, int y)
 {
 	switch (c)

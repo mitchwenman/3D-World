@@ -1,8 +1,17 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: CameraUtil.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together useful functions for manipulating the camera.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "CameraUtil.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtc\matrix_transform.hpp"
 #include "CollisionDetection.h"
 
+// ============== FUNCTIONS =================//
 Vertex3 CameraUtil::calculateRightEye(Camera cam, double eyeDist)
 {
 	Vertex3 eye = cam.getEye();

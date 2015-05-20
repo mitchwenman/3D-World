@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: MazeReader.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads a maze from file.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "MazeReader.h"
 
 #include <fstream>
@@ -6,6 +14,7 @@
 
 using namespace std;
 
+// ============== FUNCTIONS =================//
 std::vector<std::vector<bool>> MazeReader::readFromFile(std::string path)
 {
 	std::vector< std::vector<bool> > walls;

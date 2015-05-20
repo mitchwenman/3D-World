@@ -1,7 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Animation.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Class for encapsulating a model view transformation.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Animation.h"
 
 #include <Windows.h>
 
+// ============== FUNCTIONS =================//
 void Animation::apply()
 {
 	double currentTime = GetTickCount64();

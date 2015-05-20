@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Camera.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Defines the position and angle of the camera.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Camera.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtc\matrix_transform.hpp"
@@ -7,8 +15,10 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
+// ============== GLOBALS =================//
 static Camera* _instance;
 
+// ============== FUNCTIONS =================//
 Camera* Camera::getSingleton()
 {
 	if (!_instance)

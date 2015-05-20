@@ -1,10 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: ShaderLoader.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads open gl shaders.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "ShaderLoader.h"
 
 #include <iostream>
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-
+// ============== FUNCTIONS =================//
 int ShaderLoader::readFile(std::string name, char* buffer, int bufferLen)
 {
 	FILE* file = fopen(name.c_str(), "r");

@@ -1,11 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Texture.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads a texture from file and encapsulates it.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Texture.h"
 #include "libs\CImg.h"
-
 #include "libs\glew.h"
 #include "libs\glut.h"
 
 #include <vector>
 
+// ============== FUNCTIONS =================//
 Texture::Texture(GLenum textureTarget, std::string file) : textureTarget(textureTarget)
 {
 	loadFromPath(file);

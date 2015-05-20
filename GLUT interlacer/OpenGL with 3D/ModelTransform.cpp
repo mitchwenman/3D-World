@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: ModelTransform.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together functions for creatung a model transformation
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "ModelTransform.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
@@ -6,7 +14,7 @@
 #include "libs\glm\gtc\type_ptr.hpp"
 #include "GraphicsSettings.h"
 
-
+// ============== FUNCTIONS =================//
 void ModelTransform::translate(double x, double y, double z)
 {
 	GraphicsSettings *gset = GraphicsSettings::getSingleton();	

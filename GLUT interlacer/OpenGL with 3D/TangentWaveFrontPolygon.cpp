@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: TangentWaveFrontPolygon.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Stores a obj file polygon and calculates tangents.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "TangentWaveFrontPolygon.h"
 #include "libs\glm\glm.hpp"
 #include "libs\glm\gtx\transform.hpp"
@@ -5,6 +13,7 @@
 ///Loosely based on this tutorial: http://ogldev.atspace.co.uk/www/tutorial26/tutorial26.html
 ///and Mathematics for Games Programming
 
+// ============== FUNCTIONS =================//
 TangentWaveFrontPolygon::TangentWaveFrontPolygon(std::string objFile) : WaveFrontPolygon(objFile)
 {
 	//Group vertices and texture coords so it's easier to calculate

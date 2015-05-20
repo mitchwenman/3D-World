@@ -1,12 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Object.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together functions for tranforming an object.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "ObjectTransform.h"
 
 #include "World.h"
 #include <iostream>
 #include "CollisionDetection.h"
 
+// ============== PROTOTYPES =================//
 //Returns -1 if at the back
 int getTranslateInsertPosition(WorldObject *object);
 
+// ============== FUNCTIONS =================//
 void ObjectTransform::translateObject(WorldObject *object, double dx, double dy, double dz)
 {
 	std::vector<Transformation *> objectTransformations = object->transformations;

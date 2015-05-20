@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Polygon.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Encapsulates an obj file that has been read in.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Polygon.h"
 #include "WaveFrontPolygon.h"
 #include "WaveFrontPolygonDrawer.h"
@@ -6,8 +14,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-static float angle = 0.1;
-
+// ============== FUNCTIONS =================//
 void PolygonWorldObject::draw()
 {
 	for (unsigned int i = 0; i < this->transformations.size(); i++)

@@ -1,7 +1,16 @@
-#include "WaveFrontPolygon.h"
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: WaveFrontPolygon.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Stores an obj file's data so it can be drawn.
+///////////////////////////////////////////////////////////////////////////////////
 
+
+// ============== INCLUDES =================//
+#include "WaveFrontPolygon.h"
 #include "tiny_obj_loader.h"
 
+// ============== FUNCTIONS =================//
 WaveFrontPolygon::WaveFrontPolygon(std::string objFile)
 {
 	std::vector<tinyobj::shape_t> shapes;

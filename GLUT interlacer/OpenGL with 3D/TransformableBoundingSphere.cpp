@@ -1,7 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: TransformableBoundingSphere.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Subclasses bounding sphere. Can transform it's radius and position.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "BoundingSphere.h"
 #include "GraphicsUtil.h"
 #include "libs\glm\gtx\transform.hpp"
 
+// ============== FUNCTIONS =================//
 TransformableBoundingSphere::TransformableBoundingSphere(WaveFrontPolygon polygon) : BoundingSphere(polygon)
 {
 	this->worldMatrix = glm::mat4();

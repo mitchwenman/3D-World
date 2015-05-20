@@ -1,5 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: GraphicsUtil.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together useful miscellaneous functions.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "GraphicsUtil.h"
 
+// ============== FUNCTIONS =================//
 glm::vec3 GraphicsUtil::vertex3ToGLMVec3(Vertex3 v)
 {
 	return glm::vec3(v.x, v.y, v.z);

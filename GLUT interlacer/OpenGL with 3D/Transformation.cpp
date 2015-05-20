@@ -1,7 +1,15 @@
-#include "Transformation.h"
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Transformation.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Encapsulates a model view transformation.
+///////////////////////////////////////////////////////////////////////////////////
 
+// ============== INCLUDES =================//
+#include "Transformation.h"
 #include "ModelTransform.h"
 
+// ============== FUNCTIONS =================//
 void Transformation::apply()
 {
 	switch (type)

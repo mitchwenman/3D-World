@@ -1,9 +1,17 @@
-#include "TangentPolygonWorldObject.h"
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: TangentPolygonWorldObject.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Encapsulates a pointer to a polygon with tangents calculated.
+///////////////////////////////////////////////////////////////////////////////////
 
+// ============== INCLUDES =================//
+#include "TangentPolygonWorldObject.h"
 #include "GraphicsSettings.h"
 #include "WaveFrontPolygonDrawer.h"
 #include "ModelTransform.h"
 
+// ============== FUNCTIONS =================//
 void TangentPolygonWorldObject::draw()
 {
 	for (unsigned int i = 0; i < this->transformations.size(); i++)

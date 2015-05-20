@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Heightmap.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads and stores a heightmap from file.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "HeightMap.h"
 #include "libs\CImg.h"
 #include "libs\glm\glm.hpp"
@@ -9,7 +17,7 @@
 */
 
 
-//Load the height map
+// ============== FUNCTIONS =================//
 void HeightMap::loadFromImage(std::string path)
 {
 	cimg_library::CImg<unsigned char> image(path.c_str());

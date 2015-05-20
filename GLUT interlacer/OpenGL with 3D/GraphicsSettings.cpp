@@ -1,15 +1,25 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: GraphicsSettings.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Defines the model and projection matrices and other various properties.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "GraphicsSettings.h"
 #include "libs\glew.h"
 #include "libs\glut.h"
 #include "libs\glm\gtc\matrix_transform.hpp"
 #include "libs\glm\gtc\type_ptr.hpp"
-
-static GraphicsSettings* _instance;
-
 #include <iostream>
 #include "libs\glm\ext.hpp"
 #include "Camera.h"
 
+// ============== GLOBALS =================//
+static GraphicsSettings* _instance;
+
+
+// ============== FUNCTIONS =================//
 GraphicsSettings::GraphicsSettings() : drawBoundingSphere(false) {};
 
 GraphicsSettings* GraphicsSettings::getSingleton()

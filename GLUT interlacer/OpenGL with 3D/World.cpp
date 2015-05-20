@@ -1,12 +1,22 @@
-#include "World.h"
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: World.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Defines the scene graph of the world.
+///////////////////////////////////////////////////////////////////////////////////
 
+
+// ============== INCLUDES =================//
+#include "World.h"
 #include "WaveFrontPolygonDrawer.h"
 #include "Camera.h"
 #include "GraphicsSettings.h"
 #include "HighlightShaderProgram.h"
 
+// ============== GLOBALS =================//
 static World* _instance;
 
+// ============== FUNCTIONS =================//
 World* World::getInstance()
 {
 	if (!_instance)

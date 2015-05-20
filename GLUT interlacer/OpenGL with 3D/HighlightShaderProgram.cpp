@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: HighlightShaderProgram.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads the highlight shader program.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "HighlightShaderProgram.h"
 #include "ShaderLoader.h"
 #include "DirectionalLight.h"
@@ -9,6 +17,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
+// ============== FUNCTIONS =================//
 HighlightShaderProgram::HighlightShaderProgram()
 {
 	this->programId = ShaderLoader::link(ShaderLoader::compile("selected_poly.vs", GL_VERTEX_SHADER),

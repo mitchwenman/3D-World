@@ -1,6 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: BoundingSphere.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Encapsulates a bounding sphere used for collision detection.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "BoundingSphere.h"
 #include <cmath>
 
+// ============== FUNCTIONS =================//
 BoundingSphere::BoundingSphere(WaveFrontPolygon polygon)
 {
 	//Group together position data so it's easier to use for calculations

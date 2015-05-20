@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: CameraUtil.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together useful functions for collision detection.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "CollisionDetection.h"
 #include "World.h"
 #include "Camera.h"
@@ -5,6 +13,7 @@
 #include "Game.h"
 #include <iostream>
 
+// ============== FUNCTIONS =================//
 bool CollisionDetection::objectCollidesWithWorld(WorldObject *object)
 {
 	World *world = World::getInstance();

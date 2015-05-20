@@ -1,7 +1,16 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Lighting.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together open gl material property values.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "MaterialData.h"
 
 #include <string.h>
 
+// ============== FUNCTIONS =================//
 MaterialData::MaterialData(GLfloat spec[4], GLfloat diff[4], GLfloat amb[4], GLfloat shininess[1])
 {
 	memcpy(ambientColour, amb, sizeof(GLfloat) * 4);

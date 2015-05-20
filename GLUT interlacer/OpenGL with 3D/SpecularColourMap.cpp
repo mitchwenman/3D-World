@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: SpecularColourMap.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads the opengl shader for specular lighting with textures.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "SpecularColourMap.h"
 #include "DirectionalLight.h"
 #include "Camera.h"
@@ -7,7 +15,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
-
+// ============== FUNCTIONS =================//
 SpecularColourMap::SpecularColourMap(std::string file)
 {
 	this->texture = new Texture(GL_TEXTURE_2D, file); //Load texture from file	

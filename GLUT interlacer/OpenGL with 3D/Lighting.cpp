@@ -1,7 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Lighting.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Groups together functions for defining openGL lights.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Lighting.h"
 
 
-
+// ============== FUNCTIONS =================//
 void Lighting::setupDirectionalLight(Vertex4 direction, Vertex4 diffuse, Vertex4 ambient)
 {
 	GLfloat light_direction[] = { (float)direction.x, (float)direction.y, (float)direction.z, (float)direction.w };

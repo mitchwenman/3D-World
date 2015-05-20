@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: Maze.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Defines a set of walls loaded from file.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "Maze.h"
 #include "SpecularNormalMap.h"
 #include "Transformation.h"
@@ -7,7 +15,7 @@
 #include "GraphicsUtil.h"
 #include <math.h>
 
-
+// ============== FUNCTIONS =================//
 Maze::Maze(std::string mazeFile, TangentWaveFrontPolygon* wall) : wall(wall), xOffset(-1.5), zOffset(-2.5)
 {
 	this->maze = MazeReader::readFromFile(mazeFile);

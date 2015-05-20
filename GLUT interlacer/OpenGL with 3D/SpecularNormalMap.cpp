@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Filename: SpecularNormalMap.cpp
+// Author: Mitch Wenman
+// Date Modified: 20/05/2015
+// Description: Loads the opengl shader for specular lighting with a texture and normal map.
+///////////////////////////////////////////////////////////////////////////////////
+
+// ============== INCLUDES =================//
 #include "SpecularNormalMap.h"
 #include "ShaderLoader.h"
 #include "DirectionalLight.h"
@@ -8,6 +16,7 @@
 #include "libs\glew.h"
 #include "libs\glut.h"
 
+// ============== FUNCTIONS =================//
 SpecularNormalMap::SpecularNormalMap(std::string texture, std::string normalMap)
 {
 	this->texture = new Texture(GL_TEXTURE_2D, texture);
