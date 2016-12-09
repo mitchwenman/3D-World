@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -50,12 +50,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\LUKE\Desktop\OpenGL with 3D\OpenGL with 3D\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;glut32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;glew32.lib;glut32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,6 +68,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,15 +76,91 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\LUKE\Desktop\OpenGL with 3D\OpenGL with 3D\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;glut32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;glew32.lib;glut32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BoundingSphere.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraUtil.cpp" />
+    <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GraphicsSettings.cpp" />
+    <ClCompile Include="GraphicsUtil.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="HeightMapWorldObject.cpp" />
+    <ClCompile Include="HighlightShaderProgram.cpp" />
     <ClCompile Include="Interlacer.cpp" />
+    <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MaterialData.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeReader.cpp" />
+    <ClCompile Include="MazeWalker.cpp" />
+    <ClCompile Include="ModelTransform.cpp" />
+    <ClCompile Include="ObjectTransform.cpp" />
+    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="SpecularColourMap.cpp" />
+    <ClCompile Include="SpecularNormalMap.cpp" />
+    <ClCompile Include="TangentPolygonWorldObject.cpp" />
+    <ClCompile Include="TangentWaveFrontPolygon.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="tiny_obj_loader.cc" />
+    <ClCompile Include="TransformableBoundingSphere.cpp" />
+    <ClCompile Include="Transformation.cpp" />
+    <ClCompile Include="UserInput.cpp" />
+    <ClCompile Include="WaveFrontPolygon.cpp" />
+    <ClCompile Include="WaveFrontPolygonDrawer.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BoundingSphere.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraUtil.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="Frustum.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GraphicsSettings.h" />
+    <ClInclude Include="GraphicsUtil.h" />
+    <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="HeightMapWorldObject.h" />
+    <ClInclude Include="HighlightShaderProgram.h" />
     <ClInclude Include="Interlacer.h" />
+    <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="Lighting.h" />
+    <ClInclude Include="MaterialData.h" />
+    <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeReader.h" />
+    <ClInclude Include="MazeWalker.h" />
+    <ClInclude Include="ModelTransform.h" />
+    <ClInclude Include="ObjectTransform.h" />
+    <ClInclude Include="Polygon.h" />
+    <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="IShaderProgram.h" />
+    <ClInclude Include="SpecularColourMap.h" />
+    <ClInclude Include="SpecularNormalMap.h" />
+    <ClInclude Include="TangentPolygonWorldObject.h" />
+    <ClInclude Include="TangentWaveFrontPolygon.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Transformation.h" />
+    <ClInclude Include="UserInput.h" />
+    <ClInclude Include="WaveFrontPolygon.h" />
+    <ClInclude Include="WaveFrontPolygonDrawer.h" />
+    <ClInclude Include="World.h" />
+    <ClInclude Include="WorldObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="selected_poly.fs" />
+    <None Include="selected_poly.vs" />
+    <None Include="texture_normal.fs" />
+    <None Include="texture_normal.vs" />
+    <None Include="texture_specular.fs" />
+    <None Include="texture_specular.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
